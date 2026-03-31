@@ -1,0 +1,63 @@
+﻿<Window x:Class="UrbanCareClient.WPF.Views.ModalWindows.EmployeeCreatingModalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UrbanCareClient.WPF.Views.UserControls"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Style="{StaticResource Win}"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner"
+Title="Регистрация сотрудника" Width="800">
+    <Grid>
+        <StackPanel Margin="0 15">
+            <TextBlock Text="Регистрация сотрудника" Style="{StaticResource PageTitle}"/>
+            <StackPanel x:Name="InputPanel" Margin="30 0">
+                <Border BorderBrush="#E3E8EF" BorderThickness="0.5,0.5,0.5,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel x:Name="MCPanel" Grid.Row="0" Grid.Column="0" Margin="5">
+
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="5">
+                            <TextBlock Text="Должность:" Style="{StaticResource SecondaryText}"/>
+                            <ComboBox x:Name="PositionInp" Margin="0,5,0,0" FontSize="14" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
+                            <TextBlock Text="Категория:" Style="{StaticResource SecondaryText}"/>
+                            <ComboBox x:Name="QualCategoryInp" Margin="0,5,0,0" FontSize="14" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
+                            <TextBlock Text="Дата найма:" Style="{StaticResource SecondaryText}"/>
+                            <DatePicker x:Name="EmploymentDateInp" Margin="0,5,0,0" FontSize="14" SelectedDateChanged="EmploymentDateInp_SelectedDateChanged" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="5">
+                            <TextBlock Text="Опыт работы (годы):" Style="{StaticResource SecondaryText}"/>
+                            <TextBox x:Name="ExpInp" Margin="0,5,0,0" FontSize="14" TextChanged="ExpInp_TextChanged" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="5">
+                            <TextBlock Text="Зарплата:" Style="{StaticResource SecondaryText}"/>
+                            <TextBox x:Name="SalaryInp" Margin="0,5,0,0" FontSize="14" TextChanged="SalaryInp_TextChanged" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Grid.Column="0" Margin="5">
+                            <TextBlock Text="Заметки:" Style="{StaticResource SecondaryText}"/>
+                            <TextBox x:Name="NotesInp" Margin="0,5,0,0" FontSize="14"  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Height="100" />
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+            </StackPanel>
+            <Button x:Name="RegistrateBtn" Content="Зарегистрироваться" Click="RegistrateBtn_Click" HorizontalAlignment="Center" Width="180" Height="35" Style="{StaticResource PrimaryButton}" Margin="0,30,0,20" />
+        </StackPanel>
+    </Grid>
+</Window>

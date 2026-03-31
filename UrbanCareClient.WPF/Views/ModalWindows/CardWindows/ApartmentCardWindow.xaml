@@ -1,0 +1,65 @@
+﻿<Window x:Class="UrbanCareClient.WPF.Views.ModalWindows.CardWindows.ApartmentCardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UrbanCareClient.WPF.Views.ModalWindows.CardWindows"
+        mc:Ignorable="d"
+        Style="{StaticResource Win}"
+        WindowStartupLocation="CenterOwner"
+               SizeToContent="WidthAndHeight"
+        Loaded="Window_Loaded"
+        Title="Квартира" MinWidth="500">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="BackBtn" Grid.Column="0" Content="Назад" Style="{StaticResource SecondaryButton}" Click="BackBtn_Click"/>
+            <TextBlock x:Name="CardHeaderTxt" Grid.Column="1" Text="Создать квартиру" Style="{StaticResource PageTitle}" Margin="10,5,10,5" HorizontalAlignment="Left" FontSize="20"/>
+            <Button x:Name="SaveBtn" Grid.Column="2" Content="Сохранить" Style="{StaticResource PrimaryButton}" Click="SaveBtn_Click"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0 10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource SecondaryText}" Text="ID: " Margin="0,0,10,0" VerticalAlignment="Center"/>
+            <TextBox x:Name="IdInp" Grid.Row="0" Grid.Column="1" BorderBrush="{DynamicResource BorderBrush}" Margin="0,5,0,5"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource SecondaryText}" Text="Номер: " Margin="0,0,10,0" VerticalAlignment="Center"/>
+            <TextBox x:Name="NumberInp" Grid.Row="1" Grid.Column="1" BorderBrush="{DynamicResource BorderBrush}" Margin="0,5,0,5"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource SecondaryText}" Text="Здание: " Margin="0,0,10,0" VerticalAlignment="Center"/>
+            <StackPanel x:Name="BuidingPanel" Grid.Row="2" Grid.Column="1" Margin="0,5,0,5"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource SecondaryText}" Text="Подъезд: " Margin="0,0,10,0" VerticalAlignment="Center"/>
+            <TextBox x:Name="EntranceInp" Grid.Row="3" Grid.Column="1" BorderBrush="{DynamicResource BorderBrush}" Margin="0,5,0,5"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource SecondaryText}" Text="Этаж: " Margin="0,0,10,0" VerticalAlignment="Center"/>
+            <TextBox x:Name="FloorInp" Grid.Row="4" Grid.Column="1" BorderBrush="{DynamicResource BorderBrush}" Margin="0,5,0,5"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource SecondaryText}" Text="Количество комнат: " Margin="0,0,10,0" VerticalAlignment="Center"/>
+            <TextBox x:Name="RoomCountInp" Grid.Row="5" Grid.Column="1" BorderBrush="{DynamicResource BorderBrush}" Margin="0,5,0,5"/>
+            
+        </Grid>
+
+        <Button x:Name="DeleteBtn" Grid.Row="2" Style="{StaticResource DangerButton}" Content="Удалить" Width="80" HorizontalAlignment="Left" Click="DeleteBtn_Click" />
+    </Grid>
+</Window>

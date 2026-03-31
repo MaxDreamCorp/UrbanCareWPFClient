@@ -1,0 +1,87 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Images\UrbanCareLogo.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\AccountIcon.png" />
+    <None Remove="Resources\Images\AddressIcon.png" />
+    <None Remove="Resources\Images\CalendarIcon.png" />
+    <None Remove="Resources\Images\CanceledIcon.png" />
+    <None Remove="Resources\Images\CategoryIcon.png" />
+    <None Remove="Resources\Images\EmailIcon.png" />
+    <None Remove="Resources\Images\FinishedIcon.png" />
+    <None Remove="Resources\Images\InProgressIcon.png" />
+    <None Remove="Resources\Images\MCIcon.png" />
+    <None Remove="Resources\Images\NewOrderIcon.png" />
+    <None Remove="Resources\Images\PhoneIcon.png" />
+    <None Remove="Resources\Images\TypeIcon.png" />
+    <None Remove="Resources\Images\UrbanCareLogo.ico" />
+    <None Remove="Resources\Images\UrbanCareLogo.png" />
+    <None Remove="Resources\Images\WaitingForPaymentIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UrbanCareClient.Application\UrbanCareClient.Application.csproj" />
+    <ProjectReference Include="..\UrbanCareClient.Domain\UrbanCareClient.Domain.csproj" />
+    <ProjectReference Include="..\UrbanCareClient.Infrastructure\UrbanCareClient.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Pages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\AccountIcon.png" />
+    <Resource Include="Resources\Images\AddressIcon.png" />
+    <Resource Include="Resources\Images\CalendarIcon.png" />
+    <Resource Include="Resources\Images\CategoryIcon.png" />
+    <Resource Include="Resources\Images\EmailIcon.png" />
+    <Resource Include="Resources\Images\FinishedIcon.png" />
+    <Resource Include="Resources\Images\CanceledIcon.png" />
+    <Resource Include="Resources\Images\InProgressIcon.png" />
+    <Resource Include="Resources\Images\MCIcon.png" />
+    <Resource Include="Resources\Images\NewOrderIcon.png" />
+    <Resource Include="Resources\Images\PhoneIcon.png" />
+    <Resource Include="Resources\Images\TypeIcon.png" />
+    <Resource Include="Resources\Images\UrbanCareLogo.ico" />
+    <Resource Include="Resources\Images\UrbanCareLogo.png" />
+    <Resource Include="Resources\Images\WaitingForPaymentIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,25 @@
+﻿<Window x:Class="UrbanCareClient.WPF.Views.ModalWindows.DataChoiceModalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UrbanCareClient.WPF.Views.ModalWindows"
+        mc:Ignorable="d"
+        Style="{StaticResource Win}"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterOwner"
+        Title="Выбрать" MinHeight="700" MinWidth="500">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <DockPanel Grid.Row="0">
+            <Button x:Name="BackBtn" Style="{StaticResource SecondaryButton}" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BackBtn_Click"/>
+            <Button x:Name="ChooseBtn" Style="{StaticResource PrimaryButton}" Content="Выбрать" HorizontalAlignment="Right" VerticalAlignment="Center" Click="ChooseBtn_Click"/>
+        </DockPanel>
+
+        <DataGrid x:Name="dg" Grid.Row="1" Style="{StaticResource ModernDataGrid}" SelectionChanged="dg_SelectionChanged" Margin="0,10,0,0"/>
+    </Grid>
+</Window>

@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrbanCareClient.Domain", "UrbanCareClient.Domain\UrbanCareClient.Domain.csproj", "{308A6C87-456B-4C6A-A9C5-21CCE5685A6A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrbanCareClient.Application", "UrbanCareClient.Application\UrbanCareClient.Application.csproj", "{4E185F7B-2A95-4E1B-91A1-5B40513E6D2A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrbanCareClient.Infrastructure", "UrbanCareClient.Infrastructure\UrbanCareClient.Infrastructure.csproj", "{F9A36446-8DB2-4076-97E3-531EBE2BA9ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrbanCareClient.WPF", "UrbanCareClient.WPF\UrbanCareClient.WPF.csproj", "{46A25DCC-DCE1-4496-B76E-207E649938C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanCareClient.Testing", "UrbanCareClient.Testing\UrbanCareClient.Testing.csproj", "{120B3057-FD82-41D9-B3AD-E8FC2F109885}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{308A6C87-456B-4C6A-A9C5-21CCE5685A6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{308A6C87-456B-4C6A-A9C5-21CCE5685A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{308A6C87-456B-4C6A-A9C5-21CCE5685A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{308A6C87-456B-4C6A-A9C5-21CCE5685A6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E185F7B-2A95-4E1B-91A1-5B40513E6D2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E185F7B-2A95-4E1B-91A1-5B40513E6D2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E185F7B-2A95-4E1B-91A1-5B40513E6D2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E185F7B-2A95-4E1B-91A1-5B40513E6D2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9A36446-8DB2-4076-97E3-531EBE2BA9ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9A36446-8DB2-4076-97E3-531EBE2BA9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9A36446-8DB2-4076-97E3-531EBE2BA9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9A36446-8DB2-4076-97E3-531EBE2BA9ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46A25DCC-DCE1-4496-B76E-207E649938C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46A25DCC-DCE1-4496-B76E-207E649938C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46A25DCC-DCE1-4496-B76E-207E649938C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46A25DCC-DCE1-4496-B76E-207E649938C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{120B3057-FD82-41D9-B3AD-E8FC2F109885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{120B3057-FD82-41D9-B3AD-E8FC2F109885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{120B3057-FD82-41D9-B3AD-E8FC2F109885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{120B3057-FD82-41D9-B3AD-E8FC2F109885}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B28E286C-848D-4CEC-B263-7D7E8D179B0D}
+	EndGlobalSection
+EndGlobal

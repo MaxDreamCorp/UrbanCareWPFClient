@@ -1,0 +1,363 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Primary -->
+    <Color x:Key="PrimaryColor">#2F6FED</Color>
+    <Color x:Key="PrimaryLightColor">#4A90E2</Color>
+    <Color x:Key="PrimaryHoverColor">#1E56D0</Color>
+
+    <!-- Secondary -->
+    <Color x:Key="SuccessColor">#2DBE7F</Color>
+    <Color x:Key="WarningColor">#F59E0B</Color>
+    <Color x:Key="DangerColor">#E5484D</Color>
+
+    <Color x:Key="NewBgColor">#e9bffb</Color>
+    <Color x:Key="NewColor">#ad23fe</Color>
+    <Color x:Key="InProgressBgColor">#c2edff</Color>
+    <Color x:Key="InProgressColor">#0891b2</Color>
+    <Color x:Key="WaitingForPaymentBgColor">#fef3c7</Color>
+    <Color x:Key="WaitingForPaymentColor">#da8325</Color>
+    <Color x:Key="FinishedBgColor">#d1fae5</Color>
+    <Color x:Key="FinishedColor">#059671</Color>
+    <Color x:Key="CanceledBgColor">#fee2e2</Color>
+    <Color x:Key="CanceledColor">#de413e</Color>
+
+    <Color x:Key="PriorityCriticalColor">#E5484D</Color>
+    <Color x:Key="PriorityCriticalBgColor">#FEE2E2</Color>
+    <Color x:Key="PriorityHighColor">#F97316</Color>
+    <Color x:Key="PriorityHighBgColor">#FFEDD5</Color>
+    <Color x:Key="PriorityMediumColor">#F59E0B</Color>
+    <Color x:Key="PriorityMediumBgColor">#FEF3C7</Color>
+    <Color x:Key="PriorityLowColor">#10B981</Color>
+    <Color x:Key="PriorityLowBgColor">#D1FAE5</Color>
+    <Color x:Key="PriorityPlannedColor">#6B7280</Color>
+    <Color x:Key="PriorityPlannedBgColor">#F3F4F6</Color>
+
+    <!-- Neutral -->
+    <Color x:Key="BackgroundColor">#f8fafc</Color>
+    <Color x:Key="CardColor">#FFFFFF</Color>
+    <Color x:Key="BorderColor">#E3E8EF</Color>
+
+    <!-- Text -->
+    <Color x:Key="TextColor">#1F2933</Color>
+    <Color x:Key="SecondaryTextColor">#6B7280</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="PrimaryLightBrush" Color="{StaticResource PrimaryLightColor}" />
+    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource PrimaryHoverColor}" />
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}" />
+    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}" />
+    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerColor}" />
+
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+    <SolidColorBrush x:Key="CardBrush" Color="{StaticResource CardColor}" />
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
+
+    <SolidColorBrush x:Key="NewBgBrush" Color="{StaticResource NewBgColor}"/>
+    <SolidColorBrush x:Key="NewBrush" Color="{StaticResource NewColor}"/>
+    <SolidColorBrush x:Key="InProgressBgBrush" Color="{StaticResource InProgressBgColor}"/>
+    <SolidColorBrush x:Key="InProgressBrush" Color="{StaticResource InProgressColor}"/>
+    <SolidColorBrush x:Key="WaitingForPaymentBgBrush" Color="{StaticResource WaitingForPaymentBgColor}"/>
+    <SolidColorBrush x:Key="WaitingForPaymentBrush" Color="{StaticResource WaitingForPaymentColor}"/>
+    <SolidColorBrush x:Key="FinishedBgBrush" Color="{StaticResource FinishedBgColor}"/>
+    <SolidColorBrush x:Key="FinishedBrush" Color="{StaticResource FinishedColor}"/>
+    <SolidColorBrush x:Key="CanceledBgBrush" Color="{StaticResource CanceledBgColor}"/>
+    <SolidColorBrush x:Key="CanceledBrush" Color="{StaticResource CanceledColor}"/>
+
+    <!-- Critical -->
+    <SolidColorBrush x:Key="PriorityCriticalBrush" Color="{StaticResource PriorityCriticalColor}"/>
+    <SolidColorBrush x:Key="PriorityCriticalBgBrush" Color="{StaticResource PriorityCriticalBgColor}"/>
+
+    <!-- High -->
+    <SolidColorBrush x:Key="PriorityHighBrush" Color="{StaticResource PriorityHighColor}"/>
+    <SolidColorBrush x:Key="PriorityHighBgBrush" Color="{StaticResource PriorityHighBgColor}"/>
+
+    <!-- Medium -->
+    <SolidColorBrush x:Key="PriorityMediumBrush" Color="{StaticResource PriorityMediumColor}"/>
+    <SolidColorBrush x:Key="PriorityMediumBgBrush" Color="{StaticResource PriorityMediumBgColor}"/>
+
+    <!-- Low -->
+    <SolidColorBrush x:Key="PriorityLowBrush" Color="{StaticResource PriorityLowColor}"/>
+    <SolidColorBrush x:Key="PriorityLowBgBrush" Color="{StaticResource PriorityLowBgColor}"/>
+
+    <!-- Planned -->
+    <SolidColorBrush x:Key="PriorityPlannedBrush" Color="{StaticResource PriorityPlannedColor}"/>
+    <SolidColorBrush x:Key="PriorityPlannedBgBrush" Color="{StaticResource PriorityPlannedBgColor}"/>
+
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+    <SolidColorBrush x:Key="SecondaryTextBrush" Color="{StaticResource SecondaryTextColor}" />
+
+    <Style TargetType="Window" x:Key="Win">
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    </Style>
+
+    <Style TargetType="TextBox">
+        <Setter Property="Padding" Value="10,6"/>
+        <Setter Property="MinHeight" Value="19" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
+        
+    </Style>
+
+    <Style x:Key="ChoseElement" TargetType="TextBox">
+        <Setter Property="Padding" Value="10,6"/>
+        <Setter Property="MinHeight" Value="19" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="BorderBrush" Value="#FF9A9A9A"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="Background" Value="#FF9EACD0"/>
+        
+
+    </Style>
+
+    <Style TargetType="PasswordBox">
+        <Setter Property="Padding" Value="10,6"/>
+        <Setter Property="MinHeight" Value="19" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="White"/>
+       
+    </Style>
+
+    <Style x:Key="FormLabel" TargetType="Label">
+
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}"/>
+        <Setter Property="Margin" Value="0,6,0,2"/>
+
+    </Style>
+
+    <Style x:Key="SecondaryLabel" TargetType="Label">
+
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}"/>
+
+    </Style>
+
+    <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="14,8"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="8"
+                            Padding="14 8"
+                        Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource PrimaryHoverBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SecondaryButton" TargetType="Button">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="Padding" Value="14,8"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+
+    <Style x:Key="DangerButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="14,8"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <Style TargetType="ComboBox">
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="MinHeight" Value="35"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#DDE4EE"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="#8A99B1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <Border x:Name="MainBorder" 
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ContentPresenter x:Name="ContentSite"
+                                          IsHitTestVisible="False" 
+                                          Content="{TemplateBinding SelectionBoxItem}"
+                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left" />
+
+                            <Path x:Name="Arrow"
+                              Grid.Column="1"
+                              Data="M 0 0 L 4 4 L 8 0"
+                              Stroke="#8A99B1"
+                              StrokeThickness="1"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center" />
+
+                            <ToggleButton Grid.ColumnSpan="2"
+                                      Background="Transparent"
+                                      BorderThickness="0"
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                      Focusable="False">
+                                <ToggleButton.Style>
+                                    <Style TargetType="ToggleButton">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ToggleButton">
+                                                    <Border Background="Transparent"/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ToggleButton.Style>
+                            </ToggleButton>
+                        </Grid>
+
+                        <Popup x:Name="Popup"
+                           Placement="Bottom"
+                           IsOpen="{TemplateBinding IsDropDownOpen}"
+                           AllowsTransparency="True"
+                           Focusable="False"
+                           PopupAnimation="Slide">
+                            <Border x:Name="DropDownBorder"
+                                Background="White"
+                                BorderBrush="#DDE4EE"
+                                BorderThickness="1"
+                                CornerRadius="0,0,8,8"
+                                MinWidth="{TemplateBinding ActualWidth}"
+                                MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <ScrollViewer Margin="4" SnapsToDevicePixels="True">
+                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MainBorder" Property="BorderBrush" Value="#C0CAD9"/>
+                        </Trigger>
+                        <Trigger Property="IsDropDownOpen" Value="True">
+                            <Setter TargetName="MainBorder" Property="CornerRadius" Value="8,8,0,0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="DatePickerTextBox">
+        <Setter Property="Padding" Value="10,6"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="Background" Value="White"/>
+    </Style>
+
+    <Style x:Key="PageTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="0,0,0,16"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="SectionTitleText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Margin" Value="0,0,0,10"/>
+    </Style>
+
+    <Style x:Key="SecondaryText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}"/>
+    </Style>
+
+    <Style x:Key="ModernDataGrid" TargetType="DataGrid">
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="#4A90E2"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="GridLinesVisibility" Value="All"/>
+        <Setter Property="AlternatingRowBackground" Value="#FFAAC7F3" />
+        <Setter Property="SelectionMode" Value="Single" />
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+
+        <!-- Заголовки -->
+        <Setter Property="ColumnHeaderStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource SecondaryTextBrush}" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="Padding" Value="4" />
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <!-- Строки -->
+        <Setter Property="RowStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Height" Value="25"/>
+                    <Style.Triggers>
+                        <Trigger Property="AlternationIndex" Value="2">
+                            <Setter Property="Background" Value="#F0F8FF"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#D0E8FF"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#FF85C6EF"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Switcher" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource PrimaryLightBrush}" />
+        <Setter Property="Padding" Value="10" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource PrimaryHoverBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

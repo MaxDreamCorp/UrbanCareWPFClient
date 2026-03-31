@@ -1,0 +1,75 @@
+﻿<Window x:Class="UrbanCareClient.WPF.Views.Windows.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UrbanCareClient.WPF.Views.Windows"
+        mc:Ignorable="d"
+        Style="{StaticResource Win}"
+        WindowStartupLocation="CenterOwner"
+        Title="Администратор: Главная" MinHeight="450" MinWidth="800" Loaded="Window_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="{StaticResource PrimaryLightBrush}">
+            <TextBlock x:Name="MCNameTxt" Margin="5,5,5,3" Text="УК 'Санрайз Сити'" Foreground="White" FontWeight="Bold" FontSize="14"/>
+            <TextBlock  Margin="5,3,5,5" Text="Панель администратора" Foreground="White" FontSize="11"/>
+        </StackPanel>
+
+            <Border  Background="{StaticResource PrimaryLightBrush}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" BorderThickness="0,1,0,0">
+        <StackPanel x:Name="SwitchersPanel">
+                    <Border x:Name="MCEmployeesSwitcher" Style="{StaticResource Switcher}" MouseLeftButtonDown="MCEmployeesSwitcher_MouseLeftButtonDown">
+                    <StackPanel>                        
+                    <TextBlock Text="Работники УК" Foreground="White" FontSize="12"/>
+                    </StackPanel>
+                </Border>
+                <Border x:Name="RegionsSwitcher" Style="{StaticResource Switcher}" MouseLeftButtonDown="RegionsSwitcher_MouseLeftButtonDown">
+                    <StackPanel>                        
+                    <TextBlock Text="Области влияния" Foreground="White" FontSize="12"/>
+                    </StackPanel>
+                </Border>
+                    <Border x:Name="BuildingsSwitcher" Style="{StaticResource Switcher}" MouseLeftButtonDown="BuildingsSwitcher_MouseLeftButtonDown">
+                    <StackPanel>                        
+                    <TextBlock Text="Здания" Foreground="White" FontSize="12"/>
+                    </StackPanel>
+                </Border>
+                <Border x:Name="ApartmentsSwitcher" Style="{StaticResource Switcher}" MouseLeftButtonDown="ApartmentsSwitcher_MouseLeftButtonDown">
+                    <StackPanel>                        
+                    <TextBlock Text="Квартиры" Foreground="White" FontSize="12"/>
+                    </StackPanel>
+                </Border>
+        </StackPanel>
+            </Border>
+
+            <Border  Background="{StaticResource PrimaryLightBrush}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="2" BorderThickness="0,1,0,0">
+                <StackPanel x:Name="AccountThumbPanel">
+                    <TextBlock x:Name="FullNameTxt" Margin="5,5,5,0" Text="Иванов Иван Иванович" Foreground="White" FontWeight="Bold" FontSize="12"/>
+                    <TextBlock x:Name="PositionTxt" Margin="5,0,5,10" Text="Руководитель УК" Foreground="White" FontSize="11"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <DockPanel Grid.Row="0" >
+                <TextBlock x:Name="WorkAreaName" Margin="15" HorizontalAlignment="Left" Text="Работники УК" FontWeight="Bold"/>
+                <Button x:Name="AddBtn" Style="{StaticResource PrimaryButton}" Content="+ Добавить" Width="110" Margin="10" HorizontalAlignment="Right" Click="AddBtn_Click"/>
+            </DockPanel>
+            <DataGrid x:Name="dg" Style="{StaticResource ModernDataGrid}" Grid.Row="1" Margin="10" CanUserSortColumns="True" BeginningEdit="dg_BeginningEdit"/>
+        </Grid>
+    </Grid>
+</Window>
