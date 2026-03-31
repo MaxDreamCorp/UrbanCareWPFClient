@@ -75,7 +75,7 @@ namespace UrbanCareClient.WPF.Views.Windows
 
             foreach (var order in orders)
             {
-                var orderControl = new OrderControl();
+                var orderControl = new OrderControl(_getterDIServices, _orderService);
                 orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel
                 {
                     Order = order

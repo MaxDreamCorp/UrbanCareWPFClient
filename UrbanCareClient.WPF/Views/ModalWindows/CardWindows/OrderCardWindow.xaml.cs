@@ -22,7 +22,7 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
         private readonly OrderService _orderService;
         private readonly SolidColorBrush _borderBrush;
         private readonly WindowOperations _windowOperation;
-        private readonly OrderResponseDTO? _orderResponseDTO;
+        public OrderResponseDTO? OrderResponseDTO { get; private set; }
         private readonly SingleChoiceViewModel<BuildingViewDTO> _buildingChoiceVM;
         private readonly SingleChoiceControl _buildingChoice;
         private readonly SingleChoiceViewModel<ApartmentViewDTO> _apartmentChoiceVM;
@@ -33,6 +33,8 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
             InitializeComponent();
             _getterDIServices = getterDIServices;
             _orderService = orderService;
+            _windowOperation = windowOperation;
+            OrderResponseDTO = orderResponseDTO;
             _borderBrush = (SolidColorBrush)System.Windows.Application.Current.Resources["BorderBrush"];
 
 
@@ -62,8 +64,6 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
 
             BuildingPanel.Children.Add(_buildingChoice);
             ApartmentPanel.Children.Add(_apartmentChoice);
-            _windowOperation = windowOperation;
-            _orderResponseDTO = orderResponseDTO;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -73,6 +73,8 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
 
             if (_windowOperation == WindowOperations.Create)
                 SetForCreating();
+            else if (_windowOperation == WindowOperations.Edit)
+                SetFieldsForEditing();
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
@@ -93,9 +95,9 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
         private async void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             if (_windowOperation == WindowOperations.Create)
-            {
                 await CreateOrder();
-            }
+            else if (_windowOperation == WindowOperations.Edit)
+                await UpdateOrder();
         }
 
         private async Task CreateOrder()
@@ -127,6 +129,55 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
                 if (response == null)
                 {
                     MessageBox.Show($"Заказ #{IdInp.Text} создан", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Close();
+                }
+                else
+                    MessageBox.Show(string.Join("\n", response), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async Task UpdateOrder()
+        {
+            if (!CheckAllFields() || TemporaryDataStorage.ResidentData == null || OrderResponseDTO == null)
+            {
+                MessageBox.Show("Не все поля заполнены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (_buildingChoice.SelectedItem is BuildingViewDTO buildingViewDTO)
+            {
+                ApartmentViewDTO? apartmentViewDTO = null;
+                if (_apartmentChoice.SelectedItem is ApartmentViewDTO avd)
+                    apartmentViewDTO = avd;
+
+                var cmd = new UpdateOrderFromResident(
+                    OrderResponseDTO.Id,
+                    DescriptionInp.Text,
+                    TemporaryDataStorage.OrderCategories.First(oc => oc.Category == CategoryInp.Text).Id,
+                    buildingViewDTO.Id,
+                    apartmentViewDTO?.Id,
+                    TemporaryDataStorage.Priorities.First(p => p.Priority == PriorityyInp.Text).Id,
+                    ContactPhoneInp.Text,
+                    ContactEmailInp.Text);
+
+                var response = await _orderService.UpdateOrder(cmd);
+
+                if (response == null)
+                {
+                    MessageBox.Show($"Заказ #{IdInp.Text} обновлен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.OrderResponseDTO = new OrderResponseDTO(
+                        OrderResponseDTO.Id,
+                        OrderResponseDTO.Resident,
+                        DescriptionInp.Text,
+                        TemporaryDataStorage.OrderCategories.First(oc => oc.Category == CategoryInp.Text),
+                        TemporaryDataStorage.ResidentData.Apartment.Building,
+                        apartmentViewDTO != null ? TemporaryDataStorage.ResidentData.Apartment : null,
+                        TemporaryDataStorage.Priorities.First(p => p.Priority == PriorityyInp.Text),
+                        ContactPhoneInp.Text,
+                        ContactEmailInp.Text,
+                        OrderResponseDTO.OrderStatus,
+                        OrderResponseDTO.CreatedAt,
+                        OrderResponseDTO.OrderMaterials);
                     Close();
                 }
                 else
@@ -193,6 +244,56 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
                   ValidateFieldsService.ValidateTextBoxRegex(ContactEmailInp, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", "Некорректный формат email", _borderBrush.Color)
             };
             return checking.All(x => x);
+        }
+
+        private void SetFieldsForEditing()
+        {
+            if (OrderResponseDTO == null || TemporaryDataStorage.ResidentData == null) return;
+
+            IdInp.Text = OrderResponseDTO.Id.ToString();
+            ResidentInp.Text = OrderResponseDTO.Resident.UserData.Fullname;
+            ContactEmailInp.Text = OrderResponseDTO.ContactEmail;
+            ContactPhoneInp.Text = OrderResponseDTO.ContactPhone;
+            DescriptionInp.Text = OrderResponseDTO.Description;
+            TypeInp.SelectedItem = OrderResponseDTO.OrderCategory.OrderType.Type;
+            CategoryInp.SelectedItem = OrderResponseDTO.OrderCategory.Category;
+            PriorityyInp.SelectedItem = OrderResponseDTO.Priority.Priority;
+
+            var buildingViewDTO = ConverterService.BuildingToViewDTO(OrderResponseDTO.Building);
+            _buildingChoice.SourceItems = new() { buildingViewDTO };
+            _buildingChoice.SelectedItem = buildingViewDTO;
+            _buildingChoice.SelectedItemTxt.Text = buildingViewDTO.Address;
+
+            _buildingChoice.SelectedItemTxt.TextChanged += (sender, e) =>
+            {
+                if (sender is TextBox tb)
+                {
+                    if (string.IsNullOrEmpty(tb.Text))
+                    {
+                        _apartmentChoice.SelectedItem = null;
+                        _apartmentChoice.SelectedItemTxt.Text = string.Empty;
+                        _apartmentChoice.SourceItems = new(new List<ApartmentViewDTO>());
+                        return;
+                    }
+
+                    if (_buildingChoice.SelectedItem != null && _buildingChoice.SelectedItem is BuildingViewDTO buildingViewDTO)
+                    {
+                        var apartment = ConverterService.ApartmentToViewDTO(TemporaryDataStorage.ResidentData.Apartment);
+
+                        _apartmentChoice.SelectedItem = null;
+                        _apartmentChoice.SelectedItemTxt.Text = string.Empty;
+                        _apartmentChoice.SourceItems = new() { apartment };
+                    }
+                }
+            };
+
+            if (OrderResponseDTO.Apartment != null)
+            {
+                var apartmentViewDTO = ConverterService.ApartmentToViewDTO(OrderResponseDTO.Apartment);
+                _apartmentChoice.SourceItems = new() { apartmentViewDTO };
+                _apartmentChoice.SelectedItem = apartmentViewDTO;
+                _apartmentChoice.SelectedItemTxt.Text = $"кв. {apartmentViewDTO.Number}";
+            }
         }
     }
 }

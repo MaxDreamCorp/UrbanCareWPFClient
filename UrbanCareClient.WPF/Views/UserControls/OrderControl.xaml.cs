@@ -1,7 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using UrbanCareClient.Application.Services.ApiServices;
 using UrbanCareClient.Domain.Enums;
 using UrbanCareClient.WPF.Services;
+using UrbanCareClient.WPF.Views.ModalWindows.CardWindows;
 using UrbanCareClient.WPF.Views.UserControls.ViewModels;
 
 namespace UrbanCareClient.WPF.Views.UserControls
@@ -11,6 +13,9 @@ namespace UrbanCareClient.WPF.Views.UserControls
     /// </summary>
     public partial class OrderControl : UserControl
     {
+        private readonly GetterDIServices _getterDIServices;
+        private readonly OrderService _orderService;
+
         public static readonly DependencyProperty ViewModelProperty =
             DependencyProperty.Register(
                 nameof(ViewModel),
@@ -24,9 +29,11 @@ namespace UrbanCareClient.WPF.Views.UserControls
             set => SetValue(ViewModelProperty, value);
         }
 
-        public OrderControl()
+        public OrderControl(GetterDIServices getterDIServices, OrderService orderService)
         {
             InitializeComponent();
+            _getterDIServices = getterDIServices;
+            _orderService = orderService;
         }
 
         private static void OnViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -108,5 +115,12 @@ namespace UrbanCareClient.WPF.Views.UserControls
             }
         }
 
+        private void MoreBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var orderCard = new OrderCardWindow(_getterDIServices, _orderService, Enums.WindowOperations.Edit, ViewModel.Order);
+            orderCard.ShowDialog();
+            if (orderCard.OrderResponseDTO != null)
+                ViewModel = new OrderControlViewModel { Order = orderCard.OrderResponseDTO };
+        }
     }
 }
