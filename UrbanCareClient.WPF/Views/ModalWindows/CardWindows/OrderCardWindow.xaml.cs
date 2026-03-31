@@ -190,7 +190,7 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
             if (TemporaryDataStorage.ResidentData == null) return;
 
             if (TemporaryDataStorage.MyOrders != null && TemporaryDataStorage.MyOrders.Count > 0)
-                IdInp.Text = (TemporaryDataStorage.MyOrders.Max(x => x.Id) + 1).ToString();
+                IdInp.Text = TemporaryDataStorage.MyOrders.Max(x => x.Id).ToString();
             else
                 IdInp.Text = "1";
 
