@@ -54,6 +54,7 @@ namespace UrbanCareClient.WPF
             services.AddTransient<DataChoiceModalWindow>();
             services.AddTransient<AdminWindow>();
             services.AddTransient<ResidentWindow>();
+            services.AddTransient<DispatcherWindow>();
 
             services.AddSingleton<INavigationService>(provider => new NavigationService(provider));
             services.AddSingleton<GetterDIServices>(provider => new GetterDIServices(provider));

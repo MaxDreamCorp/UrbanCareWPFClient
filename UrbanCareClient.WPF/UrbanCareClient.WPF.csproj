@@ -22,6 +22,7 @@
     <None Remove="Resources\Images\InProgressIcon.png" />
     <None Remove="Resources\Images\MCIcon.png" />
     <None Remove="Resources\Images\NewOrderIcon.png" />
+    <None Remove="Resources\Images\PersonIcon.png" />
     <None Remove="Resources\Images\PhoneIcon.png" />
     <None Remove="Resources\Images\TypeIcon.png" />
     <None Remove="Resources\Images\UrbanCareLogo.ico" />
@@ -60,6 +61,7 @@
     <Resource Include="Resources\Images\InProgressIcon.png" />
     <Resource Include="Resources\Images\MCIcon.png" />
     <Resource Include="Resources\Images\NewOrderIcon.png" />
+    <Resource Include="Resources\Images\PersonIcon.png" />
     <Resource Include="Resources\Images\PhoneIcon.png" />
     <Resource Include="Resources\Images\TypeIcon.png" />
     <Resource Include="Resources\Images\UrbanCareLogo.ico" />

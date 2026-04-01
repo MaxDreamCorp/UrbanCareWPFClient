@@ -94,6 +94,11 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                         adminWindow.Show();
                         Close();
                         break;
+                    case (int)RoleEnum.Dispatcher:
+                        var dispatcherWindow = _navigationService.GetWindow<DispatcherWindow>();
+                        dispatcherWindow.Show();
+                        Close();
+                        break;
                     case (int)RoleEnum.Resident:
                         var residentWindow = _navigationService.GetWindow<ResidentWindow>();
                         residentWindow.Show();

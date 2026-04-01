@@ -1,0 +1,97 @@
+﻿<Window x:Class="UrbanCareClient.WPF.Views.Windows.DispatcherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UrbanCareClient.WPF.Views.Windows"
+        mc:Ignorable="d"
+            Loaded="Window_Loaded"
+    Title="Диспетчер: Главная" MinHeight="450" MinWidth="800">
+    <Window.Background>
+        <SolidColorBrush Color="{StaticResource BackgroundColor}"/>
+    </Window.Background>
+    <ScrollViewer>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0"  Padding="15 10"  Background="White">
+                <DockPanel >
+                    <StackPanel Orientation="Horizontal">
+                        <Image  RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/MCIcon.png" Width="35" />
+                        <StackPanel HorizontalAlignment="Left" >
+                            <TextBlock x:Name="MCNameTxt" Margin="5,5,5,0" Text="УК 'Санрайз Сити'"  FontWeight="Bold" FontSize="14"/>
+                            <TextBlock  Margin="5,3,5,5" Text="Панель диспетчера" FontSize="11" Style="{StaticResource SecondaryText}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <StackPanel>
+                            <TextBlock x:Name="FullNameTxt" Margin="5,5,5,0" Text="Иванов Иван Иванович"  FontWeight="Bold" FontSize="12"/>
+                            <TextBlock x:Name="PositionTxt" Margin="5,0,5,10" Text="Диспетчер" FontSize="11" Style="{StaticResource SecondaryText}" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                        <Image  RenderOptions.BitmapScalingMode="HighQuality" Width="35" Source="/Resources/Images/AccountIcon.png"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" Margin="5" Background="White" CornerRadius="15" Padding="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Margin="10" Grid.Row="0">
+                            <TextBlock Text="Новые заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                            <StackPanel x:Name="NewOrdersPanel" Margin="0 5"/> 
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" Margin="5" Background="White" CornerRadius="15" Padding="10">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <DockPanel Margin="10" Grid.Row="0">
+                                <TextBlock Text="Заказы в работе" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
+                            </DockPanel>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                                <StackPanel x:Name="InProgressOrdersPanel" Margin="0 5"/>
+                            </ScrollViewer>
+                        </Grid>
+                </Border>
+                <Border Grid.RowSpan="2" Grid.Column="1" Margin="5" Background="White" CornerRadius="15" Padding="10">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <DockPanel Margin="10" Grid.Row="0">
+                                <TextBlock Text="Исполнители" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
+                            </DockPanel>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                                <StackPanel x:Name="ExecutorssPanel" Margin="0 5"/>
+                            </ScrollViewer>
+                        </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Window>
