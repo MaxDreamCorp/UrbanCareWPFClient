@@ -69,11 +69,14 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         control.StatusTxt.Foreground = StylesService.InProgressBrush;
                         control.StatusBdr.Background = StylesService.InProgressBgBrush;
 
-                        control.InWorkPanel.Visibility = Visibility.Visible;
                         if (orderControlViewModel.Order.Dispatcher != null)
+                        {
+                            control.InWorkPanel.Visibility = Visibility.Visible;
                             control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
+                        }
+
                         if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.UserData.Fullname))}";
+                            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
                         break;
                     case OrderStatusEnum.WaitingForPayment:
                         control.StatusTxt.Foreground = StylesService.WaitingForPaymentBrush;
@@ -83,13 +86,20 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         if (orderControlViewModel.Order.Dispatcher != null)
                             control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
                         if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.UserData.Fullname))}";
+                            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
 
                         if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
                         {
                             control.PaymentPanel.Visibility = Visibility.Visible;
                             control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. ({om.Quantity} {om.Material.Unit}.)"))}";
                             decimal totalCost = orderControlViewModel.Order.OrderMaterials.Sum(om => om.Quantity * om.Material.Price);
+
+                            if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
+                            {
+                                control.MaterialsTxt.Text += $"\nРабота: {orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment)} руб.";
+                                totalCost += orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment) ?? 0;
+                            }
+
                             control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
                         }
 
@@ -103,7 +113,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         if (orderControlViewModel.Order.Dispatcher != null)
                             control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
                         if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join("\n", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.UserData.Fullname))}";
+                            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join("\n", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
                         break;
                     case OrderStatusEnum.Canceled:
                         control.StatusTxt.Foreground = StylesService.CanceledBrush;

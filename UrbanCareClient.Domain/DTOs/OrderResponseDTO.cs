@@ -16,6 +16,6 @@
         DateTime? ChangedAt,
         DateTime? AcceptedAt,
         DateTime? CompletedAt,
-        List<EmployeeDataResponseDTO>? OrderExecutors,
+        List<OrderExecutorResponseDTO>? OrderExecutors,
         List<OrderMaterialResponseDTO>? OrderMaterials);
 }
