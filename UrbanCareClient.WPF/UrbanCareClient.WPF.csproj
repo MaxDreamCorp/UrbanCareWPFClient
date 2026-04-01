@@ -15,6 +15,8 @@
     <None Remove="Resources\Images\CalendarIcon.png" />
     <None Remove="Resources\Images\CanceledIcon.png" />
     <None Remove="Resources\Images\CategoryIcon.png" />
+    <None Remove="Resources\Images\ChevronDown.png" />
+    <None Remove="Resources\Images\ChevronUp.png" />
     <None Remove="Resources\Images\EmailIcon.png" />
     <None Remove="Resources\Images\FinishedIcon.png" />
     <None Remove="Resources\Images\InProgressIcon.png" />
@@ -50,6 +52,8 @@
     <Resource Include="Resources\Images\AddressIcon.png" />
     <Resource Include="Resources\Images\CalendarIcon.png" />
     <Resource Include="Resources\Images\CategoryIcon.png" />
+    <Resource Include="Resources\Images\ChevronDown.png" />
+    <Resource Include="Resources\Images\ChevronUp.png" />
     <Resource Include="Resources\Images\EmailIcon.png" />
     <Resource Include="Resources\Images\FinishedIcon.png" />
     <Resource Include="Resources\Images\CanceledIcon.png" />

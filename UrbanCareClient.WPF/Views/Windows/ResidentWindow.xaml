@@ -83,35 +83,53 @@
                     </Border>
                 </Grid>
 
-                <Border Background="White" Padding="10" CornerRadius="15" Margin="10">
+                <Border Background="White" Padding="10" CornerRadius="15" Margin="10" x:Name="ActiveOrders" MouseLeftButtonDown="ActiveOrders_MouseLeftButtonDown">
                         <StackPanel>
                         <DockPanel Margin="10">
                             <TextBlock Text="Активные заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
-                            <Button x:Name="CreateOrderBtn" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Right" Content="Создать заказ" VerticalAlignment="Center" Click="CreateOrderBtn_Click"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
+                            <Button x:Name="CreateOrderBtn" Style="{StaticResource PrimaryButton}" Content="Создать заказ" Click="CreateOrderBtn_Click"/>
+                                <StackPanel Margin="10,0,0,0" Orientation="Horizontal" >
+                                    <Image x:Name="ActiveOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
+                                    <Image x:Name="ActiveOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
+                                </StackPanel>
+                            </StackPanel>
                         </DockPanel>
                         <StackPanel x:Name="ActiveOrdersPanel" />
                     </StackPanel>
                 </Border>
-                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10">
+                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10" x:Name="WaitingForPaymentOrders" MouseLeftButtonDown="WaitingForPaymentOrders_MouseLeftButtonDown">
                     <StackPanel>
                         <DockPanel Margin="10">
                             <TextBlock Text="Ожидающие оплаты заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
+                        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Right" >
+                            <Image x:Name="WaitingForPaymentOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
+                            <Image x:Name="WaitingForPaymentOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
+                        </StackPanel>
                         </DockPanel>
                         <StackPanel x:Name="WaitingForPaymentOrdersPanel" />
                     </StackPanel>
                 </Border>
-                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10">
+                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10" x:Name="FinishedOrders" MouseLeftButtonDown="FinishedOrders_MouseLeftButtonDown">
                     <StackPanel>
                         <DockPanel Margin="10">
                             <TextBlock Text="Завершенные заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
+                            <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Right" >
+                                <Image x:Name="FinishedOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
+                                <Image x:Name="FinishedOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
+                            </StackPanel>
                         </DockPanel>
                         <StackPanel x:Name="FinishedOrdersPanel" />
                     </StackPanel>
                 </Border>
-                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10">
+                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10" x:Name="CanceledOrders" MouseLeftButtonDown="CanceledOrders_MouseLeftButtonDown">
                     <StackPanel>
                         <DockPanel Margin="10">
                             <TextBlock Text="Отмененные заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
+                            <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Right" >
+                                <Image x:Name="CanceledOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
+                                <Image x:Name="CanceledOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
+                            </StackPanel>
                         </DockPanel>
                         <StackPanel x:Name="CanceledOrdersPanel" />
                     </StackPanel>

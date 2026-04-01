@@ -108,5 +108,69 @@ namespace UrbanCareClient.WPF.Views.Windows
             FinishedOrdersTxt.Text = _finishedOrdersCount.ToString();
             CanceledOrdersTxt.Text = _canceledOrdersCount.ToString();
         }
+
+        private void ActiveOrders_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (ActiveOrdersPanel.Visibility == Visibility.Visible)
+            {
+                ActiveOrdersPanel.Visibility = Visibility.Collapsed;
+                ActiveOrderChevronUp.Visibility = Visibility.Collapsed;
+                ActiveOrderChevronDown.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ActiveOrdersPanel.Visibility = Visibility.Visible;
+                ActiveOrderChevronUp.Visibility = Visibility.Visible;
+                ActiveOrderChevronDown.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void WaitingForPaymentOrders_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (WaitingForPaymentOrdersPanel.Visibility == Visibility.Visible)
+            {
+                WaitingForPaymentOrdersPanel.Visibility = Visibility.Collapsed;
+                WaitingForPaymentOrderChevronUp.Visibility = Visibility.Collapsed;
+                WaitingForPaymentOrderChevronDown.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                WaitingForPaymentOrdersPanel.Visibility = Visibility.Visible;
+                WaitingForPaymentOrderChevronUp.Visibility = Visibility.Visible;
+                WaitingForPaymentOrderChevronDown.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void FinishedOrders_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (FinishedOrdersPanel.Visibility == Visibility.Visible)
+            {
+                FinishedOrdersPanel.Visibility = Visibility.Collapsed;
+                FinishedOrderChevronUp.Visibility = Visibility.Collapsed;
+                FinishedOrderChevronDown.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                FinishedOrdersPanel.Visibility = Visibility.Visible;
+                FinishedOrderChevronUp.Visibility = Visibility.Visible;
+                FinishedOrderChevronDown.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void CanceledOrders_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (CanceledOrdersPanel.Visibility == Visibility.Visible)
+            {
+                CanceledOrdersPanel.Visibility = Visibility.Collapsed;
+                CanceledOrderChevronUp.Visibility = Visibility.Collapsed;
+                CanceledOrderChevronDown.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                CanceledOrdersPanel.Visibility = Visibility.Visible;
+                CanceledOrderChevronUp.Visibility = Visibility.Visible;
+                CanceledOrderChevronDown.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }

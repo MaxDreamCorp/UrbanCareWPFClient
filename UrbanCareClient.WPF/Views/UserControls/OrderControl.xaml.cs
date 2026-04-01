@@ -88,20 +88,24 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
                             control.ExecutorsTxt.Text = $"Исполнитель: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
 
+                        control.PaymentPanel.Visibility = Visibility.Visible;
+                        decimal totalCost = 0;
+
                         if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
                         {
-                            control.PaymentPanel.Visibility = Visibility.Visible;
                             control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. ({om.Quantity} {om.Material.Unit}.)"))}";
-                            decimal totalCost = orderControlViewModel.Order.OrderMaterials.Sum(om => om.Quantity * om.Material.Price);
-
-                            if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                            {
-                                control.MaterialsTxt.Text += $"\nРабота: {orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment)} руб.";
-                                totalCost += orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment) ?? 0;
-                            }
-
-                            control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
+                            totalCost += orderControlViewModel.Order.OrderMaterials.Sum(om => om.Quantity * om.Material.Price);
                         }
+
+                        if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
+                        {
+                            control.MaterialsTxt.Text += $"\nРабота: {orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment)} руб.";
+                            totalCost += orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment) ?? 0;
+                        }
+
+                        control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
+                        if (totalCost == 0)
+                            control.PayBtn.Visibility = Visibility.Collapsed;
 
                         control.MoreBtn.Visibility = Visibility.Collapsed;
                         break;
@@ -114,6 +118,25 @@ namespace UrbanCareClient.WPF.Views.UserControls
                             control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
                         if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
                             control.ExecutorsTxt.Text = $"Исполнитель: {string.Join("\n", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
+
+
+                        control.PaymentPanel.Visibility = Visibility.Visible;
+                        totalCost = 0;
+
+                        if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
+                        {
+                            control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. ({om.Quantity} {om.Material.Unit}.)"))}";
+                            totalCost += orderControlViewModel.Order.OrderMaterials.Sum(om => om.Quantity * om.Material.Price);
+                        }
+
+                        if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
+                        {
+                            control.MaterialsTxt.Text += $"\nРабота: {orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment)} руб.";
+                            totalCost += orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment) ?? 0;
+                        }
+
+                        control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
+                        control.PayBtn.Visibility = Visibility.Collapsed;
                         break;
                     case OrderStatusEnum.Canceled:
                         control.StatusTxt.Foreground = StylesService.CanceledBrush;
