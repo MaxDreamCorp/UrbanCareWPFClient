@@ -81,8 +81,14 @@ namespace UrbanCareClient.WPF.Views.Windows
                     Order = order
                 };
 
-                if (order.OrderStatus.Id < (int)OrderStatusEnum.Finished)
+                if (order.OrderStatus.Id < (int)OrderStatusEnum.WaitingForPayment)
                     ActiveOrdersPanel.Children.Add(orderControl);
+                else if (order.OrderStatus.Id == (int)OrderStatusEnum.WaitingForPayment)
+                    WaitingForPaymentOrdersPanel.Children.Add(orderControl);
+                else if (order.OrderStatus.Id == (int)OrderStatusEnum.Finished)
+                    FinishedOrdersPanel.Children.Add(orderControl);
+                else if (order.OrderStatus.Id == (int)OrderStatusEnum.Canceled)
+                    CanceledOrdersPanel.Children.Add(orderControl);
             }
 
             _newOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.New).Count();

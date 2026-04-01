@@ -68,14 +68,42 @@ namespace UrbanCareClient.WPF.Views.UserControls
                     case OrderStatusEnum.InProgress:
                         control.StatusTxt.Foreground = StylesService.InProgressBrush;
                         control.StatusBdr.Background = StylesService.InProgressBgBrush;
+
+                        control.InWorkPanel.Visibility = Visibility.Visible;
+                        if (orderControlViewModel.Order.Dispatcher != null)
+                            control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
+                        if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
+                            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.UserData.Fullname))}";
                         break;
                     case OrderStatusEnum.WaitingForPayment:
                         control.StatusTxt.Foreground = StylesService.WaitingForPaymentBrush;
                         control.StatusBdr.Background = StylesService.WaitingForPaymentBgBrush;
+
+                        control.InWorkPanel.Visibility = Visibility.Visible;
+                        if (orderControlViewModel.Order.Dispatcher != null)
+                            control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
+                        if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
+                            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.UserData.Fullname))}";
+
+                        if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
+                        {
+                            control.PaymentPanel.Visibility = Visibility.Visible;
+                            control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. ({om.Quantity} {om.Material.Unit}.)"))}";
+                            decimal totalCost = orderControlViewModel.Order.OrderMaterials.Sum(om => om.Quantity * om.Material.Price);
+                            control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
+                        }
+
+                        control.MoreBtn.Visibility = Visibility.Collapsed;
                         break;
                     case OrderStatusEnum.Finished:
                         control.StatusTxt.Foreground = StylesService.FinishedBrush;
                         control.StatusBdr.Background = StylesService.FinishedBgBrush;
+
+                        control.InWorkPanel.Visibility = Visibility.Visible;
+                        if (orderControlViewModel.Order.Dispatcher != null)
+                            control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
+                        if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
+                            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join("\n", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.UserData.Fullname))}";
                         break;
                     case OrderStatusEnum.Canceled:
                         control.StatusTxt.Foreground = StylesService.CanceledBrush;

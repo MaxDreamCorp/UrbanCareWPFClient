@@ -84,13 +84,36 @@
                 </Grid>
 
                 <Border Background="White" Padding="10" CornerRadius="15" Margin="10">
-                    <StackPanel>
+                        <StackPanel>
                         <DockPanel Margin="10">
                             <TextBlock Text="Активные заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
                             <Button x:Name="CreateOrderBtn" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Right" Content="Создать заказ" VerticalAlignment="Center" Click="CreateOrderBtn_Click"/>
                         </DockPanel>
                         <StackPanel x:Name="ActiveOrdersPanel" />
-
+                    </StackPanel>
+                </Border>
+                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10">
+                    <StackPanel>
+                        <DockPanel Margin="10">
+                            <TextBlock Text="Ожидающие оплаты заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <StackPanel x:Name="WaitingForPaymentOrdersPanel" />
+                    </StackPanel>
+                </Border>
+                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10">
+                    <StackPanel>
+                        <DockPanel Margin="10">
+                            <TextBlock Text="Завершенные заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <StackPanel x:Name="FinishedOrdersPanel" />
+                    </StackPanel>
+                </Border>
+                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10">
+                    <StackPanel>
+                        <DockPanel Margin="10">
+                            <TextBlock Text="Отмененные заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <StackPanel x:Name="CanceledOrdersPanel" />
                     </StackPanel>
                 </Border>
             </StackPanel>
