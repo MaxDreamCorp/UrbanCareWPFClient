@@ -57,6 +57,11 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                     LoginInp.Text = "a.smirnov.home@mail.ru";
                     Passwordnp.Password = "TempPass123!";
                 }
+                else if (selectedString == "Диспетчер")
+                {
+                    LoginInp.Text = "a.petrova.uk@mail.ru";
+                    Passwordnp.Password = "TempPass123!";
+                }
             };
 
             InpPanel.Children.Add(userDebugChooser);

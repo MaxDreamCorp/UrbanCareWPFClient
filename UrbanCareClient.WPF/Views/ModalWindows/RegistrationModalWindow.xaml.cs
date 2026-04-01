@@ -336,6 +336,36 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                 PassportDataDepartmentInp.Text = "УФМС России по г. Москва";
                 PassportDataDepartmentCodeInp.Text = "770-008";
             }
+            else if (role == "Диспетчер" && EmailInp.Text == "m")
+            {
+                FullnameInp.Text = "Сидоров Максим Игоревич";
+                EmailInp.Text = "m.sidorov.uk@yandex.ru";
+                PhoneInp.Text = "+79001234569";
+                DateOfBirthInp.SelectedDate = new DateTime(1988, 7, 10);
+                SnilsInp.Text = "125-456-789 00";
+                InnInp.Text = "323456789012";
+                PasswordInp.Password = "TempPass123!";
+                ConfirmPasswordInp.Password = "TempPass123!";
+                PassportDataSeriaInp.Text = "4512";
+                PassportDataNumberInp.Text = "334455";
+                PassportDataDepartmentInp.Text = "УФМС России по г. Москва";
+                PassportDataDepartmentCodeInp.Text = "770-003";
+            }
+            else if (role == "Диспетчер")
+            {
+                FullnameInp.Text = "Петрова Анна Владимировна";
+                EmailInp.Text = "a.petrova.uk@mail.ru";
+                PhoneInp.Text = "+79001234568";
+                DateOfBirthInp.SelectedDate = new DateTime(1985, 3, 20);
+                SnilsInp.Text = "124-456-789 00";
+                InnInp.Text = "223456789012";
+                PasswordInp.Password = "TempPass123!";
+                ConfirmPasswordInp.Password = "TempPass123!";
+                PassportDataSeriaInp.Text = "4511";
+                PassportDataNumberInp.Text = "223344";
+                PassportDataDepartmentInp.Text = "УФМС России по г. Москва";
+                PassportDataDepartmentCodeInp.Text = "770-002";
+            }
 #endif
         }
     }

@@ -74,8 +74,7 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                 int expYear = int.Parse(ExpInp.Text);
                 int salary = int.Parse(SalaryInp.Text);
 
-                var cmd = new CreateAdminCommand(
-                    new(
+                var employeeCreatingDTO = new EmployeeCreateRequestDTO(
                         TemporaryDataStorage.CurrentUserId,
                         mc.Id,
                         PositionInp.SelectedIndex + 1,
@@ -83,11 +82,25 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                         employmentDate,
                         expYear,
                         salary,
-                        NotesInp.Text));
+                        NotesInp.Text);
 
                 if (PositionInp.SelectedIndex == 0)
                 {
-                    var response = await _employeeService.CreateAdmin(cmd);
+                    var response = await _employeeService.CreateAdmin(new CreateAdminCommand(employeeCreatingDTO));
+
+                    if (response != null)
+                        MessageBox.Show(string.Join('\n', response), "Ошибка регистрации работника", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
+                    {
+                        MessageBox.Show("Регистрация работника прошла успешно", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                        IsReady = true;
+                        Close();
+                    }
+                }
+                else if (PositionInp.SelectedIndex == 2)
+                {
+                    var response = await _employeeService.CreateDispatcher(new CreateDispatcherCommand(employeeCreatingDTO));
+
                     if (response != null)
                         MessageBox.Show(string.Join('\n', response), "Ошибка регистрации работника", MessageBoxButton.OK, MessageBoxImage.Error);
                     else

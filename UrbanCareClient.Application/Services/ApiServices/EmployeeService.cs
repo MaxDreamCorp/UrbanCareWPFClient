@@ -22,6 +22,9 @@ namespace UrbanCareClient.Application.Services.ApiServices
             return response.Select(e => e.Message).ToList();
         }
 
+        public async Task<List<string>?> CreateDispatcher(CreateDispatcherCommand cmd) =>
+            await _employeeRepository.CreateDispatcherAsync(cmd);
+
         public async Task<List<EmployeePositionResponseDTO>> GetEmployeePositions()
         {
             return await _employeeRepository.GetEmployeePositionsAsync();

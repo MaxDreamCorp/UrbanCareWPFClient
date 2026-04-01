@@ -53,5 +53,18 @@ namespace UrbanCareClient.Infrastructure.Data.Repositories
                 return new();
             return response.Data;
         }
+
+        public async Task<List<string>?> CreateDispatcherAsync(CreateDispatcherCommand cmd, CancellationToken cancellationToken = default)
+        {
+            var response = await _apiClient.PostAsync<CreateDispatcherCommand, List<string>?>($"{ENDPOINT_CONTROLLER}create_dispatcher", cmd, cancellationToken);
+
+            if (response == null)
+                return null;
+
+            if (response.Errors != null && response.Errors.Count > 0)
+                return response.Errors.Select(e => e.Message).ToList();
+
+            return null;
+        }
     }
 }
