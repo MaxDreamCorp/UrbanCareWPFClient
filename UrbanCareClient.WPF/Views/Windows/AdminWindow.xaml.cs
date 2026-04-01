@@ -42,18 +42,7 @@ namespace UrbanCareClient.WPF.Views.Windows
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var userDataResponse = await _userService.GetMyUserData();
-            if (userDataResponse == null)
-            {
-                MessageBox.Show("Ошибка получения данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                var authWindow = _navigationService.GetWindow<LogInModalWindow>();
-                authWindow.Show();
-                Close();
-                return;
-            }
-
-            TemporaryDataStorage.UserData = userDataResponse;
-
+            
             var employeeDataResponse = await _employeeService.GetMyEmployee();
             if (employeeDataResponse == null)
             {
@@ -68,7 +57,7 @@ namespace UrbanCareClient.WPF.Views.Windows
             TemporaryDataStorage.ManagementCompany = employeeDataResponse.ManagementCompany;
 
             MCNameTxt.Text = $"УК: {TemporaryDataStorage.EmployeeData.ManagementCompany.Name}";
-            FullNameTxt.Text = TemporaryDataStorage.UserData.Fullname;
+            FullNameTxt.Text = TemporaryDataStorage.EmployeeData.UserData.Fullname;
             PositionTxt.Text = TemporaryDataStorage.EmployeeData.EmployeePosition.Name;
 
             var employees = await _administrationService.GetMyManagementCompanyEmployees();

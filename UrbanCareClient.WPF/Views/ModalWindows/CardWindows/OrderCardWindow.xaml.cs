@@ -176,7 +176,12 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
                         ContactPhoneInp.Text,
                         ContactEmailInp.Text,
                         OrderResponseDTO.OrderStatus,
+                        OrderResponseDTO.Dispatcher,
                         OrderResponseDTO.CreatedAt,
+                        DateTime.UtcNow,
+                        OrderResponseDTO.AcceptedAt,
+                        OrderResponseDTO.CompletedAt,
+                        OrderResponseDTO.OrderExecutors,
                         OrderResponseDTO.OrderMaterials);
                     Close();
                 }

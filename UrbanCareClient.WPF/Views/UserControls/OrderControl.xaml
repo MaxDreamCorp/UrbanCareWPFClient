@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:UrbanCareClient.WPF.Views.UserControls"
              xmlns:ViewModels="clr-namespace:UrbanCareClient.WPF.Views.UserControls.ViewModels" x:Class="UrbanCareClient.WPF.Views.UserControls.OrderControl"
             MinWidth="450"
+            Margin="0 10"
              mc:Ignorable="d" >
     <Grid x:Name="LayoutRoot">
         <Grid.DataContext>
@@ -36,19 +37,19 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0 10">
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0 5">
                         <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/CategoryIcon.png" Width="24" Margin="0,0,5,0" />
                         <TextBlock x:Name="CategoryTxt" Style="{StaticResource SecondaryText}" Text="Сантехника" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0 10">
+                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0 5">
                         <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/TypeIcon.png" Width="24" Margin="0,0,5,0" />
                         <TextBlock x:Name="TypeTxt" Style="{StaticResource SecondaryText}" Text="Внутриквартирные работы" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0 10">
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0 5">
                         <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/AddressIcon.png" Width="24" Margin="0,0,5,0" />
                         <TextBlock x:Name="AddressTxt" Style="{StaticResource SecondaryText}" Text="ул. Ленина, д. 22, кв. 1" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="0 10">
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="0 5">
                         <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/CalendarIcon.png" Width="24" Margin="0,0,5,0" />
                         <TextBlock x:Name="DateTxt" Style="{StaticResource SecondaryText}" Text="15.03.2025" VerticalAlignment="Center"/>
                     </StackPanel>
