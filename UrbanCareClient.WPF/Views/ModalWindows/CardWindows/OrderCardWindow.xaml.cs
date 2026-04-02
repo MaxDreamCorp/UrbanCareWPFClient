@@ -75,6 +75,8 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
                 SetForCreating();
             else if (_windowOperation == WindowOperations.Edit)
                 SetFieldsForEditing();
+            else if (_windowOperation == WindowOperations.Read)
+                SetFieldsForReadOnly();
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
@@ -299,6 +301,44 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
                 _apartmentChoice.SelectedItem = apartmentViewDTO;
                 _apartmentChoice.SelectedItemTxt.Text = $"кв. {apartmentViewDTO.Number}";
             }
+        }
+
+        private void SetFieldsForReadOnly()
+        {
+            if (OrderResponseDTO == null) return;
+            IdInp.Text = OrderResponseDTO.Id.ToString();
+            ResidentInp.Text = OrderResponseDTO.Resident.UserData.Fullname;
+            ContactEmailInp.Text = OrderResponseDTO.ContactEmail;
+            ContactPhoneInp.Text = OrderResponseDTO.ContactPhone;
+            DescriptionInp.Text = OrderResponseDTO.Description;
+            TypeInp.Text = OrderResponseDTO.OrderCategory.OrderType.Type;
+            CategoryInp.Text = OrderResponseDTO.OrderCategory.Category;
+            PriorityyInp.Text = OrderResponseDTO.Priority.Priority;
+
+            var buildingViewDTO = ConverterService.BuildingToViewDTO(OrderResponseDTO.Building);
+            _buildingChoice.SourceItems = new() { buildingViewDTO };
+            _buildingChoice.SelectedItem = buildingViewDTO;
+            _buildingChoice.SelectedItemTxt.Text = buildingViewDTO.Address;
+
+            if (OrderResponseDTO.Apartment != null)
+            {
+                var apartmentViewDTO = ConverterService.ApartmentToViewDTO(OrderResponseDTO.Apartment);
+                _apartmentChoice.SourceItems = new() { apartmentViewDTO };
+                _apartmentChoice.SelectedItem = apartmentViewDTO;
+                _apartmentChoice.SelectedItemTxt.Text = $"кв. {apartmentViewDTO.Number}";
+            }
+
+            IdInp.IsEnabled = false;
+            ResidentInp.IsEnabled = false;
+            ContactEmailInp.IsEnabled = false;
+            ContactPhoneInp.IsEnabled = false;
+            DescriptionInp.IsEnabled = false;
+            TypeInp.IsReadOnly = true;
+            CategoryInp.IsReadOnly = true;
+            PriorityyInp.IsReadOnly = true;
+            _buildingChoice.IsEnabled = false;
+            _apartmentChoice.IsEnabled = false;
+            SaveBtn.Visibility = Visibility.Collapsed;
         }
     }
 }

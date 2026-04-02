@@ -47,6 +47,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                 control.CategoryTxt.Text = orderControlViewModel.Order.OrderCategory.Category;
                 control.TypeTxt.Text = orderControlViewModel.Order.OrderCategory.OrderType.Type;
 
+
                 string address = $"{orderControlViewModel.Order.Building.Region.CommonAddress}, {orderControlViewModel.Order.Building.Address}";
 
                 if (orderControlViewModel.Order.Apartment != null)
@@ -76,7 +77,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         }
 
                         if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
+                            control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
                         break;
                     case OrderStatusEnum.WaitingForPayment:
                         control.StatusTxt.Foreground = StylesService.WaitingForPaymentBrush;
@@ -86,7 +87,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         if (orderControlViewModel.Order.Dispatcher != null)
                             control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
                         if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
+                            control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
 
                         control.PaymentPanel.Visibility = Visibility.Visible;
                         decimal totalCost = 0;
@@ -117,7 +118,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         if (orderControlViewModel.Order.Dispatcher != null)
                             control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
                         if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join("\n", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
+                            control.ExecutorsTxt.Text = $"Исполнители: {string.Join("\n", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
 
 
                         control.PaymentPanel.Visibility = Visibility.Visible;

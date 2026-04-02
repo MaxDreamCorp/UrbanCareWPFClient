@@ -16,37 +16,22 @@
                         <TextBlock x:Name="PriorityTxt" Text="Средний" FontWeight="Bold" Foreground="{StaticResource PriorityMediumBrush}" FontSize="11"/>
                     </Border>
                 </StackPanel>
-                <TextBlock x:Name="DescriptionTxt" Style="{StaticResource SecondaryText}" Text="gggggggggggg" TextWrapping="Wrap" FontSize="11"/>
-                
-                <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/CategoryIcon.png" Width="20" Margin="0,0,5,0" />
-                        <TextBlock x:Name="CategoryTxt" Style="{StaticResource SecondaryText}" Text="Сантехника" FontSize="11" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/TypeIcon.png" Width="20" Margin="0,0,5,0" />
-                        <TextBlock x:Name="TypeTxt" Style="{StaticResource SecondaryText}" Text="Внутриквартирные работы" FontSize="11" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/AddressIcon.png" Width="20" Margin="0,0,5,0" />
-                        <TextBlock x:Name="AddressTxt" Style="{StaticResource SecondaryText}" Text="ул. Ленина, д. 22, кв. 1" FontSize="11" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" x:Name="DescriptionTxt" Style="{StaticResource SecondaryText}" Text="gggggggggggg" TextWrapping="Wrap" FontSize="11" Margin="0,0,0,3" />
+                
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
                         <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/CalendarIcon.png" Width="20" Margin="0,0,5,0" />
                         <TextBlock x:Name="DateTxt" Style="{StaticResource SecondaryText}" Text="15.03.2025" FontSize="11" VerticalAlignment="Center"/>
                     </StackPanel>
-                </Grid>
-
-                    <StackPanel x:Name="ContactPanel" Margin="0 5 ">
+                <StackPanel Grid.Row="1" Grid.Column="1" x:Name="ContactPanel" Margin="15,0,0,0">
                     <StackPanel Orientation="Horizontal">
                         <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/PersonIcon.png" Width="20" Margin="0,0,5,0" />
                         <TextBlock x:Name="FullnameTxt" Text="Иванов Иван Иванович" Style="{StaticResource SecondaryText}" FontSize="11" VerticalAlignment="Center"/>
@@ -62,12 +47,13 @@
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
+                </Grid>
 
-                <Border x:Name="InWorkPanel" Visibility="Collapsed"  Background="White" CornerRadius="15" Padding="10" Margin="0 5">
-                    <StackPanel Margin="0,10"  Background="White">
-                        <TextBlock Text="Исполнительская информация:" Style="{StaticResource SecondaryText}" Foreground="Black" FontWeight="DemiBold" Margin="0,0,0,6"/>
-                        <TextBlock x:Name="DispatcherTxt" Text="" Style="{StaticResource SecondaryText}"/>
-                        <TextBlock x:Name="ExecutorsTxt" Text="" Style="{StaticResource SecondaryText}" TextWrapping="Wrap"/>
+                <Border x:Name="InWorkPanel" Visibility="Collapsed" Background="White" CornerRadius="15" Padding="6 0" Margin="0 2">
+                    <StackPanel Margin="0"  Background="White">
+                        <TextBlock Text="Исполнительская информация:" Style="{StaticResource SecondaryText}" Foreground="Black" FontWeight="DemiBold" Margin="0,0,0,3" FontSize="12"/>
+                        <TextBlock x:Name="DispatcherTxt" Text="" Style="{StaticResource SecondaryText}" FontSize="11"/>
+                        <TextBlock x:Name="ExecutorsTxt" Text="" Style="{StaticResource SecondaryText}" TextWrapping="Wrap" FontSize="11"/>
                     </StackPanel>
                 </Border>
 
@@ -80,9 +66,9 @@
                     </StackPanel>
                 </Border>
 
-                <StackPanel x:Name="ButtonsPanel" Orientation="Horizontal" Margin="0 10 0 0">
-                    <Button x:Name="SetExecutorBtn" Style="{StaticResource PrimaryButton}" Content="Назначить исполнителя" Margin="0,0,5,0" Click="SetExecutorBtn_Click"/>
-                    <Button x:Name="MoreBtn" Style="{StaticResource SecondaryButton}" Content="Подробнее" Click="MoreBtn_Click" FontSize="11"/>
+                <StackPanel x:Name="ButtonsPanel" Orientation="Horizontal" Margin="0 0 0 0">
+                    <Button x:Name="SetExecutorBtn" Style="{StaticResource PrimaryButton}" Padding="6 0" FontSize="11" Content="Назначить исполнителя" Margin="0,0,5,0" Click="SetExecutorBtn_Click"/>
+                    <Button x:Name="MoreBtn" Style="{StaticResource SecondaryButton}" Padding="6 4" Content="Подробнее" Click="MoreBtn_Click" FontSize="11"/>
 
                 </StackPanel>
             </StackPanel>

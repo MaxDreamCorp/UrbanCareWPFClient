@@ -44,6 +44,10 @@ namespace UrbanCareClient.WPF.Views.Windows
             TemporaryDataStorage.EmployeeData = employeeDataResponse;
             TemporaryDataStorage.ManagementCompany = employeeDataResponse.ManagementCompany;
 
+            await _orderService.GetOrderStatuses();
+            await _orderService.GetOrderCategories();
+            await _orderService.GetPriorities();
+
             MCNameTxt.Text = $"УК: {TemporaryDataStorage.EmployeeData.ManagementCompany.Name}";
             FullNameTxt.Text = TemporaryDataStorage.EmployeeData.UserData.Fullname;
             PositionTxt.Text = TemporaryDataStorage.EmployeeData.EmployeePosition.Name;
@@ -64,7 +68,7 @@ namespace UrbanCareClient.WPF.Views.Windows
             }
 
             var newOrdersResponse = await _dispatcherService.GetCompanyNewOrders(TemporaryDataStorage.ManagementCompany.Id);
-            foreach (var order in newOrdersResponse.OrderByDescending(o => o.OrderStatus.Id))
+            foreach (var order in newOrdersResponse.OrderBy(o => o.Priority.Id))
             {
                 var orderControl = new MiniOrderControl(_getterDIServices, _orderService);
                 orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel { Order = order };
@@ -72,7 +76,7 @@ namespace UrbanCareClient.WPF.Views.Windows
             }
 
             var inProgressOrdersResponse = await _dispatcherService.GetCompanyInProgressOrders(TemporaryDataStorage.ManagementCompany.Id);
-            foreach (var order in inProgressOrdersResponse.OrderByDescending(o => o.OrderStatus.Id))
+            foreach (var order in inProgressOrdersResponse.OrderBy(o => o.Priority.Id))
             {
                 var orderControl = new MiniOrderControl(_getterDIServices, _orderService);
                 orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel { Order = order };

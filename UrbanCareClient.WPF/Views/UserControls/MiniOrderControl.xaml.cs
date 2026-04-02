@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using UrbanCareClient.Application.Services.ApiServices;
 using UrbanCareClient.Domain.Enums;
 using UrbanCareClient.WPF.Services;
+using UrbanCareClient.WPF.Views.ModalWindows.CardWindows;
 using UrbanCareClient.WPF.Views.UserControls.ViewModels;
 
 namespace UrbanCareClient.WPF.Views.UserControls
@@ -44,107 +45,16 @@ namespace UrbanCareClient.WPF.Views.UserControls
 
                 control.HeaderTxt.Text = $"Заказ №{orderControlViewModel.Order.Id}";
                 control.DescriptionTxt.Text = orderControlViewModel.Order.Description;
-                control.CategoryTxt.Text = orderControlViewModel.Order.OrderCategory.Category;
-                control.TypeTxt.Text = orderControlViewModel.Order.OrderCategory.OrderType.Type;
-
                 string address = $"{orderControlViewModel.Order.Building.Region.CommonAddress}, {orderControlViewModel.Order.Building.Address}";
 
                 if (orderControlViewModel.Order.Apartment != null)
                     address += $", кв. {orderControlViewModel.Order.Apartment.Number}";
 
-                control.AddressTxt.Text = address;
+                control.FullnameTxt.Text = orderControlViewModel.Order.Resident.UserData.Fullname;
                 control.DateTxt.Text = orderControlViewModel.Order.CreatedAt.ToString("dd.MM.yyyy");
                 control.ContactPhoneTxt.Text = orderControlViewModel.Order.ContactPhone;
                 control.ContactEmailTxt.Text = orderControlViewModel.Order.ContactEmail;
 
-                //control.StatusTxt.Text = orderControlViewModel.Order.OrderStatus.Status;
-
-                //switch ((OrderStatusEnum)orderControlViewModel.Order.OrderStatus.Id)
-                //{
-                //    case OrderStatusEnum.New:
-                //        control.StatusTxt.Foreground = StylesService.NewBrush;
-                //        control.StatusBdr.Background = StylesService.NewBgBrush;
-                //        break;
-                //    case OrderStatusEnum.InProgress:
-                //        control.StatusTxt.Foreground = StylesService.InProgressBrush;
-                //        control.StatusBdr.Background = StylesService.InProgressBgBrush;
-
-                //        if (orderControlViewModel.Order.Dispatcher != null)
-                //        {
-                //            control.InWorkPanel.Visibility = Visibility.Visible;
-                //            control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
-                //        }
-
-                //        if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                //            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
-                //        break;
-                //    case OrderStatusEnum.WaitingForPayment:
-                //        control.StatusTxt.Foreground = StylesService.WaitingForPaymentBrush;
-                //        control.StatusBdr.Background = StylesService.WaitingForPaymentBgBrush;
-
-                //        control.InWorkPanel.Visibility = Visibility.Visible;
-                //        if (orderControlViewModel.Order.Dispatcher != null)
-                //            control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
-                //        if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                //            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
-
-                //        control.PaymentPanel.Visibility = Visibility.Visible;
-                //        decimal totalCost = 0;
-
-                //        if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
-                //        {
-                //            control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. ({om.Quantity} {om.Material.Unit}.)"))}";
-                //            totalCost += orderControlViewModel.Order.OrderMaterials.Sum(om => om.Quantity * om.Material.Price);
-                //        }
-
-                //        if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                //        {
-                //            control.MaterialsTxt.Text += $"\nРабота: {orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment)} руб.";
-                //            totalCost += orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment) ?? 0;
-                //        }
-
-                //        control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
-                //        if (totalCost == 0)
-                //            control.PayBtn.Visibility = Visibility.Collapsed;
-
-                //        control.MoreBtn.Visibility = Visibility.Collapsed;
-                //        break;
-                //    case OrderStatusEnum.Finished:
-                //        control.StatusTxt.Foreground = StylesService.FinishedBrush;
-                //        control.StatusBdr.Background = StylesService.FinishedBgBrush;
-
-                //        control.InWorkPanel.Visibility = Visibility.Visible;
-                //        if (orderControlViewModel.Order.Dispatcher != null)
-                //            control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
-                //        if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                //            control.ExecutorsTxt.Text = $"Исполнитель: {string.Join("\n", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
-
-
-                //        control.PaymentPanel.Visibility = Visibility.Visible;
-                //        totalCost = 0;
-
-                //        if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
-                //        {
-                //            control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. ({om.Quantity} {om.Material.Unit}.)"))}";
-                //            totalCost += orderControlViewModel.Order.OrderMaterials.Sum(om => om.Quantity * om.Material.Price);
-                //        }
-
-                //        if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                //        {
-                //            control.MaterialsTxt.Text += $"\nРабота: {orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment)} руб.";
-                //            totalCost += orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment) ?? 0;
-                //        }
-
-                //        control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
-                //        control.PayBtn.Visibility = Visibility.Collapsed;
-                //        break;
-                //    case OrderStatusEnum.Canceled:
-                //        control.StatusTxt.Foreground = StylesService.CanceledBrush;
-                //        control.StatusBdr.Background = StylesService.CanceledBgBrush;
-                //        break;
-                //    default:
-                //        break;
-                //}
 
                 if (orderControlViewModel.Order.OrderStatus.Id == (int)OrderStatusEnum.InProgress || orderControlViewModel.Order.OrderStatus.Id == (int)OrderStatusEnum.WaitingForPayment)
                 {
@@ -154,7 +64,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                     if (orderControlViewModel.Order.Dispatcher != null)
                         control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
                     if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                        control.ExecutorsTxt.Text = $"Исполнитель: {string.Join("\n", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
+                        control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
                 }
 
                 control.PriorityTxt.Text = orderControlViewModel.Order.Priority.Priority;
@@ -194,7 +104,8 @@ namespace UrbanCareClient.WPF.Views.UserControls
 
         private void MoreBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            var orderCardWindow = new OrderCardWindow(_getterDIServices, _orderService, Enums.WindowOperations.Read, ViewModel.Order);
+            orderCardWindow.ShowDialog();
         }
     }
 }
