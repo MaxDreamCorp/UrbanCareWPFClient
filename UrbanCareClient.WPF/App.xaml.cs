@@ -67,6 +67,7 @@ namespace UrbanCareClient.WPF
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddScoped<IResidentRepository, ResidentRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IDispatcherRepository, DispatcherRepository>();
 
             services.AddScoped<AuthorizationService>();
             services.AddScoped<UserService>();
@@ -75,6 +76,7 @@ namespace UrbanCareClient.WPF
             services.AddScoped<CompanyService>();
             services.AddScoped<ResidentService>();
             services.AddScoped<OrderService>();
+            services.AddScoped<DispatcherService>();
 
             services.AddHttpClient<ApiClient>((serviceProvider, client) =>
             {

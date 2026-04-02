@@ -87,7 +87,7 @@
                                 <TextBlock Text="Исполнители" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
                             </DockPanel>
                             <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-                                <StackPanel x:Name="ExecutorssPanel" Margin="0 5"/>
+                                <StackPanel x:Name="ExecutorsPanel" Margin="0 5"/>
                             </ScrollViewer>
                         </Grid>
                 </Border>
