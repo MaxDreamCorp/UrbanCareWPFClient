@@ -70,6 +70,14 @@ namespace UrbanCareClient.WPF.Views.Windows
                 orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel { Order = order };
                 NewOrdersPanel.Children.Add(orderControl);
             }
+
+            var inProgressOrdersResponse = await _dispatcherService.GetCompanyInProgressOrders(TemporaryDataStorage.ManagementCompany.Id);
+            foreach (var order in inProgressOrdersResponse.OrderByDescending(o => o.OrderStatus.Id))
+            {
+                var orderControl = new MiniOrderControl(_getterDIServices, _orderService);
+                orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel { Order = order };
+                InProgressOrdersPanel.Children.Add(orderControl);
+            }
         }
     }
 }

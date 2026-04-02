@@ -33,5 +33,16 @@ namespace UrbanCareClient.Infrastructure.Data.Repositories
                 return new List<OrderResponseDTO>();
             return response.Data;
         }
+
+        public async Task<List<OrderResponseDTO>> GetCompanyInProgressOrdersAsync(int companyId, CancellationToken cancellationToken = default)
+        {
+            var response = await _apiClient.GetAsync<List<OrderResponseDTO>?>($"{ENDPOINT_CONTROLLER}get_company_in_progress_orders/{companyId}", null, cancellationToken);
+            if (response == null)
+                throw new Exception("Ошибка запроса");
+
+            if (response.Data == null)
+                return new List<OrderResponseDTO>();
+            return response.Data;
+        }
     }
 }

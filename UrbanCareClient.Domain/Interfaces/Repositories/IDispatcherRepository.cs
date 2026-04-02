@@ -6,5 +6,6 @@ namespace UrbanCareClient.Domain.Interfaces.Repositories
     {
         Task<List<ExecutorResponseDTO>?> GetCompanyExecutorsAsync(int companyId, CancellationToken cancellationToken = default);
         Task<List<OrderResponseDTO>> GetCompanyNewOrdersAsync(int companyId, CancellationToken cancellationToken = default);
+        Task<List<OrderResponseDTO>> GetCompanyInProgressOrdersAsync(int companyId, CancellationToken cancellationToken = default);
     }
 }
