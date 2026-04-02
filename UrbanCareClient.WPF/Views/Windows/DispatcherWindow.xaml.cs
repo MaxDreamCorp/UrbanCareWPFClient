@@ -15,16 +15,18 @@ namespace UrbanCareClient.WPF.Views.Windows
     {
         private readonly GetterDIServices _getterDIServices;
         private readonly DispatcherService _dispatcherService;
+        private readonly OrderService _orderService;
         private readonly EmployeeService _employeeService;
         private readonly INavigationService _navigationService;
 
-        public DispatcherWindow(GetterDIServices getterDIServices, DispatcherService dispatcherService, EmployeeService employeeService, INavigationService navigationService)
+        public DispatcherWindow(GetterDIServices getterDIServices, DispatcherService dispatcherService, EmployeeService employeeService, INavigationService navigationService, OrderService orderService)
         {
             InitializeComponent();
             _getterDIServices = getterDIServices;
             _dispatcherService = dispatcherService;
             _employeeService = employeeService;
             _navigationService = navigationService;
+            _orderService = orderService;
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -59,6 +61,14 @@ namespace UrbanCareClient.WPF.Views.Windows
                     };
                     ExecutorsPanel.Children.Add(executorControl);
                 }
+            }
+
+            var newOrdersResponse = await _dispatcherService.GetCompanyNewOrders(TemporaryDataStorage.ManagementCompany.Id);
+            foreach (var order in newOrdersResponse.OrderByDescending(o => o.OrderStatus.Id))
+            {
+                var orderControl = new MiniOrderControl(_getterDIServices, _orderService);
+                orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel { Order = order };
+                NewOrdersPanel.Children.Add(orderControl);
             }
         }
     }
