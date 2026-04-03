@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using UrbanCareClient.Application.Services.ApiServices;
 using UrbanCareClient.Application.Services.OtherServices;
+using UrbanCareClient.Domain.Enums;
 using UrbanCareClient.WPF.Interfaces;
 using UrbanCareClient.WPF.Services;
 using UrbanCareClient.WPF.Views.ModalWindows;
@@ -67,20 +68,16 @@ namespace UrbanCareClient.WPF.Views.Windows
                 }
             }
 
-            var newOrdersResponse = await _dispatcherService.GetCompanyNewOrders(TemporaryDataStorage.ManagementCompany.Id);
-            foreach (var order in newOrdersResponse.OrderBy(o => o.Priority.Id))
+            var ordersResponse = await _dispatcherService.GetCompanyOrders(TemporaryDataStorage.ManagementCompany.Id);
+            foreach (var order in ordersResponse.OrderBy(o => o.Priority.Id))
             {
                 var orderControl = new MiniOrderControl(_getterDIServices, _orderService);
                 orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel { Order = order };
-                NewOrdersPanel.Children.Add(orderControl);
-            }
 
-            var inProgressOrdersResponse = await _dispatcherService.GetCompanyInProgressOrders(TemporaryDataStorage.ManagementCompany.Id);
-            foreach (var order in inProgressOrdersResponse.OrderBy(o => o.Priority.Id))
-            {
-                var orderControl = new MiniOrderControl(_getterDIServices, _orderService);
-                orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel { Order = order };
-                InProgressOrdersPanel.Children.Add(orderControl);
+                if (order.OrderStatus.Id == (int)OrderStatusEnum.New)
+                    NewOrdersPanel.Children.Add(orderControl);
+                else if (order.OrderStatus.Id >= (int)OrderStatusEnum.ExecutorAppointed && order.OrderStatus.Id <= (int)OrderStatusEnum.MarkedAsCompletedByExecutor)
+                    ActiveOrdersPanel.Children.Add(orderControl);
             }
         }
     }

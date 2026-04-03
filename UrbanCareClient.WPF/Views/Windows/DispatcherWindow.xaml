@@ -68,10 +68,10 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <DockPanel Margin="10" Grid.Row="0">
-                                <TextBlock Text="Заказы в работе" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
+                                <TextBlock Text="Активные" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
                             </DockPanel>
                             <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-                                <StackPanel x:Name="InProgressOrdersPanel" Margin="0 5"/>
+                                <StackPanel x:Name="ActiveOrdersPanel" Margin="0 5"/>
                             </ScrollViewer>
                         </Grid>
                 </Border>

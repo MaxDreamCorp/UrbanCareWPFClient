@@ -15,6 +15,9 @@ namespace UrbanCareClient.Application.Services.ApiServices
         public async Task<List<ExecutorResponseDTO>?> GetCompanyExecutors(int companyId) =>
             await _dispatcherRepository.GetCompanyExecutorsAsync(companyId);
 
+        public async Task<List<OrderResponseDTO>> GetCompanyOrders(int companyId) =>
+            await _dispatcherRepository.GetCompanyOrdersAsync(companyId);
+
         public async Task<List<OrderResponseDTO>> GetCompanyNewOrders(int companyId) =>
             await _dispatcherRepository.GetCompanyNewOrdersAsync(companyId);
 
