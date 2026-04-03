@@ -34,10 +34,19 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await _companyService.GetRoles();
-            await _companyService.GetBuildingTypes();
-            await _companyService.GetFloorMaterials();
-            await _companyService.GetWallMaterials();
+            try
+            {
+                await _companyService.GetRoles();
+                await _companyService.GetBuildingTypes();
+                await _companyService.GetFloorMaterials();
+                await _companyService.GetWallMaterials();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+                return;
+            }
 #if DEBUG
             ComboBox userDebugChooser = new ComboBox()
             {

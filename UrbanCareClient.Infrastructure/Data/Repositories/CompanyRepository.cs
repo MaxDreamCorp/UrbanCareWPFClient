@@ -20,7 +20,7 @@ namespace UrbanCareClient.Infrastructure.Data.Repositories
 
 
             if (response.Data == null)
-                return new();
+                throw new Exception("Ошибка запроса");
 
             return response.Data;
         }
@@ -91,8 +91,8 @@ namespace UrbanCareClient.Infrastructure.Data.Repositories
             var response = await _apiClient.GetAsync<List<RegionResponseDTO>>($"{ENDPOINT_CONTROLLER}region/get_all_regions", null, cancellationToken);
 
             if (response.Data == null)
-                return new(new(), new() { "Ошибка запроса"});
-            
+                return new(new(), new() { "Ошибка запроса" });
+
             return (response.Data, response.Errors?.Select(e => e.Message).ToList());
         }
 

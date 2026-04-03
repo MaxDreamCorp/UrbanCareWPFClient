@@ -19,8 +19,9 @@ namespace UrbanCareClient.WPF.Views.Windows
         private readonly OrderService _orderService;
         private readonly EmployeeService _employeeService;
         private readonly INavigationService _navigationService;
+        private readonly UserService _userService;
 
-        public DispatcherWindow(GetterDIServices getterDIServices, DispatcherService dispatcherService, EmployeeService employeeService, INavigationService navigationService, OrderService orderService)
+        public DispatcherWindow(GetterDIServices getterDIServices, DispatcherService dispatcherService, EmployeeService employeeService, INavigationService navigationService, OrderService orderService, UserService userService)
         {
             InitializeComponent();
             _getterDIServices = getterDIServices;
@@ -28,18 +29,30 @@ namespace UrbanCareClient.WPF.Views.Windows
             _employeeService = employeeService;
             _navigationService = navigationService;
             _orderService = orderService;
+            _userService = userService;
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var employeeDataResponse = await _employeeService.GetMyEmployee();
-            if (employeeDataResponse == null)
+            var userData = await _userService.GetMyUserData();
+            if (userData == null)
             {
                 MessageBox.Show("Ошибка получения данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 var authWindow = _navigationService.GetWindow<LogInModalWindow>();
                 authWindow.Show();
                 Close();
                 return;
+            }
+            TemporaryDataStorage.CurrentUserId = userData.Id;
+
+            var employeeDataResponse = await _employeeService.GetMyEmployee();
+            while (employeeDataResponse == null)
+            {
+                MessageBox.Show("Вам необходимо заполнить данные работника", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                EmployeeCreatingModalWindow employeeCreatingModalWindow = _getterDIServices.GetService<EmployeeCreatingModalWindow>();
+                employeeCreatingModalWindow = _getterDIServices.GetService<EmployeeCreatingModalWindow>();
+                employeeCreatingModalWindow.ShowDialog();
+                employeeDataResponse = await _employeeService.GetMyEmployee();
             }
 
             TemporaryDataStorage.EmployeeData = employeeDataResponse;

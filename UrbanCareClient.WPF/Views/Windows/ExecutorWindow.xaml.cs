@@ -1,5 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using UrbanCareClient.Application.Services.ApiServices;
+using UrbanCareClient.Application.Services.OtherServices;
+using UrbanCareClient.WPF.Interfaces;
+using UrbanCareClient.WPF.Services;
+using UrbanCareClient.WPF.Views.ModalWindows;
 
 namespace UrbanCareClient.WPF.Views.Windows
 {
@@ -8,14 +13,44 @@ namespace UrbanCareClient.WPF.Views.Windows
     /// </summary>
     public partial class ExecutorWindow : Window
     {
-        public ExecutorWindow()
+        private readonly GetterDIServices _getterDIServices;
+        private readonly OrderService _orderService;
+        private readonly EmployeeService _employeeService;
+        private readonly INavigationService _navigationService;
+        private readonly UserService _userService;
+
+        public ExecutorWindow(GetterDIServices getterDIServices, OrderService orderService, EmployeeService employeeService, INavigationService navigationService, UserService userService)
         {
             InitializeComponent();
+            _getterDIServices = getterDIServices;
+            _orderService = orderService;
+            _employeeService = employeeService;
+            _navigationService = navigationService;
+            _userService = userService;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            var userData = await _userService.GetMyUserData();
+            if (userData == null)
+            {
+                MessageBox.Show("Ошибка получения данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                var authWindow = _navigationService.GetWindow<LogInModalWindow>();
+                authWindow.Show();
+                Close();
+                return;
+            }
+            TemporaryDataStorage.CurrentUserId = userData.Id;
 
+            var employeeDataResponse = await _employeeService.GetMyEmployee();
+            while (employeeDataResponse == null)
+            {
+                MessageBox.Show("Вам необходимо заполнить данные работника", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                EmployeeCreatingModalWindow employeeCreatingModalWindow = _getterDIServices.GetService<EmployeeCreatingModalWindow>();
+                employeeCreatingModalWindow = _getterDIServices.GetService<EmployeeCreatingModalWindow>();
+                employeeCreatingModalWindow.ShowDialog();
+                employeeDataResponse = await _employeeService.GetMyEmployee();
+            }
         }
 
         private void ExecutorAppointedOrders_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

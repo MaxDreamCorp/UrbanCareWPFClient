@@ -16,6 +16,7 @@ namespace UrbanCareClient.WPF.Views.Windows
     public partial class ResidentWindow : Window
     {
         private readonly ResidentService _residentService;
+        private readonly UserService _userService;
         private readonly OrderService _orderService;
         private readonly INavigationService _navigationService;
         private readonly GetterDIServices _getterDIServices;
@@ -28,19 +29,20 @@ namespace UrbanCareClient.WPF.Views.Windows
         private int _completedOrdersCount;
         private int _canceledOrdersCount;
 
-        public ResidentWindow(GetterDIServices getterDIServices, INavigationService navigationService, ResidentService residentService, OrderService orderService)
+        public ResidentWindow(GetterDIServices getterDIServices, INavigationService navigationService, ResidentService residentService, OrderService orderService, UserService userService)
         {
             InitializeComponent();
             _getterDIServices = getterDIServices;
             _navigationService = navigationService;
             _residentService = residentService;
             _orderService = orderService;
+            _userService = userService;
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var residentDataResponse = await _residentService.GetMyResidentData();
-            if (residentDataResponse == null)
+            var userData = await _userService.GetMyUserData();
+            if (userData == null)
             {
                 MessageBox.Show("Ошибка получения данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 var authWindow = _navigationService.GetWindow<LogInModalWindow>();
@@ -48,9 +50,19 @@ namespace UrbanCareClient.WPF.Views.Windows
                 Close();
                 return;
             }
+            TemporaryDataStorage.CurrentUserId = userData.Id;
+
+            var residentDataResponse = await _residentService.GetMyResidentData();
+            while (residentDataResponse == null)
+            {
+                MessageBox.Show("Вам необходимо заполнить данные жителя", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                ResidentCreatingModalWindow residentCreatingModalWindow = _getterDIServices.GetService<ResidentCreatingModalWindow>();
+                residentCreatingModalWindow = _getterDIServices.GetService<ResidentCreatingModalWindow>();
+                residentCreatingModalWindow.ShowDialog();
+                residentDataResponse = await _residentService.GetMyResidentData();
+            }
 
             TemporaryDataStorage.ResidentData = residentDataResponse;
-            TemporaryDataStorage.CurrentUserId = residentDataResponse.Id;
             TemporaryDataStorage.UserData = residentDataResponse.UserData;
 
             await _orderService.GetOrderStatuses();

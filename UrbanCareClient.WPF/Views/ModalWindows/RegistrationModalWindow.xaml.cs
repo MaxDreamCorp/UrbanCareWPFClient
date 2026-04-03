@@ -57,32 +57,7 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
             {
                 MessageBox.Show("Регистрация прошла успешно", "", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                if (cmd.User.RoleId < (int)RoleEnum.Resident)
-                {
-                    MessageBox.Show("Вам необходимо заполнить данные работника", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                    TemporaryDataStorage.CurrentUserId = response.userId;
-                    EmployeeCreatingModalWindow employeeCreatingModalWindow = _getterDIServices.GetService<EmployeeCreatingModalWindow>();
-                    while (!employeeCreatingModalWindow.IsReady)
-                    {
-                        employeeCreatingModalWindow = _getterDIServices.GetService<EmployeeCreatingModalWindow>();
-                        employeeCreatingModalWindow.ShowDialog();
-                    }
-
-                    Close();
-                }
-                else
-                {
-                    MessageBox.Show("Вам необходимо заполнить данные жителя", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                    TemporaryDataStorage.CurrentUserId = response.userId;
-                    ResidentCreatingModalWindow residentCreatingModalWindow = _getterDIServices.GetService<ResidentCreatingModalWindow>();
-                    while (!residentCreatingModalWindow.IsReady)
-                    {
-                        residentCreatingModalWindow = _getterDIServices.GetService<ResidentCreatingModalWindow>();
-                        residentCreatingModalWindow.ShowDialog();
-                    }
-
-                    Close();
-                }
+                Close();
             }
             else
                 MessageBox.Show(string.Join('\n', response.errors), "Ошибка регистрации", MessageBoxButton.OK, MessageBoxImage.Error);
