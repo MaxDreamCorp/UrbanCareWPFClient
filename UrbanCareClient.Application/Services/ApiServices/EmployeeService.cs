@@ -13,14 +13,8 @@ namespace UrbanCareClient.Application.Services.ApiServices
             _employeeRepository = employeeRepository;
         }
 
-        public async Task<List<string>?> CreateAdmin(CreateAdminCommand cmd)
-        {
-            var response = await _employeeRepository.CreateAdminAsync(cmd);
-
-            if (response == null) return null;
-
-            return response.Select(e => e.Message).ToList();
-        }
+        public async Task<List<string>?> CreateAdmin(CreateAdminCommand cmd) =>
+            await _employeeRepository.CreateAdminAsync(cmd);
 
         public async Task<List<string>?> CreateDispatcher(CreateDispatcherCommand cmd) =>
             await _employeeRepository.CreateDispatcherAsync(cmd);

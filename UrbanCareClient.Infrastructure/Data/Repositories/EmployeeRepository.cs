@@ -15,13 +15,17 @@ namespace UrbanCareClient.Infrastructure.Data.Repositories
             _apiClient = apiClient;
         }
 
-        public async Task<List<ErrorDTO>?> CreateAdminAsync(CreateAdminCommand cmd, CancellationToken cancellationToken = default)
+        public async Task<List<string>?> CreateAdminAsync(CreateAdminCommand cmd, CancellationToken cancellationToken = default)
         {
-            var response = await _apiClient.PostAsync<CreateAdminCommand, List<ErrorDTO>?>($"{ENDPOINT_CONTROLLER}create_admin", cmd, cancellationToken);
+            var response = await _apiClient.PostAsync<CreateAdminCommand, List<string>?>($"{ENDPOINT_CONTROLLER}create_admin", cmd, cancellationToken);
 
-            if (response == null) return null;
+            if (response == null)
+                return null;
 
-            return response.Data;
+            if (response.Errors != null && response.Errors.Count > 0)
+                return response.Errors.Select(e => e.Message).ToList();
+
+            return null;
         }
 
         public async Task<List<EmployeePositionResponseDTO>> GetEmployeePositionsAsync(CancellationToken cancellationToken = default)
