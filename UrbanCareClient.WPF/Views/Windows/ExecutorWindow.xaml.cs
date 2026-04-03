@@ -55,15 +55,15 @@ namespace UrbanCareClient.WPF.Views.Windows
 
         private void ExecutorAppointedOrders_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (ExecutorAppointedOrders.Visibility == Visibility.Visible)
+            if (ExecutorAppointedOrdersPanel.Visibility == Visibility.Visible)
             {
-                ExecutorAppointedOrders.Visibility = Visibility.Collapsed;
+                ExecutorAppointedOrdersPanel.Visibility = Visibility.Collapsed;
                 ExecutorAppointedOrderChevronUp.Visibility = Visibility.Collapsed;
                 ExecutorAppointedOrderChevronDown.Visibility = Visibility.Visible;
             }
             else
             {
-                ExecutorAppointedOrders.Visibility = Visibility.Visible;
+                ExecutorAppointedOrdersPanel.Visibility = Visibility.Visible;
                 ExecutorAppointedOrderChevronUp.Visibility = Visibility.Visible;
                 ExecutorAppointedOrderChevronDown.Visibility = Visibility.Collapsed;
             }
@@ -71,15 +71,15 @@ namespace UrbanCareClient.WPF.Views.Windows
 
         private void InProgressOrders_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (InProgressOrders.Visibility == Visibility.Visible)
+            if (InProgressOrdersPanel.Visibility == Visibility.Visible)
             {
-                InProgressOrders.Visibility = Visibility.Collapsed;
+                InProgressOrdersPanel.Visibility = Visibility.Collapsed;
                 InProgressOrderChevronUp.Visibility = Visibility.Collapsed;
                 InProgressOrderChevronDown.Visibility = Visibility.Visible;
             }
             else
             {
-                InProgressOrders.Visibility = Visibility.Visible;
+                InProgressOrdersPanel.Visibility = Visibility.Visible;
                 InProgressOrderChevronUp.Visibility = Visibility.Visible;
                 InProgressOrderChevronDown.Visibility = Visibility.Collapsed;
             }
@@ -87,15 +87,15 @@ namespace UrbanCareClient.WPF.Views.Windows
 
         private void MarkedAsCompletedOrders_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (MarkedAsCompletedOrders.Visibility == Visibility.Visible)
+            if (MarkedAsCompletedOrdersPanel.Visibility == Visibility.Visible)
             {
-                MarkedAsCompletedOrders.Visibility = Visibility.Collapsed;
+                MarkedAsCompletedOrdersPanel.Visibility = Visibility.Collapsed;
                 MarkedAsCompletedOrderChevronUp.Visibility = Visibility.Collapsed;
                 MarkedAsCompletedOrderChevronDown.Visibility = Visibility.Visible;
             }
             else
             {
-                MarkedAsCompletedOrders.Visibility = Visibility.Visible;
+                MarkedAsCompletedOrdersPanel.Visibility = Visibility.Visible;
                 MarkedAsCompletedOrderChevronUp.Visibility = Visibility.Visible;
                 MarkedAsCompletedOrderChevronDown.Visibility = Visibility.Collapsed;
             }
@@ -103,15 +103,15 @@ namespace UrbanCareClient.WPF.Views.Windows
 
         private void CompletedOrders_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (CompletedOrders.Visibility == Visibility.Visible)
+            if (CompletedOrdersPanel.Visibility == Visibility.Visible)
             {
-                CompletedOrders.Visibility = Visibility.Collapsed;
+                CompletedOrdersPanel.Visibility = Visibility.Collapsed;
                 CompletedOrderChevronUp.Visibility = Visibility.Collapsed;
                 CompletedOrderChevronDown.Visibility = Visibility.Visible;
             }
             else
             {
-                CompletedOrders.Visibility = Visibility.Visible;
+                CompletedOrdersPanel.Visibility = Visibility.Visible;
                 CompletedOrderChevronUp.Visibility = Visibility.Visible;
                 CompletedOrderChevronDown.Visibility = Visibility.Collapsed;
             }
