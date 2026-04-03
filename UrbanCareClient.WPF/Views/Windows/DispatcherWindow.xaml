@@ -10,7 +10,6 @@
     <Window.Background>
         <SolidColorBrush Color="{StaticResource BackgroundColor}"/>
     </Window.Background>
-    <ScrollViewer>
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -93,5 +92,4 @@
                 </Border>
             </Grid>
         </Grid>
-    </ScrollViewer>
 </Window>
