@@ -62,6 +62,11 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                     LoginInp.Text = "a.petrova.uk@mail.ru";
                     Passwordnp.Password = "TempPass123!";
                 }
+                else if (selectedString == "Исполнитель")
+                {
+                    LoginInp.Text = "executor1.jkh@mail.ru";
+                    Passwordnp.Password = "TempPass123!";
+                }
             };
 
             InpPanel.Children.Add(userDebugChooser);
@@ -102,6 +107,11 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                     case (int)RoleEnum.Resident:
                         var residentWindow = _navigationService.GetWindow<ResidentWindow>();
                         residentWindow.Show();
+                        Close();
+                        break;
+                    case (int)RoleEnum.Executor:
+                        var executorWindow = _navigationService.GetWindow<ExecutorWindow>();
+                        executorWindow.Show();
                         Close();
                         break;
                     default:

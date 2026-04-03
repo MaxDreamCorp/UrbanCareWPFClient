@@ -110,6 +110,19 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                         Close();
                     }
                 }
+                else if (PositionInp.SelectedIndex > 2)
+                {
+                    var response = await _employeeService.CreateExecutor(new CreateExecutorCommand(employeeCreatingDTO));
+
+                    if (response != null)
+                        MessageBox.Show(string.Join('\n', response), "Ошибка регистрации работника", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
+                    {
+                        MessageBox.Show("Регистрация работника прошла успешно", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                        IsReady = true;
+                        Close();
+                    }
+                }
             }
         }
         private bool CheckAllFields()

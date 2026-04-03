@@ -25,6 +25,9 @@ namespace UrbanCareClient.Application.Services.ApiServices
         public async Task<List<string>?> CreateDispatcher(CreateDispatcherCommand cmd) =>
             await _employeeRepository.CreateDispatcherAsync(cmd);
 
+        public async Task<List<string>?> CreateExecutor(CreateExecutorCommand cmd) =>
+            await _employeeRepository.CreateExecutorAsync(cmd);
+
         public async Task<List<EmployeePositionResponseDTO>> GetEmployeePositions()
         {
             return await _employeeRepository.GetEmployeePositionsAsync();
