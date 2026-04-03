@@ -66,6 +66,32 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         control.StatusTxt.Foreground = StylesService.NewBrush;
                         control.StatusBdr.Background = StylesService.NewBgBrush;
                         break;
+                    case OrderStatusEnum.ExecutorAppointed:
+                        control.StatusTxt.Foreground = StylesService.ExecutorAppointedBrush;
+                        control.StatusBdr.Background = StylesService.ExecutorAppointedBgBrush;
+
+                        if (orderControlViewModel.Order.Dispatcher != null)
+                        {
+                            control.InWorkPanel.Visibility = Visibility.Visible;
+                            control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
+                        }
+
+                        if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
+                            control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
+                        break;
+                    case OrderStatusEnum.MarkedAsCompletedByExecutor:
+                        control.StatusTxt.Foreground = StylesService.MarkedAsCompletedBrush;
+                        control.StatusBdr.Background = StylesService.MarkedAsCompletedBgBrush;
+
+                        if (orderControlViewModel.Order.Dispatcher != null)
+                        {
+                            control.InWorkPanel.Visibility = Visibility.Visible;
+                            control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
+                        }
+
+                        if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
+                            control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
+                        break;
                     case OrderStatusEnum.InProgress:
                         control.StatusTxt.Foreground = StylesService.InProgressBrush;
                         control.StatusBdr.Background = StylesService.InProgressBgBrush;
@@ -79,9 +105,9 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
                             control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
                         break;
-                    case OrderStatusEnum.WaitingForPayment:
-                        control.StatusTxt.Foreground = StylesService.WaitingForPaymentBrush;
-                        control.StatusBdr.Background = StylesService.WaitingForPaymentBgBrush;
+                    case OrderStatusEnum.PendingPayment:
+                        control.StatusTxt.Foreground = StylesService.PendingPaymentBrush;
+                        control.StatusBdr.Background = StylesService.PendingPaymentBgBrush;
 
                         control.InWorkPanel.Visibility = Visibility.Visible;
                         if (orderControlViewModel.Order.Dispatcher != null)
@@ -110,9 +136,9 @@ namespace UrbanCareClient.WPF.Views.UserControls
 
                         control.MoreBtn.Visibility = Visibility.Collapsed;
                         break;
-                    case OrderStatusEnum.Finished:
-                        control.StatusTxt.Foreground = StylesService.FinishedBrush;
-                        control.StatusBdr.Background = StylesService.FinishedBgBrush;
+                    case OrderStatusEnum.Completed:
+                        control.StatusTxt.Foreground = StylesService.CompletedBrush;
+                        control.StatusBdr.Background = StylesService.CompletedBgBrush;
 
                         control.InWorkPanel.Visibility = Visibility.Visible;
                         if (orderControlViewModel.Order.Dispatcher != null)

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UrbanCareClient.WPF.Views.Windows"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Житель: Главная" MinHeight="450" MinWidth="800">
+        Title="Житель: Главная" MinHeight="450" MinWidth="1000">
     <Window.Background>
         <SolidColorBrush Color="{StaticResource BackgroundColor}"/>
     </Window.Background>
@@ -39,11 +39,13 @@
             <StackPanel Grid.Row="1" Margin="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <Border Grid.Column="0" CornerRadius="15" Background="White" Padding="10" Margin="10,0,10,0">
@@ -53,28 +55,42 @@
                             <TextBlock  Margin="5,3,5,5" Text="Новых заказов" FontSize="11" Style="{StaticResource SecondaryText}"/>
                         </StackPanel>
                     </Border>
-                    <Border Grid.Column="1" CornerRadius="15" Background="White" Padding="10"  Margin="10,0,10,0">
+                    <Border Grid.Column="1" CornerRadius="15" Background="White" Padding="10" Margin="10,0,10,0">
+                        <StackPanel>
+                            <Image Margin="5" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ExecutorAssignedIcon.png" Width="40" HorizontalAlignment="Left"/>
+                            <TextBlock x:Name="ExecutorAppointedOrdersTxt" Margin="5,5,5,0" Text="0"  FontWeight="Bold" FontSize="16"/>
+                            <TextBlock  Margin="5,3,5,5" Text="Назначены" TextWrapping="Wrap"  FontSize="11" Style="{StaticResource SecondaryText}"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="2" CornerRadius="15" Background="White" Padding="10"  Margin="10,0,10,0">
                         <StackPanel>
                             <Image Margin="5" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/InProgressIcon.png" Width="40" HorizontalAlignment="Left"/>
                             <TextBlock x:Name="InProgressOrdersTxt" Margin="5,5,5,0" Text="0"  FontWeight="Bold" FontSize="16"/>
                             <TextBlock  Margin="5,3,5,5" Text="В работе" FontSize="11" Style="{StaticResource SecondaryText}"/>
                         </StackPanel>
                     </Border>
-                    <Border Grid.Column="2" CornerRadius="15" Background="White" Padding="10" Margin="10,0,10,0">
-                        <StackPanel>
-                            <Image Margin="5" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/WaitingForPaymentIcon.png" Width="40" HorizontalAlignment="Left"/>
-                            <TextBlock x:Name="WaitingForPaymentOrdersTxt" Margin="5,5,5,0" Text="0"  FontWeight="Bold" FontSize="16"/>
-                            <TextBlock  Margin="5,3,5,5" Text="Ожидают оплаты" FontSize="11" Style="{StaticResource SecondaryText}"/>
-                        </StackPanel>
-                    </Border>
                     <Border Grid.Column="3" CornerRadius="15" Background="White" Padding="10" Margin="10,0,10,0">
                         <StackPanel>
-                            <Image Margin="5" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/FinishedIcon.png" Width="40" HorizontalAlignment="Left"/>
-                            <TextBlock x:Name="FinishedOrdersTxt" Margin="5,5,5,0" Text="0"  FontWeight="Bold" FontSize="16"/>
-                            <TextBlock  Margin="5,3,5,5" Text="Завершены" FontSize="11" Style="{StaticResource SecondaryText}"/>
+                            <Image Margin="5" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/MarkedAsCompletedIcon.png" Width="40" HorizontalAlignment="Left"/>
+                            <TextBlock x:Name="MarkedAsCompletedByExecutorOrdersTxt" Margin="5,5,5,0" Text="0"  FontWeight="Bold" FontSize="16"/>
+                            <TextBlock  Margin="5,3,5,5" Text="Выполнены" FontSize="11" Style="{StaticResource SecondaryText}"/>
                         </StackPanel>
                     </Border>
                     <Border Grid.Column="4" CornerRadius="15" Background="White" Padding="10" Margin="10,0,10,0">
+                        <StackPanel>
+                            <Image Margin="5" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/PendingPaymentIcon.png" Width="40" HorizontalAlignment="Left"/>
+                            <TextBlock x:Name="PendingPaymentOrdersTxt" Margin="5,5,5,0" Text="0"  FontWeight="Bold" FontSize="16"/>
+                            <TextBlock  Margin="5,3,5,5" Text="Ожидают оплаты" FontSize="11" Style="{StaticResource SecondaryText}"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="5" CornerRadius="15" Background="White" Padding="10" Margin="10,0,10,0">
+                        <StackPanel>
+                            <Image Margin="5" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/CompletedIcon.png" Width="40" HorizontalAlignment="Left"/>
+                            <TextBlock x:Name="CompletedOrdersTxt" Margin="5,5,5,0" Text="0"  FontWeight="Bold" FontSize="16"/>
+                            <TextBlock  Margin="5,3,5,5" Text="Завершены" FontSize="11" Style="{StaticResource SecondaryText}"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="6" CornerRadius="15" Background="White" Padding="10" Margin="10,0,10,0">
                         <StackPanel>
                             <Image Margin="5" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/CanceledIcon.png" Width="40" HorizontalAlignment="Left"/>
                             <TextBlock x:Name="CanceledOrdersTxt" Margin="5,5,5,0" Text="0"  FontWeight="Bold" FontSize="16"/>
@@ -98,28 +114,40 @@
                         <StackPanel x:Name="ActiveOrdersPanel" />
                     </StackPanel>
                 </Border>
-                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10" x:Name="WaitingForPaymentOrders" MouseLeftButtonDown="WaitingForPaymentOrders_MouseLeftButtonDown">
+                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10" x:Name="MarkedAsCompletedOrders" MouseLeftButtonDown="MarkedAsCompletedOrders_MouseLeftButtonDown">
+                    <StackPanel>
+                        <DockPanel Margin="10">
+                            <TextBlock Text="Ожидающие подтверждения заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
+                        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Right" >
+                            <Image x:Name="MarkedAsCompletedOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
+                            <Image x:Name="MarkedAsCompletedOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
+                        </StackPanel>
+                        </DockPanel>
+                        <StackPanel x:Name="MarkedAsCompletedOrdersPanel" />
+                    </StackPanel>
+                </Border>
+                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10" x:Name="PendingPaymentOrders" MouseLeftButtonDown="PendingPaymentOrders_MouseLeftButtonDown">
                     <StackPanel>
                         <DockPanel Margin="10">
                             <TextBlock Text="Ожидающие оплаты заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
                         <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Right" >
-                            <Image x:Name="WaitingForPaymentOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
-                            <Image x:Name="WaitingForPaymentOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
+                            <Image x:Name="PendingPaymentOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
+                            <Image x:Name="PendingPaymentOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
                         </StackPanel>
                         </DockPanel>
-                        <StackPanel x:Name="WaitingForPaymentOrdersPanel" />
+                        <StackPanel x:Name="PendingPaymentOrdersPanel" />
                     </StackPanel>
                 </Border>
-                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10" x:Name="FinishedOrders" MouseLeftButtonDown="FinishedOrders_MouseLeftButtonDown">
+                <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10" x:Name="CompletedOrders" MouseLeftButtonDown="CompletedOrders_MouseLeftButtonDown">
                     <StackPanel>
                         <DockPanel Margin="10">
                             <TextBlock Text="Завершенные заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
                             <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Right" >
-                                <Image x:Name="FinishedOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
-                                <Image x:Name="FinishedOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
+                                <Image x:Name="CompletedOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
+                                <Image x:Name="CompletedOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
                             </StackPanel>
                         </DockPanel>
-                        <StackPanel x:Name="FinishedOrdersPanel" />
+                        <StackPanel x:Name="CompletedOrdersPanel" />
                     </StackPanel>
                 </Border>
                 <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10" x:Name="CanceledOrders" MouseLeftButtonDown="CanceledOrders_MouseLeftButtonDown">

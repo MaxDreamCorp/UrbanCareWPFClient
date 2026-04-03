@@ -21,9 +21,11 @@ namespace UrbanCareClient.WPF.Views.Windows
         private readonly GetterDIServices _getterDIServices;
 
         private int _newOrdersCount;
+        private int _executoAppointedOrdersCount;
         private int _inProgressOrdersCount;
-        private int _waitingForPaymentOrdersCount;
-        private int _finishedOrdersCount;
+        private int _markedAsCompletedByExecutorOrdersCount;
+        private int _pendingPaymentOrdersCount;
+        private int _completedOrdersCount;
         private int _canceledOrdersCount;
 
         public ResidentWindow(GetterDIServices getterDIServices, INavigationService navigationService, ResidentService residentService, OrderService orderService)
@@ -81,20 +83,24 @@ namespace UrbanCareClient.WPF.Views.Windows
                     Order = order
                 };
 
-                if (order.OrderStatus.Id < (int)OrderStatusEnum.WaitingForPayment)
+                if (order.OrderStatus.Id < (int)OrderStatusEnum.MarkedAsCompletedByExecutor)
                     ActiveOrdersPanel.Children.Add(orderControl);
-                else if (order.OrderStatus.Id == (int)OrderStatusEnum.WaitingForPayment)
-                    WaitingForPaymentOrdersPanel.Children.Add(orderControl);
-                else if (order.OrderStatus.Id == (int)OrderStatusEnum.Finished)
-                    FinishedOrdersPanel.Children.Add(orderControl);
+                else if (order.OrderStatus.Id == (int)OrderStatusEnum.MarkedAsCompletedByExecutor)
+                    MarkedAsCompletedOrdersPanel.Children.Add(orderControl);
+                else if (order.OrderStatus.Id == (int)OrderStatusEnum.PendingPayment)
+                    PendingPaymentOrdersPanel.Children.Add(orderControl);
+                else if (order.OrderStatus.Id == (int)OrderStatusEnum.Completed)
+                    CompletedOrdersPanel.Children.Add(orderControl);
                 else if (order.OrderStatus.Id == (int)OrderStatusEnum.Canceled)
                     CanceledOrdersPanel.Children.Add(orderControl);
             }
 
             _newOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.New).Count();
+            _executoAppointedOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.ExecutorAppointed).Count();
             _inProgressOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.InProgress).Count();
-            _waitingForPaymentOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.WaitingForPayment).Count();
-            _finishedOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.Finished).Count();
+            _markedAsCompletedByExecutorOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.MarkedAsCompletedByExecutor).Count();
+            _pendingPaymentOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.PendingPayment).Count();
+            _completedOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.Completed).Count();
             _canceledOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.Canceled).Count();
 
             RefreshCounters();
@@ -103,9 +109,11 @@ namespace UrbanCareClient.WPF.Views.Windows
         private void RefreshCounters()
         {
             NewOrdersTxt.Text = _newOrdersCount.ToString();
+            ExecutorAppointedOrdersTxt.Text = _executoAppointedOrdersCount.ToString();
             InProgressOrdersTxt.Text = _inProgressOrdersCount.ToString();
-            WaitingForPaymentOrdersTxt.Text = _waitingForPaymentOrdersCount.ToString();
-            FinishedOrdersTxt.Text = _finishedOrdersCount.ToString();
+            MarkedAsCompletedByExecutorOrdersTxt.Text = _markedAsCompletedByExecutorOrdersCount.ToString();
+            PendingPaymentOrdersTxt.Text = _pendingPaymentOrdersCount.ToString();
+            CompletedOrdersTxt.Text = _completedOrdersCount.ToString();
             CanceledOrdersTxt.Text = _canceledOrdersCount.ToString();
         }
 
@@ -125,35 +133,35 @@ namespace UrbanCareClient.WPF.Views.Windows
             }
         }
 
-        private void WaitingForPaymentOrders_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void PendingPaymentOrders_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (WaitingForPaymentOrdersPanel.Visibility == Visibility.Visible)
+            if (PendingPaymentOrdersPanel.Visibility == Visibility.Visible)
             {
-                WaitingForPaymentOrdersPanel.Visibility = Visibility.Collapsed;
-                WaitingForPaymentOrderChevronUp.Visibility = Visibility.Collapsed;
-                WaitingForPaymentOrderChevronDown.Visibility = Visibility.Visible;
+                PendingPaymentOrdersPanel.Visibility = Visibility.Collapsed;
+                PendingPaymentOrderChevronUp.Visibility = Visibility.Collapsed;
+                PendingPaymentOrderChevronDown.Visibility = Visibility.Visible;
             }
             else
             {
-                WaitingForPaymentOrdersPanel.Visibility = Visibility.Visible;
-                WaitingForPaymentOrderChevronUp.Visibility = Visibility.Visible;
-                WaitingForPaymentOrderChevronDown.Visibility = Visibility.Collapsed;
+                PendingPaymentOrdersPanel.Visibility = Visibility.Visible;
+                PendingPaymentOrderChevronUp.Visibility = Visibility.Visible;
+                PendingPaymentOrderChevronDown.Visibility = Visibility.Collapsed;
             }
         }
 
-        private void FinishedOrders_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void CompletedOrders_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (FinishedOrdersPanel.Visibility == Visibility.Visible)
+            if (CompletedOrdersPanel.Visibility == Visibility.Visible)
             {
-                FinishedOrdersPanel.Visibility = Visibility.Collapsed;
-                FinishedOrderChevronUp.Visibility = Visibility.Collapsed;
-                FinishedOrderChevronDown.Visibility = Visibility.Visible;
+                CompletedOrdersPanel.Visibility = Visibility.Collapsed;
+                CompletedOrderChevronUp.Visibility = Visibility.Collapsed;
+                CompletedOrderChevronDown.Visibility = Visibility.Visible;
             }
             else
             {
-                FinishedOrdersPanel.Visibility = Visibility.Visible;
-                FinishedOrderChevronUp.Visibility = Visibility.Visible;
-                FinishedOrderChevronDown.Visibility = Visibility.Collapsed;
+                CompletedOrdersPanel.Visibility = Visibility.Visible;
+                CompletedOrderChevronUp.Visibility = Visibility.Visible;
+                CompletedOrderChevronDown.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -170,6 +178,22 @@ namespace UrbanCareClient.WPF.Views.Windows
                 CanceledOrdersPanel.Visibility = Visibility.Visible;
                 CanceledOrderChevronUp.Visibility = Visibility.Visible;
                 CanceledOrderChevronDown.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void MarkedAsCompletedOrders_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (MarkedAsCompletedOrdersPanel.Visibility == Visibility.Visible)
+            {
+                MarkedAsCompletedOrdersPanel.Visibility = Visibility.Collapsed;
+                MarkedAsCompletedOrderChevronUp.Visibility = Visibility.Collapsed;
+                MarkedAsCompletedOrderChevronDown.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MarkedAsCompletedOrdersPanel.Visibility = Visibility.Visible;
+                MarkedAsCompletedOrderChevronUp.Visibility = Visibility.Visible;
+                MarkedAsCompletedOrderChevronDown.Visibility = Visibility.Collapsed;
             }
         }
     }

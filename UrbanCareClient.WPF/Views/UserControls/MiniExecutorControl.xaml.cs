@@ -41,7 +41,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                 control.PhoneTxt.Text = viewModal.Executor.EmployeeData.UserData.Phone;
                 control.EmailTxt.Text = viewModal.Executor.EmployeeData.UserData.Email;
                 control.ActiveOrdersCountTxt.Text = viewModal.Executor.ActiveTasksCount.ToString();
-                control.FinishedOrdersCountTxt.Text = viewModal.Executor.FinishedTasksCount.ToString();
+                control.CompletedOrdersCountTxt.Text = viewModal.Executor.CompletedTasksCount.ToString();
                 control.StatusTxt.Text = viewModal.Executor.EmployeeData.EmployeeStatus.Status;
 
                 switch ((EmployeeStatusEnum)viewModal.Executor.EmployeeData.EmployeeStatus.Id)

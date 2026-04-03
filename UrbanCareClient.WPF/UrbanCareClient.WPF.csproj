@@ -17,17 +17,19 @@
     <None Remove="Resources\Images\CategoryIcon.png" />
     <None Remove="Resources\Images\ChevronDown.png" />
     <None Remove="Resources\Images\ChevronUp.png" />
+    <None Remove="Resources\Images\CompletedIcon.png" />
     <None Remove="Resources\Images\EmailIcon.png" />
-    <None Remove="Resources\Images\FinishedIcon.png" />
+    <None Remove="Resources\Images\ExecutorAssignedIcon.png" />
     <None Remove="Resources\Images\InProgressIcon.png" />
+    <None Remove="Resources\Images\MarkedAsCompletedIcon.png" />
     <None Remove="Resources\Images\MCIcon.png" />
     <None Remove="Resources\Images\NewOrderIcon.png" />
+    <None Remove="Resources\Images\PendingPaymentIcon.png" />
     <None Remove="Resources\Images\PersonIcon.png" />
     <None Remove="Resources\Images\PhoneIcon.png" />
     <None Remove="Resources\Images\TypeIcon.png" />
     <None Remove="Resources\Images\UrbanCareLogo.ico" />
     <None Remove="Resources\Images\UrbanCareLogo.png" />
-    <None Remove="Resources\Images\WaitingForPaymentIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,9 +58,11 @@
     <Resource Include="Resources\Images\ChevronDown.png" />
     <Resource Include="Resources\Images\ChevronUp.png" />
     <Resource Include="Resources\Images\EmailIcon.png" />
-    <Resource Include="Resources\Images\FinishedIcon.png" />
+    <Resource Include="Resources\Images\CompletedIcon.png" />
     <Resource Include="Resources\Images\CanceledIcon.png" />
+    <Resource Include="Resources\Images\ExecutorAssignedIcon.png" />
     <Resource Include="Resources\Images\InProgressIcon.png" />
+    <Resource Include="Resources\Images\MarkedAsCompletedIcon.png" />
     <Resource Include="Resources\Images\MCIcon.png" />
     <Resource Include="Resources\Images\NewOrderIcon.png" />
     <Resource Include="Resources\Images\PersonIcon.png" />
@@ -66,7 +70,7 @@
     <Resource Include="Resources\Images\TypeIcon.png" />
     <Resource Include="Resources\Images\UrbanCareLogo.ico" />
     <Resource Include="Resources\Images\UrbanCareLogo.png" />
-    <Resource Include="Resources\Images\WaitingForPaymentIcon.png" />
+    <Resource Include="Resources\Images\PendingPaymentIcon.png" />
   </ItemGroup>
 
   <ItemGroup>

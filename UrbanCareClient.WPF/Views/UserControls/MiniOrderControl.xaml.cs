@@ -56,7 +56,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                 control.ContactEmailTxt.Text = orderControlViewModel.Order.ContactEmail;
 
 
-                if (orderControlViewModel.Order.OrderStatus.Id == (int)OrderStatusEnum.InProgress || orderControlViewModel.Order.OrderStatus.Id == (int)OrderStatusEnum.WaitingForPayment)
+                if (orderControlViewModel.Order.OrderStatus.Id == (int)OrderStatusEnum.InProgress || orderControlViewModel.Order.OrderStatus.Id == (int)OrderStatusEnum.PendingPayment)
                 {
                     control.SetExecutorBtn.Visibility = Visibility.Collapsed;
 

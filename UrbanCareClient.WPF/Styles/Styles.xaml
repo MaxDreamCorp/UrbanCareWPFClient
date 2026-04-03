@@ -12,12 +12,16 @@
 
     <Color x:Key="NewBgColor">#e9bffb</Color>
     <Color x:Key="NewColor">#ad23fe</Color>
+    <Color x:Key="ExecutorAppointedBgColor">#e0f2fe</Color>
+    <Color x:Key="ExecutorAppointedColor">#0284c7</Color>
+    <Color x:Key="MarkedAsCompletedBgColor">#abfff5</Color>
+    <Color x:Key="MarkedAsCompletedColor">#0c7e71</Color>
     <Color x:Key="InProgressBgColor">#c2edff</Color>
     <Color x:Key="InProgressColor">#0891b2</Color>
-    <Color x:Key="WaitingForPaymentBgColor">#fef3c7</Color>
-    <Color x:Key="WaitingForPaymentColor">#da8325</Color>
-    <Color x:Key="FinishedBgColor">#d1fae5</Color>
-    <Color x:Key="FinishedColor">#059671</Color>
+    <Color x:Key="PendingPaymentBgColor">#fef3c7</Color>
+    <Color x:Key="PendingPaymentColor">#da8325</Color>
+    <Color x:Key="CompletedBgColor">#d1fae5</Color>
+    <Color x:Key="CompletedColor">#059671</Color>
     <Color x:Key="CanceledBgColor">#fee2e2</Color>
     <Color x:Key="CanceledColor">#de413e</Color>
 
@@ -55,12 +59,16 @@
 
     <SolidColorBrush x:Key="NewBgBrush" Color="{StaticResource NewBgColor}"/>
     <SolidColorBrush x:Key="NewBrush" Color="{StaticResource NewColor}"/>
+    <SolidColorBrush x:Key="ExecutorAppointedBgBrush" Color="{StaticResource ExecutorAppointedBgColor}"/>
+    <SolidColorBrush x:Key="ExecutorAppointedBrush" Color="{StaticResource ExecutorAppointedColor}"/>
+    <SolidColorBrush x:Key="MarkedAsCompletedBgBrush" Color="{StaticResource MarkedAsCompletedBgColor}"/>
+    <SolidColorBrush x:Key="MarkedAsCompletedBrush" Color="{StaticResource MarkedAsCompletedColor}"/>
     <SolidColorBrush x:Key="InProgressBgBrush" Color="{StaticResource InProgressBgColor}"/>
     <SolidColorBrush x:Key="InProgressBrush" Color="{StaticResource InProgressColor}"/>
-    <SolidColorBrush x:Key="WaitingForPaymentBgBrush" Color="{StaticResource WaitingForPaymentBgColor}"/>
-    <SolidColorBrush x:Key="WaitingForPaymentBrush" Color="{StaticResource WaitingForPaymentColor}"/>
-    <SolidColorBrush x:Key="FinishedBgBrush" Color="{StaticResource FinishedBgColor}"/>
-    <SolidColorBrush x:Key="FinishedBrush" Color="{StaticResource FinishedColor}"/>
+    <SolidColorBrush x:Key="PendingPaymentBgBrush" Color="{StaticResource PendingPaymentBgColor}"/>
+    <SolidColorBrush x:Key="PendingPaymentBrush" Color="{StaticResource PendingPaymentColor}"/>
+    <SolidColorBrush x:Key="CompletedBgBrush" Color="{StaticResource CompletedBgColor}"/>
+    <SolidColorBrush x:Key="CompletedBrush" Color="{StaticResource CompletedColor}"/>
     <SolidColorBrush x:Key="CanceledBgBrush" Color="{StaticResource CanceledBgColor}"/>
     <SolidColorBrush x:Key="CanceledBrush" Color="{StaticResource CanceledColor}"/>
 

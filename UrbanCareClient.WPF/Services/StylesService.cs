@@ -12,12 +12,16 @@ namespace UrbanCareClient.WPF.Services
 
         public static SolidColorBrush NewBgBrush => GetBrush("NewBgBrush");
         public static SolidColorBrush NewBrush => GetBrush("NewBrush");
+        public static SolidColorBrush ExecutorAppointedBgBrush => GetBrush("ExecutorAppointedBgBrush");
+        public static SolidColorBrush ExecutorAppointedBrush => GetBrush("ExecutorAppointedBrush");
+        public static SolidColorBrush MarkedAsCompletedBgBrush => GetBrush("MarkedAsCompletedBgBrush");
+        public static SolidColorBrush MarkedAsCompletedBrush => GetBrush("MarkedAsCompletedBrush");
         public static SolidColorBrush InProgressBgBrush => GetBrush("InProgressBgBrush");
         public static SolidColorBrush InProgressBrush => GetBrush("InProgressBrush");
-        public static SolidColorBrush WaitingForPaymentBgBrush => GetBrush("WaitingForPaymentBgBrush");
-        public static SolidColorBrush WaitingForPaymentBrush => GetBrush("WaitingForPaymentBrush");
-        public static SolidColorBrush FinishedBgBrush => GetBrush("FinishedBgBrush");
-        public static SolidColorBrush FinishedBrush => GetBrush("FinishedBrush");
+        public static SolidColorBrush PendingPaymentBgBrush => GetBrush("PendingPaymentBgBrush");
+        public static SolidColorBrush PendingPaymentBrush => GetBrush("PendingPaymentBrush");
+        public static SolidColorBrush CompletedBgBrush => GetBrush("CompletedBgBrush");
+        public static SolidColorBrush CompletedBrush => GetBrush("CompletedBrush");
         public static SolidColorBrush CanceledBgBrush => GetBrush("CanceledBgBrush");
         public static SolidColorBrush CanceledBrush => GetBrush("CanceledBrush");
 
