@@ -67,6 +67,42 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
                 }
 
+                control.StatusTxt.Text = orderControlViewModel.Order.OrderStatus.Status;
+
+                switch ((OrderStatusEnum)orderControlViewModel.Order.OrderStatus.Id)
+                {
+                    case OrderStatusEnum.New:
+                        control.StatusTxt.Foreground = StylesService.NewBrush;
+                        control.StatusBdr.Background = StylesService.NewBgBrush;
+                        break;
+                    case OrderStatusEnum.ExecutorAppointed:
+                        control.StatusTxt.Foreground = StylesService.ExecutorAppointedBrush;
+                        control.StatusBdr.Background = StylesService.ExecutorAppointedBgBrush;
+                        break;
+                    case OrderStatusEnum.MarkedAsCompletedByExecutor:
+                        control.StatusTxt.Foreground = StylesService.MarkedAsCompletedBrush;
+                        control.StatusBdr.Background = StylesService.MarkedAsCompletedBgBrush;
+                        break;
+                    case OrderStatusEnum.InProgress:
+                        control.StatusTxt.Foreground = StylesService.InProgressBrush;
+                        control.StatusBdr.Background = StylesService.InProgressBgBrush;
+                        break;
+                    case OrderStatusEnum.PendingPayment:
+                        control.StatusTxt.Foreground = StylesService.PendingPaymentBrush;
+                        control.StatusBdr.Background = StylesService.PendingPaymentBgBrush;
+                        break;
+                    case OrderStatusEnum.Completed:
+                        control.StatusTxt.Foreground = StylesService.CompletedBrush;
+                        control.StatusBdr.Background = StylesService.CompletedBgBrush;
+                        break;
+                    case OrderStatusEnum.Canceled:
+                        control.StatusTxt.Foreground = StylesService.CanceledBrush;
+                        control.StatusBdr.Background = StylesService.CanceledBgBrush;
+                        break;
+                    default:
+                        break;
+                }
+
                 control.PriorityTxt.Text = orderControlViewModel.Order.Priority.Priority;
 
                 switch ((PriorityEnum)orderControlViewModel.Order.Priority.Id)

@@ -10,6 +10,9 @@
   
         <Border CornerRadius="15" Background="{StaticResource BackgroundBrush}" Padding="8">
             <StackPanel VerticalAlignment="Top">
+                <Border x:Name="StatusBdr" Padding="6 2" Height="20" VerticalAlignment="Center" Background="{StaticResource InProgressBgBrush}" CornerRadius="10" HorizontalAlignment="Left" >
+                    <TextBlock x:Name="StatusTxt" FontSize="11" Text="В работе" FontWeight="Bold" Foreground="{StaticResource InProgressBrush}"/>
+                </Border>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="HeaderTxt" Text="Заказ #1" Style="{StaticResource PageTitle}" VerticalAlignment="Center" Margin="0,0,0,0" FontSize="18"/>
                     <Border x:Name="PriorityBdr" Padding="6 2" Height="20" VerticalAlignment="Center" Background="{StaticResource PriorityMediumBgBrush}" CornerRadius="10" HorizontalAlignment="Left" >
