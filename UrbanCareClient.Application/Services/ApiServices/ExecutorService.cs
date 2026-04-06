@@ -1,4 +1,5 @@
-﻿using UrbanCareClient.Domain.Interfaces.Repositories;
+﻿using UrbanCareClient.Domain.DTOs;
+using UrbanCareClient.Domain.Interfaces.Repositories;
 
 namespace UrbanCareClient.Application.Services.ApiServices
 {
@@ -16,5 +17,8 @@ namespace UrbanCareClient.Application.Services.ApiServices
 
         public async Task<List<string>?> UpdateStatusToOnOrder() =>
             await _executorRepository.UpdateStatusToOnOrderAsync();
+
+        public async Task<List<OrderResponseDTO>> GetExecutorOrders() =>
+            await _executorRepository.GetExecutorOrders();
     }
 }

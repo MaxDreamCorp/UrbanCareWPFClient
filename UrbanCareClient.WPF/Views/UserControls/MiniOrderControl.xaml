@@ -30,9 +30,15 @@
                     </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" x:Name="DescriptionTxt" Style="{StaticResource SecondaryText}" Text="gggggggggggg" TextWrapping="Wrap" FontSize="11" Margin="0,0,0,3" />
                 
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
-                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/CalendarIcon.png" Width="20" Margin="0,0,5,0" />
-                        <TextBlock x:Name="DateTxt" Style="{StaticResource SecondaryText}" Text="15.03.2025" FontSize="11" VerticalAlignment="Center"/>
+                    <StackPanel Grid.Row="1" Grid.Column="0">
+                        <StackPanel Orientation="Horizontal">
+                            <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/CalendarIcon.png" Width="20" Margin="0,0,5,0" />
+                            <TextBlock x:Name="DateTxt" Style="{StaticResource SecondaryText}" Text="15.03.2025" FontSize="11" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0 5">
+                            <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/AddressIcon.png" Width="20" Margin="0,0,5,0" />
+                            <TextBlock x:Name="AddressTxt" FontSize="11" Style="{StaticResource SecondaryText}" Text="ул. Ленина, д. 22, кв. 1" VerticalAlignment="Center"/>
+                        </StackPanel>
                     </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1" x:Name="ContactPanel" Margin="15,0,0,0">
                     <StackPanel Orientation="Horizontal">

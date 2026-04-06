@@ -2,10 +2,12 @@
 using System.Windows.Input;
 using UrbanCareClient.Application.Services.ApiServices;
 using UrbanCareClient.Application.Services.OtherServices;
+using UrbanCareClient.Domain.Enums;
 using UrbanCareClient.Domain.Interfaces.Repositories;
 using UrbanCareClient.WPF.Interfaces;
 using UrbanCareClient.WPF.Services;
 using UrbanCareClient.WPF.Views.ModalWindows;
+using UrbanCareClient.WPF.Views.UserControls;
 
 namespace UrbanCareClient.WPF.Views.Windows
 {
@@ -20,6 +22,11 @@ namespace UrbanCareClient.WPF.Views.Windows
         private readonly EmployeeService _employeeService;
         private readonly INavigationService _navigationService;
         private readonly UserService _userService;
+
+        private int _executoAppointedOrdersCount;
+        private int _inProgressOrdersCount;
+        private int _markedAsCompletedByExecutorOrdersCount;
+        private int _completedOrdersCount;
 
         public ExecutorWindow(GetterDIServices getterDIServices, OrderService orderService, EmployeeService employeeService, INavigationService navigationService, UserService userService, IExecutorRepository executorRepository)
         {
@@ -69,6 +76,8 @@ namespace UrbanCareClient.WPF.Views.Windows
             MCNameTxt.Text = $"УК: {TemporaryDataStorage.EmployeeData.ManagementCompany.Name}";
             FullNameTxt.Text = TemporaryDataStorage.EmployeeData.UserData.Fullname;
             PositionTxt.Text = TemporaryDataStorage.EmployeeData.EmployeePosition.Name;
+
+            await SetOrders();
         }
 
         private void ExecutorAppointedOrders_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -134,6 +143,49 @@ namespace UrbanCareClient.WPF.Views.Windows
                 CompletedOrderChevronDown.Visibility = Visibility.Collapsed;
             }
 
+        }
+
+        private async Task SetOrders()
+        {
+            if (TemporaryDataStorage.EmployeeData == null)
+                return;
+
+            var orders = await _executorRepository.GetExecutorOrders();
+            if (orders == null)
+            {
+                MessageBox.Show("Ошибка получения заказов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            foreach (var order in orders)
+            {
+                ExecutorOrderControl orderControl = new ExecutorOrderControl(_getterDIServices, _orderService);
+                orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel { Order = order };
+
+                if (order.OrderStatus.Id == (int)OrderStatusEnum.ExecutorAppointed)
+                    ExecutorAppointedOrdersPanel.Children.Add(orderControl);
+                else if (order.OrderStatus.Id == (int)OrderStatusEnum.InProgress)
+                    InProgressOrdersPanel.Children.Add(orderControl);
+                else if (order.OrderStatus.Id == (int)OrderStatusEnum.MarkedAsCompletedByExecutor)
+                    MarkedAsCompletedOrdersPanel.Children.Add(orderControl);
+                else if (order.OrderStatus.Id == (int)OrderStatusEnum.Completed)
+                    CompletedOrdersPanel.Children.Add(orderControl);
+            }
+
+            _executoAppointedOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.ExecutorAppointed).Count();
+            _inProgressOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.InProgress).Count();
+            _markedAsCompletedByExecutorOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.MarkedAsCompletedByExecutor).Count();
+            _completedOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.Completed).Count();
+
+            RefreshCounters();
+        }
+
+        private void RefreshCounters()
+        {
+            ExecutorAppointedOrdersTxt.Text = _executoAppointedOrdersCount.ToString();
+            InProgressOrdersTxt.Text = _inProgressOrdersCount.ToString();
+            MarkedAsCompletedByExecutorOrdersTxt.Text = _markedAsCompletedByExecutorOrdersCount.ToString();
+            CompletedOrdersTxt.Text = _completedOrdersCount.ToString();
         }
     }
 }

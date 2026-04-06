@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="UrbanCareClient.WPF.Views.UserControls.ExecutorOrderControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UrbanCareClient.WPF.Views.UserControls"
+                        MinWidth="450"
+            Margin="0 10"
+             mc:Ignorable="d" >
+    <Grid x:Name="LayoutRoot">
+        <Border CornerRadius="15" Background="{StaticResource BackgroundBrush}" Padding="15">
+            <StackPanel VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock x:Name="HeaderTxt" Text="Заказ #1" Style="{StaticResource PageTitle}" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                    <Border x:Name="StatusBdr" Padding="8 4" Height="25" VerticalAlignment="Center" Background="{StaticResource InProgressBgBrush}" CornerRadius="10" Margin="5,0,0,0">
+                        <TextBlock x:Name="StatusTxt" FontSize="14" Text="В работе" FontWeight="Bold" Foreground="{StaticResource InProgressBrush}"/>
+                    </Border>
+                </StackPanel>
+                <TextBlock x:Name="DescriptionTxt" Style="{StaticResource SecondaryText}" Text="gggggggggggg" TextWrapping="Wrap"/>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Style="{StaticResource SecondaryText}" Text="Приоритетность:" VerticalAlignment="Center" Margin="0,0,5,0" />
+                    <Border x:Name="PriorityBdr" Padding="8 4" Height="25" VerticalAlignment="Center" Background="{StaticResource PriorityMediumBgBrush}" CornerRadius="10" HorizontalAlignment="Left" >
+                        <TextBlock x:Name="PriorityTxt" FontSize="14" Text="Средний" FontWeight="Bold" Foreground="{StaticResource PriorityMediumBrush}"/>
+                    </Border>
+                </StackPanel>
+                <StackPanel  Orientation="Horizontal" Margin="0 0 0 5">
+
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/AddressIcon.png" Width="24" Margin="0,0,5,0" />
+                        <TextBlock x:Name="AddressTxt" Style="{StaticResource SecondaryText}" Text="ул. Ленина, д. 22, кв. 1" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel  Orientation="Horizontal" Margin="30 5 0 0">
+                        <StackPanel  Orientation="Horizontal" Margin="0 5">
+                            <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/PersonIcon.png" Width="24" Margin="0,0,5,0" />
+                            <TextBlock x:Name="ResidentFullnameTxt" Style="{StaticResource SecondaryText}" Text="Иванов Иван Иванович" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    <StackPanel  Orientation="Horizontal" Margin="10 5">
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/PhoneIcon.png" Width="24" Margin="0,0,5,0" />
+                        <TextBlock x:Name="ResidentPhoneTxt" Style="{StaticResource SecondaryText}" Text="+79655974678" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+                   
+                </StackPanel>
+
+            
+                <Border x:Name="InWorkPanel" Visibility="Collapsed"  Background="White" CornerRadius="15" Padding="10" Margin="0 5">
+                    <StackPanel Margin="0,10"  Background="White">
+                        <TextBlock Text="Исполнительская информация:" Style="{StaticResource SecondaryText}" Foreground="Black" FontWeight="DemiBold" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="DispatcherTxt" Text="" Style="{StaticResource SecondaryText}"/>
+                        <TextBlock x:Name="ExecutorsTxt" Text="" Style="{StaticResource SecondaryText}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+
+
+                <Border x:Name="PaymentPanel" Visibility="Collapsed" Background="White" CornerRadius="15" Padding="10" Margin="0 5">
+                    <StackPanel Margin="0,10" Background="White">
+                        <TextBlock Text="Расходники:" Style="{StaticResource SecondaryText}" Foreground="Black" FontWeight="DemiBold" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="MaterialsTxt" Text="" Style="{StaticResource SecondaryText}" TextWrapping="Wrap" Margin="0,0,0,6"/>
+                    </StackPanel>
+                </Border>
+
+                <StackPanel x:Name="ButtonsPanel" Orientation="Horizontal" Margin="0 10 0 0">
+                    <Button x:Name="StartBtn" Style="{StaticResource PrimaryButton}" Content="Начать работу" Visibility="Collapsed" MinWidth="200" Margin="0 0 5 0" Click="StartBtn_Click"/>
+                    <Button x:Name="MarkAsCompletedBtn" Style="{StaticResource PrimaryButton}" Content="Отметить выполненным" MinWidth="200" Margin="0 0 5 0" Click="MarkAsCompletedBtn_Click"/>
+                    <Button x:Name="AddMaterialsBtn" Style="{StaticResource SecondaryButton}" Content="Добавить расходники" Click="AddMaterialsBtn_Click"/>
+
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

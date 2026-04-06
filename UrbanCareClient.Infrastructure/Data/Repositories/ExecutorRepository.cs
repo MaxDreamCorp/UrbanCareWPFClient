@@ -1,4 +1,5 @@
-﻿using UrbanCareClient.Domain.Interfaces.Repositories;
+﻿using UrbanCareClient.Domain.DTOs;
+using UrbanCareClient.Domain.Interfaces.Repositories;
 using UrbanCareClient.Infrastructure.Api;
 
 namespace UrbanCareClient.Infrastructure.Data.Repositories
@@ -35,6 +36,18 @@ namespace UrbanCareClient.Infrastructure.Data.Repositories
             if (response.Errors != null && response.Errors.Count > 0)
                 return response.Errors.Select(e => e.Message).ToList();
             return null;
+        }
+
+        public async Task<List<OrderResponseDTO>> GetExecutorOrders(CancellationToken cancellationToken = default)
+        {
+            var response = await _apiClient.GetAsync<List<OrderResponseDTO>>($"{ENDPOINT_CONTROLLER}get_executor_orders", null, cancellationToken);
+
+            if (response == null)
+                throw new Exception("Ошибка запроса");
+
+            if (response.Data == null)
+                return new List<OrderResponseDTO>();
+            return response.Data;
         }
     }
 }

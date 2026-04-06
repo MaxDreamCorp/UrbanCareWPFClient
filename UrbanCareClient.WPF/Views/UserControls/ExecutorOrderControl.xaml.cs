@@ -1,29 +1,37 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using UrbanCareClient.Application.Services.ApiServices;
 using UrbanCareClient.Domain.Enums;
 using UrbanCareClient.WPF.Services;
-using UrbanCareClient.WPF.Views.ModalWindows;
-using UrbanCareClient.WPF.Views.ModalWindows.CardWindows;
 using UrbanCareClient.WPF.Views.UserControls.ViewModels;
 
 namespace UrbanCareClient.WPF.Views.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для MiniOrderControl.xaml
+    /// Логика взаимодействия для ExecutorOrderControl.xaml
     /// </summary>
-    public partial class MiniOrderControl : UserControl
+    public partial class ExecutorOrderControl : UserControl
     {
-        public event EventHandler? ExecutorAppointed;
         private readonly GetterDIServices _getterDIServices;
         private readonly OrderService _orderService;
-        private readonly DispatcherService _dispatcherService;
 
         public static readonly DependencyProperty ViewModelProperty =
             DependencyProperty.Register(
                 nameof(ViewModel),
                 typeof(OrderControlViewModel),
-                typeof(MiniOrderControl),
+                typeof(ExecutorOrderControl),
                 new PropertyMetadata(null, OnViewModelChanged));
 
         public OrderControlViewModel ViewModel
@@ -32,45 +40,45 @@ namespace UrbanCareClient.WPF.Views.UserControls
             set => SetValue(ViewModelProperty, value);
         }
 
-        public MiniOrderControl(GetterDIServices getterDIServices, OrderService orderService)
+        public ExecutorOrderControl(GetterDIServices getterDIServices, OrderService orderService)
         {
             InitializeComponent();
             _getterDIServices = getterDIServices;
             _orderService = orderService;
-            _dispatcherService = getterDIServices.GetService<DispatcherService>();
         }
-
 
         private static void OnViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is MiniOrderControl control && e.NewValue is OrderControlViewModel orderControlViewModel)
+            if (d is ExecutorOrderControl control && e.NewValue is OrderControlViewModel orderControlViewModel)
             {
                 control.LayoutRoot.DataContext = e.NewValue;
 
                 control.HeaderTxt.Text = $"Заказ №{orderControlViewModel.Order.Id}";
                 control.DescriptionTxt.Text = orderControlViewModel.Order.Description;
+
+
                 string address = $"{orderControlViewModel.Order.Building.Region.CommonAddress}, {orderControlViewModel.Order.Building.Address}";
 
                 if (orderControlViewModel.Order.Apartment != null)
                     address += $", кв. {orderControlViewModel.Order.Apartment.Number}";
 
                 control.AddressTxt.Text = address;
-                control.FullnameTxt.Text = orderControlViewModel.Order.Resident.UserData.Fullname;
-                control.DateTxt.Text = orderControlViewModel.Order.CreatedAt.ToString("dd.MM.yyyy");
-                control.ContactPhoneTxt.Text = orderControlViewModel.Order.ContactPhone;
-                control.ContactEmailTxt.Text = orderControlViewModel.Order.ContactEmail;
+                control.ResidentFullnameTxt.Text = orderControlViewModel.Order.Resident.UserData.Fullname;
+                control.ResidentPhoneTxt.Text = orderControlViewModel.Order.ContactPhone;
 
-
-                if (orderControlViewModel.Order.OrderStatus.Id == (int)OrderStatusEnum.InProgress || orderControlViewModel.Order.OrderStatus.Id == (int)OrderStatusEnum.PendingPayment)
+                if (orderControlViewModel.Order.Dispatcher != null)
                 {
-                    control.SetExecutorBtn.Visibility = Visibility.Collapsed;
-
                     control.InWorkPanel.Visibility = Visibility.Visible;
-                    if (orderControlViewModel.Order.Dispatcher != null)
-                        control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
-                    if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                        control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
+                    control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
                 }
+
+                if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
+                    control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
+
+                control.PaymentPanel.Visibility = Visibility.Visible;
+
+                if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
+                    control.MaterialsTxt.Text = $"{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"{om.Material.Name} x ({om.Quantity} {om.Material.Unit}"))}";
 
                 control.StatusTxt.Text = orderControlViewModel.Order.OrderStatus.Status;
 
@@ -83,22 +91,32 @@ namespace UrbanCareClient.WPF.Views.UserControls
                     case OrderStatusEnum.ExecutorAppointed:
                         control.StatusTxt.Foreground = StylesService.ExecutorAppointedBrush;
                         control.StatusBdr.Background = StylesService.ExecutorAppointedBgBrush;
+                        control.StartBtn.Visibility = Visibility.Visible;
+                        control.AddMaterialsBtn.Visibility = Visibility.Visible;
+                        control.MarkAsCompletedBtn.Visibility = Visibility.Collapsed;
                         break;
                     case OrderStatusEnum.MarkedAsCompletedByExecutor:
                         control.StatusTxt.Foreground = StylesService.MarkedAsCompletedBrush;
                         control.StatusBdr.Background = StylesService.MarkedAsCompletedBgBrush;
+
+                     
                         break;
                     case OrderStatusEnum.InProgress:
                         control.StatusTxt.Foreground = StylesService.InProgressBrush;
                         control.StatusBdr.Background = StylesService.InProgressBgBrush;
+
+                       
                         break;
                     case OrderStatusEnum.PendingPayment:
                         control.StatusTxt.Foreground = StylesService.PendingPaymentBrush;
                         control.StatusBdr.Background = StylesService.PendingPaymentBgBrush;
+
+                        
                         break;
                     case OrderStatusEnum.Completed:
                         control.StatusTxt.Foreground = StylesService.CompletedBrush;
                         control.StatusBdr.Background = StylesService.CompletedBgBrush;
+                        control.ButtonsPanel.Visibility = Visibility.Collapsed;
                         break;
                     case OrderStatusEnum.Canceled:
                         control.StatusTxt.Foreground = StylesService.CanceledBrush;
@@ -106,20 +124,6 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         break;
                     default:
                         break;
-                }
-
-                if (orderControlViewModel.Order.OrderStatus.Id > (int)OrderStatusEnum.New)
-                {
-                    if (orderControlViewModel.Order.Dispatcher != null)
-                    {
-                        control.InWorkPanel.Visibility = Visibility.Visible;
-                        control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
-                    }
-
-                    if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                        control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
-
-                    control.SetExecutorBtn.Visibility = Visibility.Collapsed;
                 }
 
                 control.PriorityTxt.Text = orderControlViewModel.Order.Priority.Priority;
@@ -152,20 +156,19 @@ namespace UrbanCareClient.WPF.Views.UserControls
             }
         }
 
-        private void SetExecutorBtn_Click(object sender, RoutedEventArgs e)
+        private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
-            var appointingExecutorToOrderModalWindow = new AppointingExecutorToOrderModalWindow(_dispatcherService, ViewModel.Order, _orderService, _getterDIServices);
-            appointingExecutorToOrderModalWindow.Closed += (s, args) =>
-            {
-                ExecutorAppointed?.Invoke(this, EventArgs.Empty);
-            };
-            appointingExecutorToOrderModalWindow.ShowDialog();
+
         }
 
-        private void MoreBtn_Click(object sender, RoutedEventArgs e)
+        private void MarkAsCompletedBtn_Click(object sender, RoutedEventArgs e)
         {
-            var orderCardWindow = new OrderCardWindow(_getterDIServices, _orderService, Enums.WindowOperations.Read, ViewModel.Order);
-            orderCardWindow.ShowDialog();
+
+        }
+
+        private void AddMaterialsBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
