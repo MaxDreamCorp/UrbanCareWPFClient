@@ -74,6 +74,41 @@ namespace UrbanCareClient.WPF.Views.Windows
             FullNameTxt.Text = TemporaryDataStorage.EmployeeData.UserData.Fullname;
             PositionTxt.Text = TemporaryDataStorage.EmployeeData.EmployeePosition.Name;
 
+            await SetExecutors();
+
+            await SetOrders();
+        }
+
+        private async Task SetOrders()
+        {
+            if (TemporaryDataStorage.ManagementCompany == null)
+                return;
+            NewOrdersPanel.Children.Clear();
+            ActiveOrdersPanel.Children.Clear();
+            var ordersResponse = await _dispatcherService.GetCompanyOrders(TemporaryDataStorage.ManagementCompany.Id);
+            foreach (var order in ordersResponse.OrderBy(o => o.Priority.Id))
+            {
+                var orderControl = new MiniOrderControl(_getterDIServices, _orderService);
+                orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel { Order = order };
+
+                if (order.OrderStatus.Id == (int)OrderStatusEnum.New)
+                    NewOrdersPanel.Children.Add(orderControl);
+                else if (order.OrderStatus.Id >= (int)OrderStatusEnum.ExecutorAppointed && order.OrderStatus.Id <= (int)OrderStatusEnum.MarkedAsCompletedByExecutor)
+                    ActiveOrdersPanel.Children.Add(orderControl);
+
+                orderControl.ExecutorAppointed += async (s, e) =>
+                {
+                    await SetOrders();
+                    await SetExecutors();
+                };
+            }
+        }
+
+        private async Task SetExecutors()
+        {
+            if (TemporaryDataStorage.ManagementCompany == null)
+                return;
+            ExecutorsPanel.Children.Clear();
             var executorsResponse = await _dispatcherService.GetCompanyExecutors(TemporaryDataStorage.ManagementCompany.Id);
             if (executorsResponse != null)
             {
@@ -87,18 +122,6 @@ namespace UrbanCareClient.WPF.Views.Windows
                     };
                     ExecutorsPanel.Children.Add(executorControl);
                 }
-            }
-
-            var ordersResponse = await _dispatcherService.GetCompanyOrders(TemporaryDataStorage.ManagementCompany.Id);
-            foreach (var order in ordersResponse.OrderBy(o => o.Priority.Id))
-            {
-                var orderControl = new MiniOrderControl(_getterDIServices, _orderService);
-                orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel { Order = order };
-
-                if (order.OrderStatus.Id == (int)OrderStatusEnum.New)
-                    NewOrdersPanel.Children.Add(orderControl);
-                else if (order.OrderStatus.Id >= (int)OrderStatusEnum.ExecutorAppointed && order.OrderStatus.Id <= (int)OrderStatusEnum.MarkedAsCompletedByExecutor)
-                    ActiveOrdersPanel.Children.Add(orderControl);
             }
         }
     }

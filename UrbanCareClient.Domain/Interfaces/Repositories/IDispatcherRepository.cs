@@ -1,4 +1,5 @@
-﻿using UrbanCareClient.Domain.DTOs;
+﻿using UrbanCareClient.Domain.Commands;
+using UrbanCareClient.Domain.DTOs;
 
 namespace UrbanCareClient.Domain.Interfaces.Repositories
 {
@@ -8,5 +9,6 @@ namespace UrbanCareClient.Domain.Interfaces.Repositories
         Task<List<OrderResponseDTO>> GetCompanyOrdersAsync(int companyId, CancellationToken cancellationToken = default);
         Task<List<OrderResponseDTO>> GetCompanyNewOrdersAsync(int companyId, CancellationToken cancellationToken = default);
         Task<List<OrderResponseDTO>> GetCompanyInProgressOrdersAsync(int companyId, CancellationToken cancellationToken = default);
+        Task<List<string>?> AppointExecutorToOrderAsync(AppointExecutorToOrderCommand cmd, CancellationToken cancellationToken = default);
     }
 }

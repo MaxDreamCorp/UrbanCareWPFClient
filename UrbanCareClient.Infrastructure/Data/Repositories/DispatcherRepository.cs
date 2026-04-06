@@ -1,4 +1,5 @@
-﻿using UrbanCareClient.Domain.DTOs;
+﻿using UrbanCareClient.Domain.Commands;
+using UrbanCareClient.Domain.DTOs;
 using UrbanCareClient.Domain.Interfaces.Repositories;
 using UrbanCareClient.Infrastructure.Api;
 
@@ -54,6 +55,19 @@ namespace UrbanCareClient.Infrastructure.Data.Repositories
             if (response.Data == null)
                 return new List<OrderResponseDTO>();
             return response.Data;
+        }
+
+        public async Task<List<string>?> AppointExecutorToOrderAsync(AppointExecutorToOrderCommand cmd, CancellationToken cancellationToken = default)
+        {
+            var response = await _apiClient.PutAsync<AppointExecutorToOrderCommand, List<string>?>($"{ENDPOINT_CONTROLLER}appoint_executor_to_order", cmd, cancellationToken);
+
+            if (response == null)
+                return null;
+
+            if (response.Errors != null && response.Errors.Count > 0)
+                return response.Errors.Select(e => e.Message).ToList();
+
+            return null;
         }
     }
 }

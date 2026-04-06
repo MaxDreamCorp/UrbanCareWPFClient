@@ -258,6 +258,7 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
             if (OrderResponseDTO == null || TemporaryDataStorage.ResidentData == null) return;
 
             IdInp.Text = OrderResponseDTO.Id.ToString();
+            CardHeaderTxt.Text = $"Заказ #{OrderResponseDTO.Id}";
             ResidentInp.Text = OrderResponseDTO.Resident.UserData.Fullname;
             ContactEmailInp.Text = OrderResponseDTO.ContactEmail;
             ContactPhoneInp.Text = OrderResponseDTO.ContactPhone;
@@ -306,6 +307,7 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
         private void SetFieldsForReadOnly()
         {
             if (OrderResponseDTO == null) return;
+            CardHeaderTxt.Text = $"Заказ #{OrderResponseDTO.Id}";
             IdInp.Text = OrderResponseDTO.Id.ToString();
             ResidentInp.Text = OrderResponseDTO.Resident.UserData.Fullname;
             ContactEmailInp.Text = OrderResponseDTO.ContactEmail;

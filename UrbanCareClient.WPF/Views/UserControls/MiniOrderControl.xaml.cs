@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using UrbanCareClient.Application.Services.ApiServices;
 using UrbanCareClient.Domain.Enums;
 using UrbanCareClient.WPF.Services;
+using UrbanCareClient.WPF.Views.ModalWindows;
 using UrbanCareClient.WPF.Views.ModalWindows.CardWindows;
 using UrbanCareClient.WPF.Views.UserControls.ViewModels;
 
@@ -13,8 +14,10 @@ namespace UrbanCareClient.WPF.Views.UserControls
     /// </summary>
     public partial class MiniOrderControl : UserControl
     {
+        public event EventHandler? ExecutorAppointed;
         private readonly GetterDIServices _getterDIServices;
         private readonly OrderService _orderService;
+        private readonly DispatcherService _dispatcherService;
 
         public static readonly DependencyProperty ViewModelProperty =
             DependencyProperty.Register(
@@ -34,6 +37,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
             InitializeComponent();
             _getterDIServices = getterDIServices;
             _orderService = orderService;
+            _dispatcherService = getterDIServices.GetService<DispatcherService>();
         }
 
 
@@ -103,6 +107,20 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         break;
                 }
 
+                if (orderControlViewModel.Order.OrderStatus.Id > (int)OrderStatusEnum.New)
+                {
+                    if (orderControlViewModel.Order.Dispatcher != null)
+                    {
+                        control.InWorkPanel.Visibility = Visibility.Visible;
+                        control.DispatcherTxt.Text = $"Диспетчер: {orderControlViewModel.Order.Dispatcher.UserData.Fullname}";
+                    }
+
+                    if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
+                        control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
+
+                    control.SetExecutorBtn.Visibility = Visibility.Collapsed;
+                }
+
                 control.PriorityTxt.Text = orderControlViewModel.Order.Priority.Priority;
 
                 switch ((PriorityEnum)orderControlViewModel.Order.Priority.Id)
@@ -135,7 +153,12 @@ namespace UrbanCareClient.WPF.Views.UserControls
 
         private void SetExecutorBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            var appointingExecutorToOrderModalWindow = new AppointingExecutorToOrderModalWindow(_dispatcherService, ViewModel.Order, _orderService, _getterDIServices);
+            appointingExecutorToOrderModalWindow.Closed += (s, args) =>
+            {
+                ExecutorAppointed?.Invoke(this, EventArgs.Empty);
+            };
+            appointingExecutorToOrderModalWindow.ShowDialog();
         }
 
         private void MoreBtn_Click(object sender, RoutedEventArgs e)

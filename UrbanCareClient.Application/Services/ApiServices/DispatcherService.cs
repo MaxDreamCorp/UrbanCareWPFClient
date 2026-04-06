@@ -1,4 +1,5 @@
-﻿using UrbanCareClient.Domain.DTOs;
+﻿using UrbanCareClient.Domain.Commands;
+using UrbanCareClient.Domain.DTOs;
 using UrbanCareClient.Domain.Interfaces.Repositories;
 
 namespace UrbanCareClient.Application.Services.ApiServices
@@ -23,5 +24,8 @@ namespace UrbanCareClient.Application.Services.ApiServices
 
         public async Task<List<OrderResponseDTO>> GetCompanyInProgressOrders(int companyId) =>
             await _dispatcherRepository.GetCompanyInProgressOrdersAsync(companyId);
+
+        public async Task<List<string>?> AppointExecutorToOrder(AppointExecutorToOrderCommand cmd) =>
+            await _dispatcherRepository.AppointExecutorToOrderAsync(cmd);
     }
 }
