@@ -58,6 +58,14 @@ namespace UrbanCareClient.WPF.Views.Windows
             TemporaryDataStorage.EmployeeData = employeeDataResponse;
             TemporaryDataStorage.ManagementCompany = employeeDataResponse.ManagementCompany;
 
+            var response = await _employeeService.UpdateStatusToWorking();
+            if (response != null)
+            {
+                MessageBox.Show(string.Join("\n", response), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+                return;
+            }
+
             await _orderService.GetOrderStatuses();
             await _orderService.GetOrderCategories();
             await _orderService.GetPriorities();

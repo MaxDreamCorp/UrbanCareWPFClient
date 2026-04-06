@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using UrbanCareClient.Application.Services.ApiServices;
 using UrbanCareClient.Application.Services.OtherServices;
+using UrbanCareClient.Domain.Interfaces.Repositories;
 using UrbanCareClient.WPF.Interfaces;
 using UrbanCareClient.WPF.Services;
 using UrbanCareClient.WPF.Views.ModalWindows;
@@ -14,12 +15,13 @@ namespace UrbanCareClient.WPF.Views.Windows
     public partial class ExecutorWindow : Window
     {
         private readonly GetterDIServices _getterDIServices;
+        private readonly IExecutorRepository _executorRepository;
         private readonly OrderService _orderService;
         private readonly EmployeeService _employeeService;
         private readonly INavigationService _navigationService;
         private readonly UserService _userService;
 
-        public ExecutorWindow(GetterDIServices getterDIServices, OrderService orderService, EmployeeService employeeService, INavigationService navigationService, UserService userService)
+        public ExecutorWindow(GetterDIServices getterDIServices, OrderService orderService, EmployeeService employeeService, INavigationService navigationService, UserService userService, IExecutorRepository executorRepository)
         {
             InitializeComponent();
             _getterDIServices = getterDIServices;
@@ -27,6 +29,7 @@ namespace UrbanCareClient.WPF.Views.Windows
             _employeeService = employeeService;
             _navigationService = navigationService;
             _userService = userService;
+            _executorRepository = executorRepository;
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -51,6 +54,21 @@ namespace UrbanCareClient.WPF.Views.Windows
                 employeeCreatingModalWindow.ShowDialog();
                 employeeDataResponse = await _employeeService.GetMyEmployee();
             }
+
+            TemporaryDataStorage.EmployeeData = employeeDataResponse;
+            TemporaryDataStorage.ManagementCompany = employeeDataResponse.ManagementCompany;
+
+            var response = await _executorRepository.UpdateStatusToAvailableAsync();
+            if (response != null && response.Count > 0)
+            {
+                MessageBox.Show(string.Join("\n", response), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+                return;
+            }
+
+            MCNameTxt.Text = $"УК: {TemporaryDataStorage.EmployeeData.ManagementCompany.Name}";
+            FullNameTxt.Text = TemporaryDataStorage.EmployeeData.UserData.Fullname;
+            PositionTxt.Text = TemporaryDataStorage.EmployeeData.EmployeePosition.Name;
         }
 
         private void ExecutorAppointedOrders_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -83,5 +83,28 @@ namespace UrbanCareClient.Infrastructure.Data.Repositories
 
             return null;
         }
+
+        public async Task<List<string>?> UpdateStatusToWorkingAsync(CancellationToken cancellationToken = default)
+        {
+            var response = await _apiClient.PutAsync<string, List<string>?>($"{ENDPOINT_CONTROLLER}update_status_to_working", "", cancellationToken);
+
+            if (response == null)
+                return null;
+
+            if (response.Errors != null && response.Errors.Count > 0)
+                return response.Errors.Select(e => e.Message).ToList();
+
+            return null;
+        }
+
+        public async Task<List<string>?> UpdateStatusToNotWorkingAsync(CancellationToken cancellationToken = default)
+        {
+            var response = await _apiClient.PutAsync<string, List<string>?>($"{ENDPOINT_CONTROLLER}update_status_to_not_working", "", cancellationToken);
+            if (response == null) return null;
+
+            if (response.Errors != null && response.Errors.Count > 0)
+                return response.Errors.Select(e => e.Message).ToList();
+            return null;
+        }
     }
 }

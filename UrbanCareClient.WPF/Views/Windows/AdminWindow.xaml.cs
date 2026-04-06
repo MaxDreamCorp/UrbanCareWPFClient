@@ -66,6 +66,14 @@ namespace UrbanCareClient.WPF.Views.Windows
             TemporaryDataStorage.EmployeeData = employeeDataResponse;
             TemporaryDataStorage.ManagementCompany = employeeDataResponse.ManagementCompany;
 
+            var response = await _employeeService.UpdateStatusToWorking();
+            if (response != null)
+            {
+                MessageBox.Show(string.Join("\n", response), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+                return;
+            }
+
             MCNameTxt.Text = $"УК: {TemporaryDataStorage.EmployeeData.ManagementCompany.Name}";
             FullNameTxt.Text = TemporaryDataStorage.EmployeeData.UserData.Fullname;
             PositionTxt.Text = TemporaryDataStorage.EmployeeData.EmployeePosition.Name;

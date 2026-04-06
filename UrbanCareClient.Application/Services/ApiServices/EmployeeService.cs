@@ -41,5 +41,11 @@ namespace UrbanCareClient.Application.Services.ApiServices
         {
             return await _employeeRepository.GetMyEmployeeAsync();
         }
+
+        public async Task<List<string>?> UpdateStatusToWorking() =>
+            await _employeeRepository.UpdateStatusToWorkingAsync();
+
+        public async Task<List<string>?> UpdateStatusToNotWorking() =>
+            await _employeeRepository.UpdateStatusToNotWorkingAsync();
     }
 }

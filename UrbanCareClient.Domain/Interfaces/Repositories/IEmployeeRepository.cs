@@ -8,6 +8,8 @@ namespace UrbanCareClient.Domain.Interfaces.Repositories
         Task<List<string>?> CreateAdminAsync(CreateAdminCommand cmd, CancellationToken cancellationToken = default);
         Task<List<string>?> CreateDispatcherAsync(CreateDispatcherCommand cmd, CancellationToken cancellationToken = default);
         Task<List<string>?> CreateExecutorAsync(CreateExecutorCommand cmd, CancellationToken cancellationToken = default);
+        Task<List<string>?> UpdateStatusToWorkingAsync(CancellationToken cancellationToken = default);
+        Task<List<string>?> UpdateStatusToNotWorkingAsync(CancellationToken cancellationToken = default);
         Task<List<EmployeePositionResponseDTO>> GetEmployeePositionsAsync(CancellationToken cancellationToken = default);
         Task<List<EmployeeStatusResponseDTO>> GetEmployeeStatusesAsync(CancellationToken cancellationToken = default);
         Task<List<QualificationCategoriesNamesResponseDTO>> GetQualificationCategoriesNamesAsync(CancellationToken cancellationToken = default);
