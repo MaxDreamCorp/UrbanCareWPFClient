@@ -20,5 +20,8 @@ namespace UrbanCareClient.Application.Services.ApiServices
 
         public async Task<List<OrderResponseDTO>> GetExecutorOrders() =>
             await _executorRepository.GetExecutorOrders();
+
+        public async Task<List<string>?> AcceptOrder(int orderId) =>
+            await _executorRepository.AcceptOrderAsync(orderId);
     }
 }

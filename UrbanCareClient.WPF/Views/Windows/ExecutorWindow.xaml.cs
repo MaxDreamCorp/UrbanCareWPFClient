@@ -150,6 +150,11 @@ namespace UrbanCareClient.WPF.Views.Windows
             if (TemporaryDataStorage.EmployeeData == null)
                 return;
 
+            ExecutorAppointedOrdersPanel.Children.Clear();
+            InProgressOrdersPanel.Children.Clear();
+            MarkedAsCompletedOrdersPanel.Children.Clear();
+            CompletedOrdersPanel.Children.Clear();
+
             var orders = await _executorRepository.GetExecutorOrders();
             if (orders == null)
             {
@@ -170,6 +175,11 @@ namespace UrbanCareClient.WPF.Views.Windows
                     MarkedAsCompletedOrdersPanel.Children.Add(orderControl);
                 else if (order.OrderStatus.Id == (int)OrderStatusEnum.Completed)
                     CompletedOrdersPanel.Children.Add(orderControl);
+
+                orderControl.OrderUpdated += async (s, e) =>
+                {
+                    await SetOrders();
+                };
             }
 
             _executoAppointedOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.ExecutorAppointed).Count();

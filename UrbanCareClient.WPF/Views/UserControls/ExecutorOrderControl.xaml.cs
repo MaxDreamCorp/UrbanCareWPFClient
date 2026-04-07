@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using UrbanCareClient.Application.Services.ApiServices;
 using UrbanCareClient.Domain.Enums;
 using UrbanCareClient.WPF.Services;
@@ -26,6 +14,8 @@ namespace UrbanCareClient.WPF.Views.UserControls
     {
         private readonly GetterDIServices _getterDIServices;
         private readonly OrderService _orderService;
+        private readonly ExecutorService _executorService;
+        public event EventHandler? OrderUpdated;
 
         public static readonly DependencyProperty ViewModelProperty =
             DependencyProperty.Register(
@@ -45,6 +35,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
             InitializeComponent();
             _getterDIServices = getterDIServices;
             _orderService = orderService;
+            _executorService = _getterDIServices.GetService<ExecutorService>();
         }
 
         private static void OnViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -99,19 +90,19 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         control.StatusTxt.Foreground = StylesService.MarkedAsCompletedBrush;
                         control.StatusBdr.Background = StylesService.MarkedAsCompletedBgBrush;
 
-                     
+
                         break;
                     case OrderStatusEnum.InProgress:
                         control.StatusTxt.Foreground = StylesService.InProgressBrush;
                         control.StatusBdr.Background = StylesService.InProgressBgBrush;
 
-                       
+
                         break;
                     case OrderStatusEnum.PendingPayment:
                         control.StatusTxt.Foreground = StylesService.PendingPaymentBrush;
                         control.StatusBdr.Background = StylesService.PendingPaymentBgBrush;
 
-                        
+
                         break;
                     case OrderStatusEnum.Completed:
                         control.StatusTxt.Foreground = StylesService.CompletedBrush;
@@ -156,9 +147,19 @@ namespace UrbanCareClient.WPF.Views.UserControls
             }
         }
 
-        private void StartBtn_Click(object sender, RoutedEventArgs e)
+        private async void StartBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            var mboxResult = MessageBox.Show("Вы уверены, что хотите начать выполнение заказа?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (mboxResult != MessageBoxResult.Yes)
+                return;
+            var response = await _executorService.AcceptOrder(ViewModel.Order.Id);
+            if (response != null)
+            {
+                MessageBox.Show(string.Join("\n", response), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            MessageBox.Show("Вы начали выполнение заказа", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            OrderUpdated?.Invoke(this, new());
         }
 
         private void MarkAsCompletedBtn_Click(object sender, RoutedEventArgs e)

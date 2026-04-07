@@ -49,5 +49,17 @@ namespace UrbanCareClient.Infrastructure.Data.Repositories
                 return new List<OrderResponseDTO>();
             return response.Data;
         }
+
+        public async Task<List<string>?> AcceptOrderAsync(int orderId, CancellationToken cancellationToken = default)
+        {
+            var response = await _apiClient.PutAsync<string, List<string>?>($"{ENDPOINT_CONTROLLER}accept_order/{orderId}", "", cancellationToken);
+
+            if (response == null)
+                return null;
+
+            if (response.Errors != null && response.Errors.Count > 0)
+                return response.Errors.Select(e => e.Message).ToList();
+            return null;
+        }
     }
 }

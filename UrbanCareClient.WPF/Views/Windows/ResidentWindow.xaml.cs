@@ -87,7 +87,7 @@ namespace UrbanCareClient.WPF.Views.Windows
             ActiveOrdersPanel.Children.Clear();
             var orders = await _residentService.GetMyOrders();
 
-            foreach (var order in orders.OrderByDescending(o => o.CreatedAt))
+            foreach (var order in orders.OrderByDescending(o => o.OrderStatus.Id))
             {
                 var orderControl = new OrderControl(_getterDIServices, _orderService);
                 orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel
