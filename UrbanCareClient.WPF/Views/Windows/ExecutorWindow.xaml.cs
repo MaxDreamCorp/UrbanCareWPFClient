@@ -26,6 +26,7 @@ namespace UrbanCareClient.WPF.Views.Windows
         private int _executoAppointedOrdersCount;
         private int _inProgressOrdersCount;
         private int _markedAsCompletedByExecutorOrdersCount;
+        private int _pendingPaymentOrdersCount;
         private int _completedOrdersCount;
 
         public ExecutorWindow(GetterDIServices getterDIServices, OrderService orderService, EmployeeService employeeService, INavigationService navigationService, UserService userService, IExecutorRepository executorRepository)
@@ -173,6 +174,8 @@ namespace UrbanCareClient.WPF.Views.Windows
                     InProgressOrdersPanel.Children.Add(orderControl);
                 else if (order.OrderStatus.Id == (int)OrderStatusEnum.MarkedAsCompletedByExecutor)
                     MarkedAsCompletedOrdersPanel.Children.Add(orderControl);
+                else if (order.OrderStatus.Id == (int)OrderStatusEnum.PendingPayment)
+                    PendingPaymentOrdersPanel.Children.Add(orderControl);
                 else if (order.OrderStatus.Id == (int)OrderStatusEnum.Completed)
                     CompletedOrdersPanel.Children.Add(orderControl);
 
@@ -185,6 +188,7 @@ namespace UrbanCareClient.WPF.Views.Windows
             _executoAppointedOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.ExecutorAppointed).Count();
             _inProgressOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.InProgress).Count();
             _markedAsCompletedByExecutorOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.MarkedAsCompletedByExecutor).Count();
+            _pendingPaymentOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.PendingPayment).Count();
             _completedOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.Completed).Count();
 
             RefreshCounters();
@@ -195,7 +199,24 @@ namespace UrbanCareClient.WPF.Views.Windows
             ExecutorAppointedOrdersTxt.Text = _executoAppointedOrdersCount.ToString();
             InProgressOrdersTxt.Text = _inProgressOrdersCount.ToString();
             MarkedAsCompletedByExecutorOrdersTxt.Text = _markedAsCompletedByExecutorOrdersCount.ToString();
+            PendingPaymentOrdersTxt.Text = _pendingPaymentOrdersCount.ToString();
             CompletedOrdersTxt.Text = _completedOrdersCount.ToString();
+        }
+
+        private void PendingPaymentOrders_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (PendingPaymentOrdersPanel.Visibility == Visibility.Visible)
+            {
+                PendingPaymentOrdersPanel.Visibility = Visibility.Collapsed;
+                PendingPaymentOrderChevronUp.Visibility = Visibility.Collapsed;
+                PendingPaymentOrderChevronDown.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PendingPaymentOrdersPanel.Visibility = Visibility.Visible;
+                PendingPaymentOrderChevronUp.Visibility = Visibility.Visible;
+                PendingPaymentOrderChevronDown.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

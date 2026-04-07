@@ -80,17 +80,17 @@ namespace UrbanCareClient.WPF.Views.UserControls
                 if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
                 {
                     decimal workPayment = orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment) ?? 0;
-                    if (workPayment > 0)
-                    {
-                        control.MaterialsTxt.Visibility = Visibility.Visible;
-                        control.MaterialsTxt.Text += $"\nРабота: {workPayment} руб.";
-                        totalCost += workPayment;
-                    }
+                    control.MaterialsTxt.Visibility = Visibility.Visible;
+                    control.MaterialsTxt.Text += $"\nРабота: {workPayment} руб.";
+                    totalCost += workPayment;
                 }
-                if (totalCost > 0)
+                control.PaymentTxt.Visibility = Visibility.Visible;
+                control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
+
+                if (orderControlViewModel.Order.OrderStatus.Id >= (int)OrderStatusEnum.PendingPayment)
                 {
-                    control.PaymentTxt.Visibility = Visibility.Visible;
-                    control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
+                    control.MarkAsCompletedBtn.Visibility = Visibility.Collapsed;
+                    control.AddMaterialsBtn.Visibility = Visibility.Collapsed;
                 }
 
                 control.StatusTxt.Text = orderControlViewModel.Order.OrderStatus.Status;
