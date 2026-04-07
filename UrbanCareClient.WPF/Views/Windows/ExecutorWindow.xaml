@@ -77,11 +77,11 @@ Title="Исполнитель: Главная" MinHeight="450" MinWidth="800">
                 </Grid>
 
                 <StackPanel>
-                    <Border Background="White" Padding="10" CornerRadius="15" Margin="10" x:Name="ExecutorAppointedOrders" MouseLeftButtonDown="ExecutorAppointedOrders_MouseLeftButtonDown">
+                    <Border Background="White" Padding="10" CornerRadius="15" Margin="10">
                         <StackPanel>
-                            <DockPanel Margin="10">
-                                <TextBlock Text="Назначенные заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
-                                <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <DockPanel Background="White"  x:Name="ExecutorAppointedOrders" MouseLeftButtonDown="ExecutorAppointedOrders_MouseLeftButtonDown">
+                                <TextBlock Text="Назначенные заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center" Margin="10"/>
+                                <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
                                     <Image x:Name="ExecutorAppointedOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
                                     <Image x:Name="ExecutorAppointedOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
                                 </StackPanel>
@@ -89,11 +89,11 @@ Title="Исполнитель: Главная" MinHeight="450" MinWidth="800">
                             <StackPanel x:Name="ExecutorAppointedOrdersPanel" />
                         </StackPanel>
                     </Border>
-                    <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10" x:Name="InProgressOrders" MouseLeftButtonDown="InProgressOrders_MouseLeftButtonDown">
+                    <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10">
                         <StackPanel>
-                            <DockPanel Margin="10">
-                                <TextBlock Text="Заказы в работе" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
-                                <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Right" >
+                            <DockPanel Background="White" x:Name="InProgressOrders" MouseLeftButtonDown="InProgressOrders_MouseLeftButtonDown">
+                                <TextBlock Text="Заказы в работе" FontWeight="Bold" FontSize="12" VerticalAlignment="Center" Margin="10"/>
+                                <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Right" >
                                     <Image x:Name="InProgressOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
                                     <Image x:Name="InProgressOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
                                 </StackPanel>
@@ -101,11 +101,11 @@ Title="Исполнитель: Главная" MinHeight="450" MinWidth="800">
                             <StackPanel x:Name="InProgressOrdersPanel" />
                         </StackPanel>
                     </Border>
-                    <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10" x:Name="MarkedAsCompletedOrders" MouseLeftButtonDown="MarkedAsCompletedOrders_MouseLeftButtonDown">
+                    <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10">
                         <StackPanel>
-                            <DockPanel Margin="10">
-                                <TextBlock Text="Выполнены" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
-                                <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Right" >
+                            <DockPanel Background="White" x:Name="MarkedAsCompletedOrders" MouseLeftButtonDown="MarkedAsCompletedOrders_MouseLeftButtonDown">
+                                <TextBlock Text="Выполнены" FontWeight="Bold" FontSize="12" VerticalAlignment="Center" Margin="10"/>
+                                <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Right" >
                                     <Image x:Name="MarkedAsCompletedOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
                                     <Image x:Name="MarkedAsCompletedOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
                                 </StackPanel>
@@ -113,11 +113,11 @@ Title="Исполнитель: Главная" MinHeight="450" MinWidth="800">
                             <StackPanel x:Name="MarkedAsCompletedOrdersPanel" />
                         </StackPanel>
                     </Border>
-                    <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10" x:Name="CompletedOrders" MouseLeftButtonDown="CompletedOrders_MouseLeftButtonDown">
+                    <Border Background="White" Padding="10" CornerRadius="15" Margin="10,0,10,10">
                         <StackPanel>
-                            <DockPanel Margin="10">
-                                <TextBlock Text="Завершенные заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center"/>
-                                <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Right" >
+                            <DockPanel Background="White" x:Name="CompletedOrders" MouseLeftButtonDown="CompletedOrders_MouseLeftButtonDown">
+                                <TextBlock Text="Завершенные заказы" FontWeight="Bold" FontSize="12" VerticalAlignment="Center" Margin="10"/>
+                                <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Right" >
                                     <Image x:Name="CompletedOrderChevronUp" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronUp.png" Width="15" VerticalAlignment="Center" />
                                     <Image x:Name="CompletedOrderChevronDown" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/Images/ChevronDown.png" Width="15" VerticalAlignment="Center" Visibility="Collapsed"/>
                                 </StackPanel>

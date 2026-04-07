@@ -89,7 +89,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                     case OrderStatusEnum.MarkedAsCompletedByExecutor:
                         control.StatusTxt.Foreground = StylesService.MarkedAsCompletedBrush;
                         control.StatusBdr.Background = StylesService.MarkedAsCompletedBgBrush;
-
+                        control.MarkAsCompletedBtn.Visibility = Visibility.Collapsed;
 
                         break;
                     case OrderStatusEnum.InProgress:
