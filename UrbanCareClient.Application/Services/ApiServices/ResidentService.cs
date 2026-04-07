@@ -26,5 +26,8 @@ namespace UrbanCareClient.Application.Services.ApiServices
             TemporaryDataStorage.MyOrders = orders;
             return orders;
         }
+
+        public async Task<List<string>?> ConfirmOrderCompletion(int orderId) =>
+            await _residentRepository.ConfirmOrderCompletionAsync(orderId);
     }
 }

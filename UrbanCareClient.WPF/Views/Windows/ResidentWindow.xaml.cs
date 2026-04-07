@@ -85,6 +85,10 @@ namespace UrbanCareClient.WPF.Views.Windows
         private async Task SetOrders()
         {
             ActiveOrdersPanel.Children.Clear();
+            MarkedAsCompletedOrdersPanel.Children.Clear();
+            PendingPaymentOrdersPanel.Children.Clear();
+            CompletedOrdersPanel.Children.Clear();
+            CanceledOrdersPanel.Children.Clear();
             var orders = await _residentService.GetMyOrders();
 
             foreach (var order in orders.OrderByDescending(o => o.OrderStatus.Id))
@@ -105,6 +109,11 @@ namespace UrbanCareClient.WPF.Views.Windows
                     CompletedOrdersPanel.Children.Add(orderControl);
                 else if (order.OrderStatus.Id == (int)OrderStatusEnum.Canceled)
                     CanceledOrdersPanel.Children.Add(orderControl);
+
+                orderControl.OrderUpdated += async (s, e) =>
+                {
+                    await SetOrders();
+                };
             }
 
             _newOrdersCount = orders.Where(o => o.OrderStatus.Id == (int)OrderStatusEnum.New).Count();

@@ -15,6 +15,8 @@ namespace UrbanCareClient.WPF.Views.UserControls
     {
         private readonly GetterDIServices _getterDIServices;
         private readonly OrderService _orderService;
+        private readonly ResidentService _residentService;
+        public event EventHandler? OrderUpdated;
 
         public static readonly DependencyProperty ViewModelProperty =
             DependencyProperty.Register(
@@ -34,6 +36,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
             InitializeComponent();
             _getterDIServices = getterDIServices;
             _orderService = orderService;
+            _residentService = getterDIServices.GetService<ResidentService>();
         }
 
         private static void OnViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -104,6 +107,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                     case OrderStatusEnum.MarkedAsCompletedByExecutor:
                         control.StatusTxt.Foreground = StylesService.MarkedAsCompletedBrush;
                         control.StatusBdr.Background = StylesService.MarkedAsCompletedBgBrush;
+                        control.ConfirmCompletionBtn.Visibility = Visibility.Visible;
                         break;
                     case OrderStatusEnum.InProgress:
                         control.StatusTxt.Foreground = StylesService.InProgressBrush;
@@ -165,6 +169,22 @@ namespace UrbanCareClient.WPF.Views.UserControls
             orderCard.ShowDialog();
             if (orderCard.OrderResponseDTO != null)
                 ViewModel = new OrderControlViewModel { Order = orderCard.OrderResponseDTO };
+        }
+
+        private async void ConfirmCompletionBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var mboxResult = MessageBox.Show("Вы уверены, что хотите подтвердить выполнение заказа?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (mboxResult != MessageBoxResult.Yes)
+                return;
+
+            var response = await _residentService.ConfirmOrderCompletion(ViewModel.Order.Id);
+            if (response != null)
+            {
+                MessageBox.Show(string.Join("\n", response), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            MessageBox.Show("Заказ успешно подтвержден", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            OrderUpdated?.Invoke(this, EventArgs.Empty);
         }
     }
 }
