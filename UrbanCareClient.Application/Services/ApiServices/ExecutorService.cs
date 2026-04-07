@@ -1,4 +1,5 @@
-﻿using UrbanCareClient.Domain.DTOs;
+﻿using UrbanCareClient.Domain.Commands;
+using UrbanCareClient.Domain.DTOs;
 using UrbanCareClient.Domain.Interfaces.Repositories;
 
 namespace UrbanCareClient.Application.Services.ApiServices
@@ -24,7 +25,7 @@ namespace UrbanCareClient.Application.Services.ApiServices
         public async Task<List<string>?> AcceptOrder(int orderId) =>
             await _executorRepository.AcceptOrderAsync(orderId);
 
-        public async Task<List<string>?> MarkAsCompleted(int orderId) =>
-            await _executorRepository.MarkAsCompletedAsync(orderId);
+        public async Task<List<string>?> MarkAsCompleted(MarkAsCompletedByExecutorCommand cmd) =>
+            await _executorRepository.MarkAsCompletedAsync(cmd);
     }
 }

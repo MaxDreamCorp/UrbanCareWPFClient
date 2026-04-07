@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using UrbanCareClient.Application.Services.ApiServices;
 using UrbanCareClient.Domain.Enums;
 using UrbanCareClient.WPF.Services;
+using UrbanCareClient.WPF.Views.ModalWindows;
 using UrbanCareClient.WPF.Views.UserControls.ViewModels;
 
 namespace UrbanCareClient.WPF.Views.UserControls
@@ -68,8 +69,29 @@ namespace UrbanCareClient.WPF.Views.UserControls
 
                 control.PaymentPanel.Visibility = Visibility.Visible;
 
+                decimal totalCost = 0;
                 if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
+                {
+                    control.MaterialsTxt.Visibility = Visibility.Visible;
                     control.MaterialsTxt.Text = $"{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"{om.Material.Name} x ({om.Quantity} {om.Material.Unit}"))}";
+                    totalCost += orderControlViewModel.Order.OrderMaterials.Sum(om => om.Material.Price * om.Quantity);
+                }
+
+                if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
+                {
+                    decimal workPayment = orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment) ?? 0;
+                    if (workPayment > 0)
+                    {
+                        control.MaterialsTxt.Visibility = Visibility.Visible;
+                        control.MaterialsTxt.Text += $"\nРабота: {workPayment} руб.";
+                        totalCost += workPayment;
+                    }
+                }
+                if (totalCost > 0)
+                {
+                    control.PaymentTxt.Visibility = Visibility.Visible;
+                    control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
+                }
 
                 control.StatusTxt.Text = orderControlViewModel.Order.OrderStatus.Status;
 
@@ -164,11 +186,17 @@ namespace UrbanCareClient.WPF.Views.UserControls
 
         private async void MarkAsCompletedBtn_Click(object sender, RoutedEventArgs e)
         {
+            var setWorkPaymentModalWindow = new SetWorkPaymentModalWindow();
+            setWorkPaymentModalWindow.ShowDialog();
+
             var mboxResult = MessageBox.Show("Вы уверены, что хотите отметить заказ как выполненный?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (mboxResult != MessageBoxResult.Yes)
                 return;
 
-            var response = await _executorService.MarkAsCompleted(ViewModel.Order.Id);
+            var response = await _executorService.MarkAsCompleted(new(
+                -1,
+                ViewModel.Order.Id,
+                setWorkPaymentModalWindow.WorkPayment));
             if (response != null)
             {
                 MessageBox.Show(string.Join("\n", response), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

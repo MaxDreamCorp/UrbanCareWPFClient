@@ -1,4 +1,5 @@
-﻿using UrbanCareClient.Domain.DTOs;
+﻿using UrbanCareClient.Domain.Commands;
+using UrbanCareClient.Domain.DTOs;
 using UrbanCareClient.Domain.Interfaces.Repositories;
 using UrbanCareClient.Infrastructure.Api;
 
@@ -62,9 +63,9 @@ namespace UrbanCareClient.Infrastructure.Data.Repositories
             return null;
         }
 
-        public async Task<List<string>?> MarkAsCompletedAsync(int orderId, CancellationToken cancellationToken = default)
+        public async Task<List<string>?> MarkAsCompletedAsync(MarkAsCompletedByExecutorCommand cmd, CancellationToken cancellationToken = default)
         {
-            var response = await _apiClient.PutAsync<string, List<string>?>($"{ENDPOINT_CONTROLLER}mark_as_completed/{orderId}", "", cancellationToken);
+            var response = await _apiClient.PutAsync<MarkAsCompletedByExecutorCommand, List<string>?>($"{ENDPOINT_CONTROLLER}mark_as_completed", cmd, cancellationToken);
 
             if (response == null)
                 return null;
