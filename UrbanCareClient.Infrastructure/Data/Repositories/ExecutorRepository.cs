@@ -61,5 +61,17 @@ namespace UrbanCareClient.Infrastructure.Data.Repositories
                 return response.Errors.Select(e => e.Message).ToList();
             return null;
         }
+
+        public async Task<List<string>?> MarkAsCompletedAsync(int orderId, CancellationToken cancellationToken = default)
+        {
+            var response = await _apiClient.PutAsync<string, List<string>?>($"{ENDPOINT_CONTROLLER}mark_as_completed/{orderId}", "", cancellationToken);
+
+            if (response == null)
+                return null;
+
+            if (response.Errors != null && response.Errors.Count > 0)
+                return response.Errors.Select(e => e.Message).ToList();
+            return null;
+        }
     }
 }

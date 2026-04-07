@@ -162,9 +162,20 @@ namespace UrbanCareClient.WPF.Views.UserControls
             OrderUpdated?.Invoke(this, new());
         }
 
-        private void MarkAsCompletedBtn_Click(object sender, RoutedEventArgs e)
+        private async void MarkAsCompletedBtn_Click(object sender, RoutedEventArgs e)
         {
+            var mboxResult = MessageBox.Show("Вы уверены, что хотите отметить заказ как выполненный?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (mboxResult != MessageBoxResult.Yes)
+                return;
 
+            var response = await _executorService.MarkAsCompleted(ViewModel.Order.Id);
+            if (response != null)
+            {
+                MessageBox.Show(string.Join("\n", response), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            MessageBox.Show("Вы отметили заказ как выполненный", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            OrderUpdated?.Invoke(this, new());
         }
 
         private void AddMaterialsBtn_Click(object sender, RoutedEventArgs e)
