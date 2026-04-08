@@ -67,26 +67,28 @@ namespace UrbanCareClient.WPF.Views.UserControls
                 if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
                     control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
 
-                control.PaymentPanel.Visibility = Visibility.Visible;
-
-                decimal totalCost = 0;
-                if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
+                if (orderControlViewModel.Order.OrderStatus.Id > (int)OrderStatusEnum.ExecutorAppointed)
                 {
-                    control.MaterialsTxt.Visibility = Visibility.Visible;
-                    control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. x ({om.Quantity} {om.Material.Unit}.)"))}";
-                    totalCost += orderControlViewModel.Order.OrderMaterials.Sum(om => om.Material.Price * om.Quantity);
-                }
+                    control.PaymentPanel.Visibility = Visibility.Visible;
 
-                if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
-                {
-                    decimal workPayment = orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment) ?? 0;
-                    control.MaterialsTxt.Visibility = Visibility.Visible;
-                    control.MaterialsTxt.Text += $"\nРабота: {workPayment} руб.";
-                    totalCost += workPayment;
-                }
-                control.PaymentTxt.Visibility = Visibility.Visible;
-                control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
+                    decimal totalCost = 0;
+                    if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
+                    {
+                        control.MaterialsTxt.Visibility = Visibility.Visible;
+                        control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. x ({om.Quantity} {om.Material.Unit}.)"))}";
+                        totalCost += orderControlViewModel.Order.OrderMaterials.Sum(om => om.Material.Price * om.Quantity);
+                    }
 
+                    if (orderControlViewModel.Order.OrderExecutors != null && orderControlViewModel.Order.OrderExecutors.Count > 0)
+                    {
+                        decimal workPayment = orderControlViewModel.Order.OrderExecutors.Sum(oe => oe.WorkPayment) ?? 0;
+                        control.MaterialsTxt.Visibility = Visibility.Visible;
+                        control.MaterialsTxt.Text += $"\nРабота: {workPayment} руб.";
+                        totalCost += workPayment;
+                    }
+                    control.PaymentTxt.Visibility = Visibility.Visible;
+                    control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
+                }
                 if (orderControlViewModel.Order.OrderStatus.Id >= (int)OrderStatusEnum.PendingPayment)
                 {
                     control.MarkAsCompletedBtn.Visibility = Visibility.Collapsed;
@@ -105,7 +107,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         control.StatusTxt.Foreground = StylesService.ExecutorAppointedBrush;
                         control.StatusBdr.Background = StylesService.ExecutorAppointedBgBrush;
                         control.StartBtn.Visibility = Visibility.Visible;
-                        control.AddMaterialsBtn.Visibility = Visibility.Visible;
+                        control.AddMaterialsBtn.Visibility = Visibility.Collapsed;
                         control.MarkAsCompletedBtn.Visibility = Visibility.Collapsed;
                         break;
                     case OrderStatusEnum.MarkedAsCompletedByExecutor:

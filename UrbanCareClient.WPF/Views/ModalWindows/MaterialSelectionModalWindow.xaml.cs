@@ -37,6 +37,7 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
             var orderControl = new MiniOrderControl(_getterDIServices, _orderService);
             orderControl.ViewModel = new OrderControlViewModel { Order = _orderResponseDTO };
             orderControl.ButtonsPanel.Visibility = Visibility.Collapsed;
+            orderControl.PaymentPanel.Visibility = Visibility.Collapsed;
             OrderPanel.Children.Add(orderControl);
             if (TemporaryDataStorage.ManagementCompany == null)
                 return;
@@ -57,12 +58,24 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                         Material = material,
                         Quantity = 0
                     };
+
+                    bool isExist = false;
+                    if (_orderResponseDTO.OrderMaterials != null && _orderResponseDTO.OrderMaterials.Any(om => om.Material.Id == material.Id))
+                    {
+                        var mat = _orderResponseDTO.OrderMaterials.Find(om => om.Material.Id == material.Id);
+                        if (mat != null)
+                        {
+                            materialControlViewModel.Quantity = mat.Quantity;
+                            isExist = true;
+                        }
+                    }
+
                     var materialControl = new MaterialControl();
                     materialControl.ViewModel = materialControlViewModel;
                     CheckBox checkBox = new CheckBox
                     {
                         Content = materialControl,
-                        Margin = new Thickness(5)
+                        Margin = new Thickness(5),
                     };
 
                     checkBox.SizeChanged += (s, args) =>
@@ -77,8 +90,11 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                     {
                         if (checkBox.Content is MaterialControl mc)
                         {
-                            mc.ViewModel.Quantity = 1; // Устанавливаем количество в 1 при выборе
-                            mc.QuantityTxt.Text = "1";
+                            if (mc.ViewModel.Quantity == 0)
+                            {
+                                mc.ViewModel.Quantity = 1; // Устанавливаем количество в 1 при выборе
+                                mc.QuantityTxt.Text = "1";
+                            }
 
                             mc.AddBtn.IsEnabled = true;
                             mc.RemoveBtn.IsEnabled = true;
@@ -96,6 +112,8 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                             mc.RemoveBtn.IsEnabled = false;
                         }
                     };
+
+                    checkBox.IsChecked = isExist;
 
                     MaterialsPanel.Children.Add(checkBox);
                 }
