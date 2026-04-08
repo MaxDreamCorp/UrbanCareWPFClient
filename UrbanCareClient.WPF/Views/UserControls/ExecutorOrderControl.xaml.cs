@@ -208,7 +208,12 @@ namespace UrbanCareClient.WPF.Views.UserControls
 
         private void AddMaterialsBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            var materialSelectionModalWindow = new MaterialSelectionModalWindow(_getterDIServices);
+            materialSelectionModalWindow.Closed += (s, args) =>
+                {
+                    OrderUpdated?.Invoke(this, EventArgs.Empty);
+                };
+            materialSelectionModalWindow.ShowDialog();
         }
     }
 }

@@ -1,0 +1,32 @@
+﻿<Window x:Class="UrbanCareClient.WPF.Views.ModalWindows.MaterialSelectionModalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UrbanCareClient.WPF.Views.ModalWindows"
+        mc:Ignorable="d"
+          Loaded="Window_Loaded"
+        MaxWidth="1000"
+        SizeToContent="WidthAndHeight"
+        Title="Выбор материалов">
+    <StackPanel>
+
+        <TextBlock Text="Выберите материалы для заказа" Style="{StaticResource PageTitle}" HorizontalAlignment="Left" Margin="15"/>
+        <StackPanel Background="{StaticResource BackgroundBrush}" x:Name="OrderPanel" Margin="15 0"/>
+        <StackPanel Margin="15">
+            <TextBlock Text="Материалы:" Style="{StaticResource SectionTitleText}" HorizontalAlignment="Left"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="MaterialsPanel"/>
+            </ScrollViewer>
+        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="SelectBtn" Height="35" FontSize="14" Content="Выбрать" Style="{StaticResource PrimaryButton}" Margin="15" Grid.Column="1" Click="SelectBtn_Click"/>
+            <Button x:Name="CancelBtn" Height="35" FontSize="14" Content="Отмена" Style="{StaticResource SecondaryButton}" Margin="15" Grid.Column="0" Click="CancelBtn_Click"/>
+
+        </Grid>
+    </StackPanel>
+</Window>

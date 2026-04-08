@@ -14,5 +14,6 @@ namespace UrbanCareClient.Domain.Interfaces.Repositories
         Task<(List<RegionResponseDTO> regions, List<string>? errors)> GetAllRegionsAsync(CancellationToken cancellationToken = default);
         Task<(List<BuildingResponseDTO> buildings, List<string>? errors)> GetBuildingsByRegionAsync(int regionId, CancellationToken cancellationToken = default);
         Task<(List<ApartmentResponseDTO> apartments, List<string>? errors)> GetApartmentsByBuildingAsync(int buildingId, CancellationToken cancellationToken = default);
+        Task<(List<MaterialResponseDTO> materials, List<string>? errors)> GetMaterialsByManagementCompanyAsync(int managementCompanyId, CancellationToken cancellationToken = default);
     }
 }

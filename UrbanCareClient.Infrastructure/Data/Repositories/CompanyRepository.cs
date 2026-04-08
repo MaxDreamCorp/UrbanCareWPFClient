@@ -121,5 +121,15 @@ namespace UrbanCareClient.Infrastructure.Data.Repositories
 
             return (response.Data, response.Errors?.Select(e => e.Message).ToList());
         }
+
+        public async Task<(List<MaterialResponseDTO> materials, List<string>? errors)> GetMaterialsByManagementCompanyAsync(int managementCompanyId, CancellationToken cancellationToken = default)
+        {
+            var response = await _apiClient.GetAsync<List<MaterialResponseDTO>>($"{ENDPOINT_CONTROLLER}material/get_company_materials/{managementCompanyId}", null, cancellationToken);
+
+            if (response.Data == null)
+                return new(new(), new() { "Ошибка запроса" });
+
+            return (response.Data, response.Errors?.Select(e => e.Message).ToList());
+        }
     }
 }

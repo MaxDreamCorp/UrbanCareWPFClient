@@ -23,7 +23,7 @@ namespace UrbanCareClient.Application.Services.ApiServices
         public async Task<List<BuildingTypeResponseDTO>> GetBuildingTypes()
         {
             var buildingTypes = await _companyRepository.GetBuildingTypesAsync();
-            TemporaryDataStorage.BuildingTypes = buildingTypes; 
+            TemporaryDataStorage.BuildingTypes = buildingTypes;
             return buildingTypes;
         }
 
@@ -62,19 +62,16 @@ namespace UrbanCareClient.Application.Services.ApiServices
             return apartments;
         }
 
-        public async Task<(List<RegionResponseDTO> regions, List<string>? errors)> GetAllRegions()
-        {
-            return await _companyRepository.GetAllRegionsAsync();
-        }
+        public async Task<(List<RegionResponseDTO> regions, List<string>? errors)> GetAllRegions() =>
+            await _companyRepository.GetAllRegionsAsync();
 
-        public async Task<(List<BuildingResponseDTO> buildings, List<string>? errors)> GetBuildingsByRegion(int regionId)
-        {
-            return await _companyRepository.GetBuildingsByRegionAsync(regionId);
-        }
+        public async Task<(List<BuildingResponseDTO> buildings, List<string>? errors)> GetBuildingsByRegion(int regionId) =>
+            await _companyRepository.GetBuildingsByRegionAsync(regionId);
 
-        public async Task<(List<ApartmentResponseDTO> apartments, List<string>? errors)> GetApartmentsByBuilding(int buildingId)
-        {
-            return await _companyRepository.GetApartmentsByBuildingAsync(buildingId);
-        }
+        public async Task<(List<ApartmentResponseDTO> apartments, List<string>? errors)> GetApartmentsByBuilding(int buildingId) =>
+            await _companyRepository.GetApartmentsByBuildingAsync(buildingId);
+
+        public async Task<(List<MaterialResponseDTO> materials, List<string>? errors)> GetMaterialsByManagementCompany(int managementCompanyId) =>
+            await _companyRepository.GetMaterialsByManagementCompanyAsync(managementCompanyId);
     }
 }

@@ -2,7 +2,9 @@
 {
     public record MaterialResponseDTO(
         int Id,
+        StorageResponseDTO Storage,
         string Name,
         string Unit,
-        decimal Price);
+        decimal Price,
+        int AmountAtStorage);
 }
