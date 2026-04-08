@@ -70,14 +70,15 @@ namespace UrbanCareClient.WPF.Views.UserControls
                         control.ExecutorsTxt.Text = $"Исполнители: {string.Join(", ", orderControlViewModel.Order.OrderExecutors.Select(oe => oe.Employee.UserData.Fullname))}";
                 }
 
-                if (orderControlViewModel.Order.OrderStatus.Id >= (int)OrderStatusEnum.MarkedAsCompletedByExecutor)
+                if (orderControlViewModel.Order.OrderStatus.Id >= (int)OrderStatusEnum.ExecutorAppointed)
                 {
                     control.PaymentPanel.Visibility = Visibility.Visible;
                     decimal totalCost = 0;
 
                     if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
                     {
-                        control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. ({om.Quantity} {om.Material.Unit}.)"))}";
+                        control.MaterialsTxt.Visibility = Visibility.Visible;
+                        control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. x ({om.Quantity} {om.Material.Unit}.)"))}";
                         totalCost += orderControlViewModel.Order.OrderMaterials.Sum(om => om.Quantity * om.Material.Price);
                     }
 
@@ -88,7 +89,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                     }
 
                     control.PaymentTxt.Text = $"Итого: {totalCost} руб.";
-                    if (totalCost == 0)
+                    if (totalCost == 0 || orderControlViewModel.Order.OrderStatus.Id < (int)OrderStatusEnum.PendingPayment)
                         control.PayBtn.Visibility = Visibility.Collapsed;
                 }
 

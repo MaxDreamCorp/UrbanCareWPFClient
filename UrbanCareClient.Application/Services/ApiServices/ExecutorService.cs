@@ -27,5 +27,8 @@ namespace UrbanCareClient.Application.Services.ApiServices
 
         public async Task<List<string>?> MarkAsCompleted(MarkAsCompletedByExecutorCommand cmd) =>
             await _executorRepository.MarkAsCompletedAsync(cmd);
+
+        public async Task<List<string>?> AddMaterialsToOrder(AddMaterialsToOrderCommand cmd) =>
+            await _executorRepository.AddMaterialsToOrderAsync(cmd);
     }
 }

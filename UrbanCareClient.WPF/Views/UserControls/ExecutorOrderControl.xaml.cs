@@ -73,7 +73,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                 if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
                 {
                     control.MaterialsTxt.Visibility = Visibility.Visible;
-                    control.MaterialsTxt.Text = $"{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"{om.Material.Name} x ({om.Quantity} {om.Material.Unit}"))}";
+                    control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. x ({om.Quantity} {om.Material.Unit}.)"))}";
                     totalCost += orderControlViewModel.Order.OrderMaterials.Sum(om => om.Material.Price * om.Quantity);
                 }
 
@@ -208,8 +208,8 @@ namespace UrbanCareClient.WPF.Views.UserControls
 
         private void AddMaterialsBtn_Click(object sender, RoutedEventArgs e)
         {
-            var materialSelectionModalWindow = new MaterialSelectionModalWindow(_getterDIServices);
-            materialSelectionModalWindow.Closed += (s, args) =>
+            var materialSelectionModalWindow = new MaterialSelectionModalWindow(_getterDIServices, ViewModel.Order);
+            materialSelectionModalWindow.OrderUpdated += (s, args) =>
                 {
                     OrderUpdated?.Invoke(this, EventArgs.Empty);
                 };
