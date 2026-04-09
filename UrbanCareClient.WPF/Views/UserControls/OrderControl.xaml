@@ -83,7 +83,7 @@
                         <TextBlock Text="Информация об оплате:" Style="{StaticResource SecondaryText}" Foreground="Black" FontWeight="DemiBold" Margin="0,0,0,6"/>
                         <TextBlock x:Name="MaterialsTxt" Text="" Style="{StaticResource SecondaryText}" TextWrapping="Wrap" Visibility="Collapsed" Margin="0,0,0,6"/>
                         <TextBlock x:Name="PaymentTxt" Text="" FontWeight="Bold" FontSize="16"/>
-                        <Button x:Name="PayBtn" Content="Оплатить" Style="{StaticResource PrimaryButton}" Margin="0,5,0,0" HorizontalAlignment="Left"/>
+                        <Button x:Name="PayBtn" Content="Оплатить" Style="{StaticResource PrimaryButton}" Margin="0,5,0,0" HorizontalAlignment="Left" Click="PayBtn_Click"/>
                     </StackPanel>
                 </Border>
 

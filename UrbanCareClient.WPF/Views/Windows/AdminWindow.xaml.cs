@@ -277,5 +277,6 @@ namespace UrbanCareClient.WPF.Views.Windows
             return ConverterService.ApartmentsToViewDTOs(TemporaryDataStorage.Apartments);
         }
 
+       
     }
 }

@@ -187,5 +187,20 @@ namespace UrbanCareClient.WPF.Views.UserControls
             MessageBox.Show("Заказ успешно подтвержден", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             OrderUpdated?.Invoke(this, EventArgs.Empty);
         }
+
+        private async void PayBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var mboxResult = MessageBox.Show("Вы уверены, что хотите оплатить заказ?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (mboxResult != MessageBoxResult.Yes)
+                return;
+
+            var response = await _residentService.ImitatePayment(ViewModel.Order.Id);
+            if (response != null) {
+                MessageBox.Show(string.Join("\n", response), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            MessageBox.Show("Заказ успешно оплачен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            OrderUpdated?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

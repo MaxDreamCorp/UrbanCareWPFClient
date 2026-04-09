@@ -29,5 +29,8 @@ namespace UrbanCareClient.Application.Services.ApiServices
 
         public async Task<List<string>?> ConfirmOrderCompletion(int orderId) =>
             await _residentRepository.ConfirmOrderCompletionAsync(orderId);
+
+        public async Task<List<string>?> ImitatePayment(int orderId) =>
+            await _residentRepository.ImitatePaymentAsync(orderId);
     }
 }
