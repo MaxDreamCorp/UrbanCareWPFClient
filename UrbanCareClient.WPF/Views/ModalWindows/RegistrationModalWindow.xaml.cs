@@ -296,6 +296,21 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                 PassportDataDepartmentInp.Text = "УФМС России по г. Москва";
                 PassportDataDepartmentCodeInp.Text = "770-001";
             }
+            else if (role == "Житель" && FullnameInp.Text == "ф")
+            {
+                FullnameInp.Text = "Фролова Ирина Николаевна";
+                EmailInp.Text = "i.frolova.home@yandex.ru";
+                PhoneInp.Text = "+79001234575";
+                DateOfBirthInp.SelectedDate = new DateTime(1982, 8, 7);
+                SnilsInp.Text = "131-456-789 00";
+                InnInp.Text = "923456789012";
+                PasswordInp.Password = "TempPass123!";
+                ConfirmPasswordInp.Password = "TempPass123!";
+                PassportDataSeriaInp.Text = "4518";
+                PassportDataNumberInp.Text = "990011";
+                PassportDataDepartmentInp.Text = "УФМС России по г. Москва";
+                PassportDataDepartmentCodeInp.Text = "770-009";
+            }
             else if (role == "Житель")
             {
                 FullnameInp.Text = "Смирнов Алексей Борисович";
@@ -340,6 +355,21 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                 PassportDataNumberInp.Text = "223344";
                 PassportDataDepartmentInp.Text = "УФМС России по г. Москва";
                 PassportDataDepartmentCodeInp.Text = "770-002";
+            }
+            else if (role == "Исполнитель" && FullnameInp.Text == "о")
+            {
+                FullnameInp.Text = "Захарова Ольга Викторовна";
+                EmailInp.Text = "executor2.jkh@yandex.ru";
+                PhoneInp.Text = "+79001234573";
+                DateOfBirthInp.SelectedDate = new DateTime(1986, 12, 30);
+                SnilsInp.Text = "129-456-789 00";
+                InnInp.Text = "723456789012";
+                PasswordInp.Password = "TempPass123!";
+                ConfirmPasswordInp.Password = "TempPass123!";
+                PassportDataSeriaInp.Text = "4516";
+                PassportDataNumberInp.Text = "778899";
+                PassportDataDepartmentInp.Text = "УФМС России по г. Москва";
+                PassportDataDepartmentCodeInp.Text = "770-007";
             }
             else if (role == "Исполнитель")
             {

@@ -53,6 +53,10 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
             _buildingChoice = _getterDIServices.GetService<SingleChoiceControl>();
             _apartmentChoice = _getterDIServices.GetService<SingleChoiceControl>();
 
+            _regionChoice.ViewModel = _regionChoiceVM;
+            _buildingChoice.ViewModel = _buildingChoiceVM;
+            _apartmentChoice.ViewModel = _apartmentChoiceVM;
+
             _regionChoice.Type = typeof(RegionViewDTO);
             _buildingChoice.Type = typeof(BuildingViewDTO);
             _apartmentChoice.Type = typeof(ApartmentViewDTO);

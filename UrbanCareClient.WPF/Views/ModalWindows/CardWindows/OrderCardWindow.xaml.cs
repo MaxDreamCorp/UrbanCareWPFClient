@@ -130,7 +130,7 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
 
                 if (response == null)
                 {
-                    MessageBox.Show($"Заказ #{IdInp.Text} создан", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Заказ создан", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                     Close();
                 }
                 else
@@ -196,11 +196,7 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
         {
             if (TemporaryDataStorage.ResidentData == null) return;
 
-            if (TemporaryDataStorage.MyOrders != null && TemporaryDataStorage.MyOrders.Count > 0)
-                IdInp.Text = (TemporaryDataStorage.MyOrders.Max(x => x.Id) + 1).ToString();
-            else
-                IdInp.Text = "1";
-
+            IdPanel.Visibility = Visibility.Collapsed;
             ResidentInp.Text = TemporaryDataStorage.ResidentData.UserData.Fullname;
             ContactEmailInp.Text = TemporaryDataStorage.ResidentData.UserData.Email;
             ContactPhoneInp.Text = TemporaryDataStorage.ResidentData.UserData.Phone;
@@ -241,7 +237,6 @@ namespace UrbanCareClient.WPF.Views.ModalWindows.CardWindows
         {
             var checking = new List<bool>
             {
-                !string.IsNullOrEmpty(IdInp.Text),
                 !string.IsNullOrEmpty(ResidentInp.Text),
                 !string.IsNullOrEmpty(TypeInp.Text),
                 !string.IsNullOrEmpty(CategoryInp.Text),

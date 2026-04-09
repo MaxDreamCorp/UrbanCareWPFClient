@@ -81,7 +81,7 @@ namespace UrbanCareClient.WPF.Views.Windows
             var employees = await _administrationService.GetMyManagementCompanyEmployees();
             dg.ItemsSource = employees;
             _currentTab = AdminTabs.Employees;
-            AddBtn.IsEnabled = false;
+            AddBtn.Visibility = Visibility.Collapsed;
         }
 
         private async void RegionsSwitcher_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -98,7 +98,7 @@ namespace UrbanCareClient.WPF.Views.Windows
                     }
                 }
 
-                AddBtn.IsEnabled = true;
+                AddBtn.Visibility = Visibility.Visible;
 
                 List<RegionViewDTO> regionViews = await GetRegionViewDTOsFromApiAsync();
 
@@ -122,7 +122,7 @@ namespace UrbanCareClient.WPF.Views.Windows
                     }
                 }
 
-                AddBtn.IsEnabled = true;
+                AddBtn.Visibility = Visibility.Visible;
 
                 List<BuildingViewDTO> buildingViews = await GetBuildingViewDTOsFromApiAsync();
 
@@ -146,7 +146,7 @@ namespace UrbanCareClient.WPF.Views.Windows
                     }
                 }
 
-                AddBtn.IsEnabled = true;
+                AddBtn.Visibility = Visibility.Visible;
 
                 List<ApartmentViewDTO> apartmentViews = await GetApartmentViewDTOsFromApiAsync();
 
@@ -170,7 +170,7 @@ namespace UrbanCareClient.WPF.Views.Windows
                     }
                 }
 
-                AddBtn.IsEnabled = false;
+                AddBtn.Visibility = Visibility.Collapsed;
 
                 var employees = await _administrationService.GetMyManagementCompanyEmployees();
                 dg.ItemsSource = employees;

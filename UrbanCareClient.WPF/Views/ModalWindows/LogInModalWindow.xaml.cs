@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Data;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using UrbanCareClient.Application.Services.ApiServices;
@@ -61,6 +62,11 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                     LoginInp.Text = "alex.dyakov@example.com";
                     Passwordnp.Password = "qw*rTy228";
                 }
+                else if (selectedString == "Житель" && LoginInp.Text == "i")
+                {
+                    LoginInp.Text = "i.frolova.home@yandex.ru";
+                    Passwordnp.Password = "TempPass123!";
+                }
                 else if (selectedString == "Житель")
                 {
                     LoginInp.Text = "a.smirnov.home@mail.ru";
@@ -69,6 +75,11 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
                 else if (selectedString == "Диспетчер")
                 {
                     LoginInp.Text = "a.petrova.uk@mail.ru";
+                    Passwordnp.Password = "TempPass123!";
+                }
+                else if (selectedString == "Исполнитель" && LoginInp.Text == "e2")
+                {
+                    LoginInp.Text = "executor2.jkh@yandex.ru";
                     Passwordnp.Password = "TempPass123!";
                 }
                 else if (selectedString == "Исполнитель")
