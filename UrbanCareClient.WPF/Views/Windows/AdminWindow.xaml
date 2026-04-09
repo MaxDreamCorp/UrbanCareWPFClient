@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UrbanCareClient.WPF.Views.Windows"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         Style="{StaticResource Win}"
         WindowStartupLocation="CenterOwner"
         Title="Администратор: Главная" MinHeight="450" MinWidth="800" Loaded="Window_Loaded">

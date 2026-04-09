@@ -277,6 +277,14 @@ namespace UrbanCareClient.WPF.Views.Windows
             return ConverterService.ApartmentsToViewDTOs(TemporaryDataStorage.Apartments);
         }
 
-       
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var mboxResult = MessageBox.Show("Вы уверены, что хотите выйти из системы?\n" +
+                "Ваш статус работника будет изменен на 'Не работает'", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (mboxResult != MessageBoxResult.Yes)
+                return;
+
+            await _employeeService.UpdateStatusToNotWorking();
+        }
     }
 }
