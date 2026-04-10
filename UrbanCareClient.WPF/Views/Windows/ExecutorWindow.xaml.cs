@@ -163,7 +163,7 @@ namespace UrbanCareClient.WPF.Views.Windows
                 return;
             }
 
-            foreach (var order in orders)
+            foreach (var order in orders.OrderBy(o => o.Priority.Id))
             {
                 ExecutorOrderControl orderControl = new ExecutorOrderControl(_getterDIServices, _orderService);
                 orderControl.ViewModel = new UserControls.ViewModels.OrderControlViewModel { Order = order };
