@@ -69,7 +69,7 @@
 
                 <Border x:Name="PaymentPanel" Visibility="Collapsed" Background="White" CornerRadius="15" Padding="10" Margin="0 5">
                     <StackPanel Margin="0,10" Background="White">
-                        <TextBlock Text="Информация об оплате:" Style="{StaticResource SecondaryText}" Foreground="Black" FontWeight="DemiBold" Margin="0,0,0,6"/>
+                        <TextBlock Text="Расходники и оплата работы:" Style="{StaticResource SecondaryText}" Foreground="Black" FontWeight="DemiBold" Margin="0,0,0,6"/>
                         <TextBlock x:Name="MaterialsTxt" Text="" Style="{StaticResource SecondaryText}" TextWrapping="Wrap" Visibility="Collapsed" Margin="0,0,0,6"/>
                         <TextBlock x:Name="PaymentTxt" Text="" FontWeight="Bold" FontSize="16"/>
                     </StackPanel>

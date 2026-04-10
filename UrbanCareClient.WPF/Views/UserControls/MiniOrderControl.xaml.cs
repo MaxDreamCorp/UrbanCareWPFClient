@@ -77,7 +77,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                     if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
                     {
                         control.MaterialsTxt.Visibility = Visibility.Visible;
-                        control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. ({om.Quantity} {om.Material.Unit}.)"))}";
+                        control.MaterialsTxt.Text = $"Расходники:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. ({om.Quantity} {om.Material.Unit}.)"))}";
                         totalCost += orderControlViewModel.Order.OrderMaterials.Sum(om => om.Quantity * om.Material.Price);
                     }
 

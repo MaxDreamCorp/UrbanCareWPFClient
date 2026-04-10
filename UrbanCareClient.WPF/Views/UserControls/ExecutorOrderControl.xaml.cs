@@ -75,7 +75,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                     if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
                     {
                         control.MaterialsTxt.Visibility = Visibility.Visible;
-                        control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. x ({om.Quantity} {om.Material.Unit}.)"))}";
+                        control.MaterialsTxt.Text = $"Расходники:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. x ({om.Quantity} {om.Material.Unit}.)"))}";
                         totalCost += orderControlViewModel.Order.OrderMaterials.Sum(om => om.Material.Price * om.Quantity);
                     }
 
@@ -190,6 +190,9 @@ namespace UrbanCareClient.WPF.Views.UserControls
         {
             var setWorkPaymentModalWindow = new SetWorkPaymentModalWindow();
             setWorkPaymentModalWindow.ShowDialog();
+
+            if (!setWorkPaymentModalWindow.IsSet)
+                return;
 
             var mboxResult = MessageBox.Show("Вы уверены, что хотите отметить заказ как выполненный?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (mboxResult != MessageBoxResult.Yes)

@@ -78,7 +78,7 @@ namespace UrbanCareClient.WPF.Views.UserControls
                     if (orderControlViewModel.Order.OrderMaterials != null && orderControlViewModel.Order.OrderMaterials.Count > 0)
                     {
                         control.MaterialsTxt.Visibility = Visibility.Visible;
-                        control.MaterialsTxt.Text = $"Материалы:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. x ({om.Quantity} {om.Material.Unit}.)"))}";
+                        control.MaterialsTxt.Text = $"Расходники:\n{string.Join("\n", orderControlViewModel.Order.OrderMaterials.Select(om => $"- {om.Material.Name} - {om.Material.Price} руб. x ({om.Quantity} {om.Material.Unit}.)"))}";
                         totalCost += orderControlViewModel.Order.OrderMaterials.Sum(om => om.Quantity * om.Material.Price);
                     }
 
@@ -195,7 +195,8 @@ namespace UrbanCareClient.WPF.Views.UserControls
                 return;
 
             var response = await _residentService.ImitatePayment(ViewModel.Order.Id);
-            if (response != null) {
+            if (response != null)
+            {
                 MessageBox.Show(string.Join("\n", response), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
