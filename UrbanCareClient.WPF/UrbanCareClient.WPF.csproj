@@ -47,10 +47,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Pages\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Resources\Images\AccountIcon.png" />
     <Resource Include="Resources\Images\AddressIcon.png" />
     <Resource Include="Resources\Images\CalendarIcon.png" />

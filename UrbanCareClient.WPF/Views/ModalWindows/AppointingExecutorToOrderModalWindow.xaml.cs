@@ -21,7 +21,10 @@ namespace UrbanCareClient.WPF.Views.ModalWindows
         private readonly GetterDIServices _getterDIServices;
 
 
-        public AppointingExecutorToOrderModalWindow(DispatcherService dispatcherService, OrderResponseDTO orderResponseDTO, OrderService orderService, GetterDIServices getterDIServices)
+        public AppointingExecutorToOrderModalWindow(DispatcherService dispatcherService,
+                                                    OrderResponseDTO orderResponseDTO,
+                                                    OrderService orderService,
+                                                    GetterDIServices getterDIServices)
         {
             InitializeComponent();
             _dispatcherService = dispatcherService;
